@@ -4,7 +4,7 @@ go 1.27
 
 require (
 	github.com/astaxie/beego v1.12.1
-	github.com/lib/pq v1.0.0
+	github.com/lib/pq v1.10.9
 )
 
 require (
