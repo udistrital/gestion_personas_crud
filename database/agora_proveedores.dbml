@@ -1,0 +1,320 @@
+Project agora_proveedores {
+  database_type: 'PostgreSQL'
+  Note: 'Esquema de proveedores e información financiera'
+}
+
+TablePartial tabla_base {
+  id serial [pk]
+  activo boolean [not null, default: true]
+  fecha_creacion timestamp [not null, default: `now()`]
+}
+
+TablePartial parametro {
+  note: 'Posible procedencia de Parametros CRUD.'
+
+  id serial [pk]
+  nombre varchar(50) [not null]
+  descripcion varchar(250)
+  codigo_abreviacion varchar(20)
+  activo boolean [not null, default: true]
+  numero_orden numeric(5,2)
+}
+
+
+
+Table proveedores.perfil {
+  note: 'Contratista, docente, investigador, etc. Posiblemente Terceros GrupoInfoComplementariaId 5: Tipo Perfil'
+  ~parametro
+
+  indexes {
+    activo [name: 'idx_perfil_activo']
+  }
+}
+
+// Revisar funcionalidad con Carlos
+Table proveedores.prefijo_facturacion {
+  note: 'SATT, SATC, etc.'
+  ~parametro
+
+  indexes {
+    activo [name: 'idx_prefijo_facturacion_activo']
+  }
+}
+
+// Revisar funcionalidad con Carlos
+Table proveedores.rango_facturacion {
+  note: '0 a 100, 101 a 500, etc.'
+  ~parametro
+
+  indexes {
+    activo [name: 'idx_rango_facturacion_activo']
+  }
+}
+
+
+
+Table proveedores.proveedor {
+  note: 'El id es una referencia externa a Terceros CRUD'
+  ~tabla_base
+  tipo_registro integer [not null, note: 'Referencia externa a Terceros CRUD: info complementaria, tipo contribuyente']
+  descripcion_portafolio varchar(250)
+
+  indexes {
+    tipo_registro [name: 'idx_proveedor_tipo_registro']
+    activo [name: 'idx_proveedor_activo']
+    fecha_creacion [name: 'idx_proveedor_fecha_creacion']
+  }
+}
+
+
+
+Table proveedores.proveedor_natural {
+  ~tabla_base
+  perfil_declarado integer [not null]
+  experiencia_laboral_meses integer [not null, default: 0]
+  experiencia_profesional_meses integer [not null, default: 0]
+  // Persona natural tiene tambien los campos booleanos para declarante de renta, posee medicina prepagada, posee cuenta AFC, es responsable de IVA, reside fiscalmente en Colombia y realiza aportes a pensión voluntaria. Estos campos se agregarán a la tabla terceros.
+
+  indexes {
+    activo [name: 'idx_proveedor_natural_activo']
+    fecha_creacion [name: 'idx_proveedor_natural_fecha_creacion']
+    perfil_declarado [name: 'idx_proveedor_natural_perfil_declarado']
+  }
+}
+
+Ref fk_proovedor_natural_proveedor {
+  proveedores.proveedor_natural.id - proveedores.proveedor.id
+}
+
+Ref fk_proovedor_natural_perfil {
+  proveedores.proveedor_natural.perfil_declarado > proveedores.perfil.id
+}
+
+
+
+Table proveedores.proveedor_juridico {
+  ~tabla_base
+  nombre_comercial varchar(50) [not null]
+  matricula_mercantil integer [not null]
+  fecha_constitucion date [not null]
+  fecha_renovacion date [not null]
+  reporta_beneficios_finales boolean [not null, default: false]
+  cotiza_bolsa boolean [not null, default: false]
+  requiere_revisor_fiscal boolean [not null, default: false]
+
+  indexes {
+    activo [name: 'idx_proveedor_juridico_activo']
+    fecha_creacion [name: 'idx_proveedor_juridico_fecha_creacion']
+    matricula_mercantil [unique, name: 'uq_proveedor_juridico_matricula_mercantil']
+  }
+}
+
+Ref fk_proovedor_juridico_proveedor {
+  proveedores.proveedor_juridico.id - proveedores.proveedor.id
+}
+
+
+
+Table proveedores.contacto {
+  ~tabla_base
+  proveedor_id integer [not null]
+  nombre_contacto varchar(100) [note: 'Juan Pérez']
+  finalidad varchar(50) [not null, note: "Representante legal, contacto comercial, notificaciones, contacto de emergencia, etc."]
+  tipo_canal varchar(50) [not null]
+  valor_especifico varchar(100) [not null] // TODO: Verificar longitud máxima
+  extension varchar(10)
+  info_complementaria_tercero_id integer [note: 'Referencia externa a Terceros CRUD']
+  es_principal boolean [not null, default: false]
+
+  indexes {
+    activo [name: 'idx_contacto_activo']
+    fecha_creacion [name: 'idx_contacto_fecha_creacion']
+    info_complementaria_tercero_id [name: 'idx_contacto_info_complementaria_tercero_id']
+  }
+}
+
+Ref fk_contacto_proveedor {
+  proveedores.contacto.proveedor_id > proveedores.proveedor.id
+}
+
+
+
+Table proveedores.cuenta_bancaria {
+  ~tabla_base
+  proveedor_id integer [not null]
+  entidad_bancaria_id integer [not null, note: 'Referencia externa a Parametros CRUD']
+  tipo_cuenta_id integer [not null, note: 'Referencia externa a Parametros CRUD']
+  numero_cuenta varchar(50) [not null]
+  nombre_titular varchar(100) [not null]
+  ciudad_apertura_id integer [note: 'Referencia externa a Ubicaciones CRUD']
+  es_principal boolean [default: false]
+
+  indexes {
+    activo [name: 'idx_cuenta_bancaria_activo']
+    fecha_creacion [name: 'idx_cuenta_bancaria_fecha_creacion']
+  }
+}
+
+Ref fk_cuenta_bancaria_proveedor {
+  proveedores.cuenta_bancaria.proveedor_id > proveedores.proveedor.id
+}
+
+
+
+Table proveedores.actividad_economica_proveedor {
+  ~tabla_base
+  proveedor_id integer [not null]
+  actividad_economica_id integer [not null, note: 'Referencia externa a Parametros CRUD']
+  es_principal boolean [not null, default: false]
+}
+
+Ref fk_actividad_economica_proveedor_proveedor {
+  proveedores.actividad_economica_proveedor.proveedor_id > proveedores.proveedor.id
+}
+
+
+
+Table proveedores.perfil_financiero {
+  ~tabla_base
+  proveedor_id integer [not null]
+  gran_contribuyente boolean [not null, default: false]
+  autorretenedor boolean [not null, default: false]
+  exencion_ica boolean [not null, default: false]
+  obligado_facturar_electronicamente boolean [not null, default: false]
+  prefijo_facturacion_id integer [not null]
+  rango_facturacion_id integer [not null]
+  resolucion_facturacion varchar(50)
+  opera_moneda_extranjera boolean [not null, default: false]
+
+  indexes {
+    activo [name: 'idx_perfil_financiero_activo']
+    fecha_creacion [name: 'idx_perfil_financiero_fecha_creacion']
+  }
+}
+
+Ref fk_perfil_financiero_proveedor {
+  proveedores.perfil_financiero.proveedor_id > proveedores.proveedor_juridico.id
+}
+
+Ref fk_perfil_financiero_juridico_prefijo_facturacion {
+  proveedores.perfil_financiero.prefijo_facturacion_id > proveedores.prefijo_facturacion.id
+}
+
+Ref fk_perfil_financiero_juridico_rango_facturacion {
+  proveedores.perfil_financiero.rango_facturacion_id > proveedores.rango_facturacion.id
+}
+
+
+
+Table proveedores.responsabilidad_fiscal_perfil {
+  ~tabla_base
+  perfil_financiero_id integer [not null]
+  responsabilidad_fiscal_id integer [not null, note: 'Referencia externa a Parametros CRUD']
+
+  indexes {
+    activo [name: 'idx_responsabilidad_fiscal_perfil_activo']
+    fecha_creacion [name: 'idx_responsabilidad_fiscal_perfil_fecha_creacion']
+  }
+}
+
+Ref fk_responsabilidad_fiscal_perfil_perfil_financiero {
+  proveedores.responsabilidad_fiscal_perfil.perfil_financiero_id > proveedores.perfil_financiero.id
+}
+
+
+
+Table proveedores.informacion_financiera {
+  ~tabla_base
+  proveedor_id integer [not null]
+  fecha_corte date [not null, default: `date_trunc('year', now()) + interval '1 year - 1 day'`, note: 'Por defecto se toma el último día del año en curso']
+  moneda_id integer [note: 'Referencia externa a Parametros CRUD']
+  capital_autorizado numeric(20,7) [not null]
+  activos_totales numeric(20,7)
+  pasivos_totales numeric(20,7)
+  indice_liquidez numeric(5,4) [not null] // TODO: Evaluar eliminación de este campo
+
+  indexes {
+    activo [name: 'idx_informacion_financiera_activo']
+    fecha_creacion [name: 'idx_informacion_financiera_fecha_creacion']
+  }
+}
+
+Ref fk_informacion_financiera_proveedor {
+  proveedores.informacion_financiera.proveedor_id > proveedores.proveedor.id
+}
+
+
+
+Table proveedores.representacion {
+  ~tabla_base
+  proveedor_id integer [not null]
+  representante_id integer [not null, note: 'Referencia externa a Terceros CRUD']
+  tipo_representacion_id integer [not null, note: 'Referencia externa a Parametros CRUD']
+  cargo_id integer [not null, note: 'Referencia externa a Parametros CRUD']
+  tiene_limitacion_cuantia boolean [not null, default: false]
+  descripcion_facultades varchar(250)
+
+  indexes {
+    activo [name: 'idx_representacion_activo']
+    fecha_creacion [name: 'idx_representacion_fecha_creacion']
+  }
+}
+
+Ref fk_representacion_proveedor {
+  proveedores.representacion.proveedor_id > proveedores.proveedor_juridico.id
+}
+
+
+
+Table proveedores.documento {
+  note: 'Se incluye certificado de registro.'
+  ~tabla_base
+  proveedor_id integer [not null]
+  tipo_documento_id integer [not null, note: 'Referencia externa a Parametros CRUD']
+  enlace uuid [note: 'Archivo de registro único tributario (RUT)']
+
+  indexes {
+    activo [name: 'idx_documento_activo']
+    fecha_creacion [name: 'idx_documento_fecha_creacion']
+  }
+}
+
+Ref fk_documento_proveedor {
+    proveedores.documento.proveedor_id > proveedores.proveedor.id
+}
+
+
+
+Table proveedores.declaracion {
+  note: 'Versionado de las declaraciones que puede firmar el proveedor.'
+  ~tabla_base
+  tipo_declaracion_id integer [not null, note: 'Referencia externa a Parametros CRUD']
+  texto varchar(250) [not null, note: 'Declaración de renta, declaración de IVA, declaración de retención en la fuente, etc.']
+
+  indexes {
+    activo [name: 'idx_declaracion_activo']
+    fecha_creacion [name: 'idx_declaracion_fecha_creacion']
+  }
+}
+
+
+
+Table proveedores.tipo_declaracion_proveedor {
+  note: 'Tabla de rompimiento entre un texto de declaración firmada y el proveedor que la firmó.'
+  ~tabla_base
+  proveedor_id integer [not null]
+  declaracion_id integer [not null]
+
+  indexes {
+    activo [name: 'idx_tipo_declaracion_proveedor_activo']
+    fecha_creacion [name: 'idx_tipo_declaracion_proveedor_fecha_creacion']
+  }
+}
+
+Ref fk_tipo_declaracion_proveedor_proveedor {
+  proveedores.tipo_declaracion_proveedor.proveedor_id > proveedores.proveedor.id
+}
+
+Ref fk_tipo_declaracion_proveedor_declaracion {
+  proveedores.tipo_declaracion_proveedor.declaracion_id > proveedores.declaracion.id
+}
