@@ -10,7 +10,7 @@ import (
 )
 
 type PrefijoFacturacion struct {
-	Id                int     `orm:"column(id);pk"`
+	Id                int     `orm:"column(id);pk;auto"`
 	Nombre            string  `orm:"column(nombre)"`
 	Descripcion       string  `orm:"column(descripcion);null"`
 	CodigoAbreviacion string  `orm:"column(codigo_abreviacion);null"`
@@ -50,7 +50,7 @@ func GetPrefijoFacturacionById(id int) (v *PrefijoFacturacion, err error) {
 func GetAllPrefijoFacturacion(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(PrefijoFacturacion))
+	qs := o.QueryTable(new(PrefijoFacturacion)).RelatedSel()
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute

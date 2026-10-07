@@ -11,7 +11,7 @@ import (
 )
 
 type Contacto struct {
-	Id                          int        `orm:"column(id);pk"`
+	Id                          int        `orm:"column(id);pk;auto"`
 	Activo                      bool       `orm:"column(activo)"`
 	FechaCreacion               time.Time  `orm:"column(fecha_creacion);type(timestamp without time zone)"`
 	ProveedorId                 *Proveedor `orm:"column(proveedor_id);rel(fk)"`
@@ -56,7 +56,7 @@ func GetContactoById(id int) (v *Contacto, err error) {
 func GetAllContacto(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(Contacto))
+	qs := o.QueryTable(new(Contacto)).RelatedSel()
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute

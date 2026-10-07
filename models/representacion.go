@@ -11,7 +11,7 @@ import (
 )
 
 type Representacion struct {
-	Id                     int                `orm:"column(id);pk"`
+	Id                     int                `orm:"column(id);pk;auto"`
 	Activo                 bool               `orm:"column(activo)"`
 	FechaCreacion          time.Time          `orm:"column(fecha_creacion);type(timestamp without time zone)"`
 	ProveedorId            *ProveedorJuridico `orm:"column(proveedor_id);rel(fk)"`
@@ -54,7 +54,7 @@ func GetRepresentacionById(id int) (v *Representacion, err error) {
 func GetAllRepresentacion(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(Representacion))
+	qs := o.QueryTable(new(Representacion)).RelatedSel()
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute

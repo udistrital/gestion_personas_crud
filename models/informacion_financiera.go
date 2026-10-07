@@ -11,7 +11,7 @@ import (
 )
 
 type InformacionFinanciera struct {
-	Id                int        `orm:"column(id);pk"`
+	Id                int        `orm:"column(id);pk;auto"`
 	Activo            bool       `orm:"column(activo)"`
 	FechaCreacion     time.Time  `orm:"column(fecha_creacion);type(timestamp without time zone)"`
 	ProveedorId       *Proveedor `orm:"column(proveedor_id);rel(fk)"`
@@ -55,7 +55,7 @@ func GetInformacionFinancieraById(id int) (v *InformacionFinanciera, err error) 
 func GetAllInformacionFinanciera(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(InformacionFinanciera))
+	qs := o.QueryTable(new(InformacionFinanciera)).RelatedSel()
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute

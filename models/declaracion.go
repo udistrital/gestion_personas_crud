@@ -11,7 +11,7 @@ import (
 )
 
 type Declaracion struct {
-	Id                int       `orm:"column(id);pk"`
+	Id                int       `orm:"column(id);pk;auto"`
 	Activo            bool      `orm:"column(activo)"`
 	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone)"`
 	TipoDeclaracionId int       `orm:"column(tipo_declaracion_id)"`
@@ -50,7 +50,7 @@ func GetDeclaracionById(id int) (v *Declaracion, err error) {
 func GetAllDeclaracion(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(Declaracion))
+	qs := o.QueryTable(new(Declaracion)).RelatedSel()
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute

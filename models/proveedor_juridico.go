@@ -11,7 +11,7 @@ import (
 )
 
 type ProveedorJuridico struct {
-	Id                       int       `orm:"column(id);pk"`
+	Id                       int       `orm:"column(id);pk;auto"`
 	Activo                   bool      `orm:"column(activo)"`
 	FechaCreacion            time.Time `orm:"column(fecha_creacion);type(timestamp without time zone)"`
 	NombreComercial          string    `orm:"column(nombre_comercial)"`
@@ -55,7 +55,7 @@ func GetProveedorJuridicoById(id int) (v *ProveedorJuridico, err error) {
 func GetAllProveedorJuridico(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(ProveedorJuridico))
+	qs := o.QueryTable(new(ProveedorJuridico)).RelatedSel()
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute
