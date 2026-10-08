@@ -1,2 +1,82 @@
-# agora_crud
-Agora V2 Crud
+# gestion_personas_crud
+
+El API provee la gestión de proveedores para el sistema de gestión de personas Ágora con su información financiera y de contacto.
+
+## Especificaciones Técnicas
+
+### Tecnologías y Versiones
+
+- [Golang](https://github.com/udistrital/lineamientos_oas/blob/master/instalacion_de_herramientas/golang.md)
+- [Beego](https://github.com/udistrital/lineamientos_oas/blob/master/instalacion_de_herramientas/beego.md)
+- [PostgreSQL](https://github.com/udistrital/lineamientos_oas/blob/master/instalacion_de_herramientas/postgres.md)
+
+### Variables de Entorno
+
+Configurar antes de ejecutar (ver también `.env.example` y `conf/app.conf`).
+
+```shell
+GESTION_PERSONAS_CRUD_HTTP_PORT=[puerto de la API]
+GESTION_PERSONAS_CRUD_RUN_MODE=[dev|prod]
+GESTION_PERSONAS_CRUD_PGUSER=[usuario BD]
+GESTION_PERSONAS_CRUD_PGPASS=[password BD]
+GESTION_PERSONAS_CRUD_PGHOST=[host BD]
+GESTION_PERSONAS_CRUD_PGPORT=[puerto BD]
+GESTION_PERSONAS_CRUD_PGDB=[nombre BD]
+GESTION_PERSONAS_CRUD_PGSCHEMA=[esquema BD]
+```
+
+### Ejecución del Proyecto
+
+#### Preparación de la base de datos
+
+Antes de ejecutar el proyecto, se debe contar con una base de datos [PostgreSQL](https://github.com/udistrital/lineamientos_oas/blob/master/instalacion_de_herramientas/postgres.md) con el esquema y tablas requeridas. Se puede correr el script `database/agora_proveedores.sql` para crear el esquema `proveedores` y las tablas necesarias.
+
+#### Comandos para ejecutar el proyecto
+
+Una vez se haya configurado el entorno con [Golang](https://github.com/udistrital/lineamientos_oas/blob/master/instalacion_de_herramientas/golang.md) y [Beego](https://github.com/udistrital/lineamientos_oas/blob/master/instalacion_de_herramientas/beego.md), ejecutar:
+
+```shell
+# 1. Clonar el repositorio
+mkdir -p $GOPATH/src/github.com/udistrital
+cd $GOPATH/src/github.com/udistrital
+git clone https://github.com/udistrital/gestion_personas_crud.git
+cd gestion_personas_crud
+
+# 2. Exportar variables
+cp .env.example .env # Importar variables según corresponda
+set -a
+source .env
+set +a
+
+# 3. Instalar dependencias y correr
+go mod tidy
+bee run
+```
+
+### Ejecución Pruebas
+
+Pruebas unitarias
+
+```shell
+# En Proceso
+```
+
+## Estado CI
+
+| Develop | Relese 0.0.1 | Master |
+| -- | -- | -- |
+| [![Build Status](https://hubci.portaloas.udistrital.edu.co/api/badges/udistrital/gestion_personas_crud/status.svg?ref=refs/heads/develop)](https://hubci.portaloas.udistrital.edu.co/udistrital/gestion_personas_crud/) | [![Build Status](https://hubci.portaloas.udistrital.edu.co/api/badges/udistrital/gestion_personas_crud/status.svg?ref=refs/heads/release/0.0.1)](https://hubci.portaloas.udistrital.edu.co/udistrital/gestion_personas_crud/) | [![Build Status](https://hubci.portaloas.udistrital.edu.co/api/badges/udistrital/gestion_personas_crud/status.svg)](https://hubci.portaloas.udistrital.edu.co/udistrital/gestion_personas_crud/) |
+
+## Modelo de Datos
+
+[Modelo de Datos API CRUD Gestion Personas](https://github.com/udistrital/gestion_personas_crud/blob/develop/database/agora_proveedores.svg)
+
+## Licencia
+
+This file is part of gestion_personas_crud.
+
+gestion_personas_crud is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+gestion_personas_crud is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with novedades_crud. If not, see https://www.gnu.org/licenses/.
