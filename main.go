@@ -8,6 +8,7 @@ import (
 	"github.com/astaxie/beego/plugins/cors"
 	_ "github.com/lib/pq"
 	"github.com/udistrital/utils_oas/customerrorv2"
+	apistatus "github.com/udistrital/utils_oas/apiStatusLib"
 )
 
 func main() {
@@ -36,5 +37,6 @@ func main() {
 		AllowCredentials: true,
 	}))
 	beego.ErrorController(&customerrorv2.CustomErrorController{})
+	apistatus.Init()
 	beego.Run()
 }
