@@ -12,14 +12,16 @@ import (
 
 type Representacion struct {
 	Id                     int                `orm:"column(id);pk;auto"`
-	Activo                 bool               `orm:"column(activo)"`
-	FechaCreacion          time.Time          `orm:"column(fecha_creacion);type(timestamp without time zone)"`
 	ProveedorId            *ProveedorJuridico `orm:"column(proveedor_id);rel(fk)"`
 	RepresentanteId        int                `orm:"column(representante_id)"`
 	TipoRepresentacionId   int                `orm:"column(tipo_representacion_id)"`
 	CargoId                int                `orm:"column(cargo_id)"`
 	TieneLimitacionCuantia bool               `orm:"column(tiene_limitacion_cuantia)"`
 	DescripcionFacultades  string             `orm:"column(descripcion_facultades);null"`
+	Activo                 bool               `orm:"column(activo)"`
+	FechaCreacion          time.Time          `orm:"column(fecha_creacion);type(timestamp without time zone)"`
+	FechaModificacion      time.Time          `orm:"column(fecha_modificacion);type(timestamp without time zone);null"`
+	AutorModificacion      int                `orm:"column(autor_modificacion);null"`
 }
 
 func (t *Representacion) TableName() string {

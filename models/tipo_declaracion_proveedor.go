@@ -11,11 +11,13 @@ import (
 )
 
 type TipoDeclaracionProveedor struct {
-	Id            int          `orm:"column(id);pk;auto"`
-	Activo        bool         `orm:"column(activo)"`
-	FechaCreacion time.Time    `orm:"column(fecha_creacion);type(timestamp without time zone)"`
-	ProveedorId   *Proveedor   `orm:"column(proveedor_id);rel(fk)"`
-	DeclaracionId *Declaracion `orm:"column(declaracion_id);rel(fk)"`
+	Id                int          `orm:"column(id);pk;auto"`
+	ProveedorId       *Proveedor   `orm:"column(proveedor_id);rel(fk)"`
+	DeclaracionId     *Declaracion `orm:"column(declaracion_id);rel(fk)"`
+	Activo            bool         `orm:"column(activo)"`
+	FechaCreacion     time.Time    `orm:"column(fecha_creacion);type(timestamp without time zone)"`
+	FechaModificacion time.Time    `orm:"column(fecha_modificacion);type(timestamp without time zone);null"`
+	AutorModificacion int          `orm:"column(autor_modificacion);null"`
 }
 
 func (t *TipoDeclaracionProveedor) TableName() string {

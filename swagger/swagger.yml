@@ -2022,9 +2022,15 @@ definitions:
         format: int64
       Activo:
         type: boolean
+      AutorModificacion:
+        type: integer
+        format: int64
       EsPrincipal:
         type: boolean
       FechaCreacion:
+        type: string
+        format: datetime
+      FechaModificacion:
         type: string
         format: datetime
       Id:
@@ -2038,11 +2044,17 @@ definitions:
     properties:
       Activo:
         type: boolean
+      AutorModificacion:
+        type: integer
+        format: int64
       EsPrincipal:
         type: boolean
       Extension:
         type: string
       FechaCreacion:
+        type: string
+        format: datetime
+      FechaModificacion:
         type: string
         format: datetime
       Finalidad:
@@ -2067,6 +2079,9 @@ definitions:
     properties:
       Activo:
         type: boolean
+      AutorModificacion:
+        type: integer
+        format: int64
       CiudadAperturaId:
         type: integer
         format: int64
@@ -2076,6 +2091,9 @@ definitions:
       EsPrincipal:
         type: boolean
       FechaCreacion:
+        type: string
+        format: datetime
+      FechaModificacion:
         type: string
         format: datetime
       Id:
@@ -2096,7 +2114,13 @@ definitions:
     properties:
       Activo:
         type: boolean
+      AutorModificacion:
+        type: integer
+        format: int64
       FechaCreacion:
+        type: string
+        format: datetime
+      FechaModificacion:
         type: string
         format: datetime
       Id:
@@ -2113,9 +2137,15 @@ definitions:
     properties:
       Activo:
         type: boolean
+      AutorModificacion:
+        type: integer
+        format: int64
       Enlace:
         type: string
       FechaCreacion:
+        type: string
+        format: datetime
+      FechaModificacion:
         type: string
         format: datetime
       Id:
@@ -2135,6 +2165,9 @@ definitions:
       ActivosTotales:
         type: number
         format: double
+      AutorModificacion:
+        type: integer
+        format: int64
       CapitalAutorizado:
         type: number
         format: double
@@ -2142,6 +2175,9 @@ definitions:
         type: string
         format: datetime
       FechaCreacion:
+        type: string
+        format: datetime
+      FechaModificacion:
         type: string
         format: datetime
       Id:
@@ -2182,11 +2218,17 @@ definitions:
     properties:
       Activo:
         type: boolean
+      AutorModificacion:
+        type: integer
+        format: int64
       Autorretenedor:
         type: boolean
       ExencionIca:
         type: boolean
       FechaCreacion:
+        type: string
+        format: datetime
+      FechaModificacion:
         type: string
         format: datetime
       GranContribuyente:
@@ -2230,12 +2272,21 @@ definitions:
     properties:
       Activo:
         type: boolean
+      AutorModificacion:
+        type: integer
+        format: int64
       DescripcionPortafolio:
         type: string
       FechaCreacion:
         type: string
         format: datetime
+      FechaModificacion:
+        type: string
+        format: datetime
       Id:
+        type: integer
+        format: int64
+      TerceroId:
         type: integer
         format: int64
       TipoRegistro:
@@ -2247,12 +2298,18 @@ definitions:
     properties:
       Activo:
         type: boolean
+      AutorModificacion:
+        type: integer
+        format: int64
       CotizaBolsa:
         type: boolean
       FechaConstitucion:
         type: string
         format: datetime
       FechaCreacion:
+        type: string
+        format: datetime
+      FechaModificacion:
         type: string
         format: datetime
       FechaRenovacion:
@@ -2276,6 +2333,9 @@ definitions:
     properties:
       Activo:
         type: boolean
+      AutorModificacion:
+        type: integer
+        format: int64
       ExperienciaLaboralMeses:
         type: integer
         format: int64
@@ -2283,6 +2343,9 @@ definitions:
         type: integer
         format: int64
       FechaCreacion:
+        type: string
+        format: datetime
+      FechaModificacion:
         type: string
         format: datetime
       Id:
@@ -2314,12 +2377,18 @@ definitions:
     properties:
       Activo:
         type: boolean
+      AutorModificacion:
+        type: integer
+        format: int64
       CargoId:
         type: integer
         format: int64
       DescripcionFacultades:
         type: string
       FechaCreacion:
+        type: string
+        format: datetime
+      FechaModificacion:
         type: string
         format: datetime
       Id:
@@ -2341,7 +2410,13 @@ definitions:
     properties:
       Activo:
         type: boolean
+      AutorModificacion:
+        type: integer
+        format: int64
       FechaCreacion:
+        type: string
+        format: datetime
+      FechaModificacion:
         type: string
         format: datetime
       Id:
@@ -2358,9 +2433,15 @@ definitions:
     properties:
       Activo:
         type: boolean
+      AutorModificacion:
+        type: integer
+        format: int64
       DeclaracionId:
         $ref: '#/definitions/models.Declaracion'
       FechaCreacion:
+        type: string
+        format: datetime
+      FechaModificacion:
         type: string
         format: datetime
       Id:

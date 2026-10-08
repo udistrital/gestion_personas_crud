@@ -12,8 +12,6 @@ import (
 
 type ProveedorJuridico struct {
 	Id                       int       `orm:"column(id);pk;auto"`
-	Activo                   bool      `orm:"column(activo)"`
-	FechaCreacion            time.Time `orm:"column(fecha_creacion);type(timestamp without time zone)"`
 	NombreComercial          string    `orm:"column(nombre_comercial)"`
 	MatriculaMercantil       int       `orm:"column(matricula_mercantil)"`
 	FechaConstitucion        time.Time `orm:"column(fecha_constitucion);type(date)"`
@@ -21,6 +19,10 @@ type ProveedorJuridico struct {
 	ReportaBeneficiosFinales bool      `orm:"column(reporta_beneficios_finales)"`
 	CotizaBolsa              bool      `orm:"column(cotiza_bolsa)"`
 	RequiereRevisorFiscal    bool      `orm:"column(requiere_revisor_fiscal)"`
+	Activo                   bool      `orm:"column(activo)"`
+	FechaCreacion            time.Time `orm:"column(fecha_creacion);type(timestamp without time zone)"`
+	FechaModificacion        time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);null"`
+	AutorModificacion        int       `orm:"column(autor_modificacion);null"`
 }
 
 func (t *ProveedorJuridico) TableName() string {

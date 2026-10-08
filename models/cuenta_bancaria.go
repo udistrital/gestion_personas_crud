@@ -12,8 +12,6 @@ import (
 
 type CuentaBancaria struct {
 	Id                int        `orm:"column(id);pk;auto"`
-	Activo            bool       `orm:"column(activo)"`
-	FechaCreacion     time.Time  `orm:"column(fecha_creacion);type(timestamp without time zone)"`
 	ProveedorId       *Proveedor `orm:"column(proveedor_id);rel(fk)"`
 	EntidadBancariaId int        `orm:"column(entidad_bancaria_id)"`
 	TipoCuentaId      int        `orm:"column(tipo_cuenta_id)"`
@@ -21,6 +19,10 @@ type CuentaBancaria struct {
 	NombreTitular     string     `orm:"column(nombre_titular)"`
 	CiudadAperturaId  int        `orm:"column(ciudad_apertura_id);null"`
 	EsPrincipal       bool       `orm:"column(es_principal);null"`
+	Activo            bool       `orm:"column(activo)"`
+	FechaCreacion     time.Time  `orm:"column(fecha_creacion);type(timestamp without time zone)"`
+	FechaModificacion time.Time  `orm:"column(fecha_modificacion);type(timestamp without time zone);null"`
+	AutorModificacion int        `orm:"column(autor_modificacion);null"`
 }
 
 func (t *CuentaBancaria) TableName() string {

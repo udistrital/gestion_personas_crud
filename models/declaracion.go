@@ -12,10 +12,12 @@ import (
 
 type Declaracion struct {
 	Id                int       `orm:"column(id);pk;auto"`
-	Activo            bool      `orm:"column(activo)"`
-	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone)"`
 	TipoDeclaracionId int       `orm:"column(tipo_declaracion_id)"`
 	Texto             string    `orm:"column(texto)"`
+	Activo            bool      `orm:"column(activo)"`
+	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone)"`
+	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);null"`
+	AutorModificacion int       `orm:"column(autor_modificacion);null"`
 }
 
 func (t *Declaracion) TableName() string {

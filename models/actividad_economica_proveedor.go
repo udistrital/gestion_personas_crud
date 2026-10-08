@@ -12,11 +12,13 @@ import (
 
 type ActividadEconomicaProveedor struct {
 	Id                   int        `orm:"column(id);pk;auto"`
-	Activo               bool       `orm:"column(activo)"`
-	FechaCreacion        time.Time  `orm:"column(fecha_creacion);type(timestamp without time zone)"`
 	ProveedorId          *Proveedor `orm:"column(proveedor_id);rel(fk)"`
 	ActividadEconomicaId int        `orm:"column(actividad_economica_id)"`
 	EsPrincipal          bool       `orm:"column(es_principal)"`
+	Activo               bool       `orm:"column(activo)"`
+	FechaCreacion        time.Time  `orm:"column(fecha_creacion);type(timestamp without time zone)"`
+	FechaModificacion    time.Time  `orm:"column(fecha_modificacion);type(timestamp without time zone);null"`
+	AutorModificacion    int        `orm:"column(autor_modificacion);null"`
 }
 
 func (t *ActividadEconomicaProveedor) TableName() string {

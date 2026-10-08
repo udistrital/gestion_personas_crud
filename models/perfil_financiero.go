@@ -12,8 +12,6 @@ import (
 
 type PerfilFinanciero struct {
 	Id                               int                 `orm:"column(id);pk;auto"`
-	Activo                           bool                `orm:"column(activo)"`
-	FechaCreacion                    time.Time           `orm:"column(fecha_creacion);type(timestamp without time zone)"`
 	ProveedorId                      *ProveedorJuridico  `orm:"column(proveedor_id);rel(fk)"`
 	GranContribuyente                bool                `orm:"column(gran_contribuyente)"`
 	Autorretenedor                   bool                `orm:"column(autorretenedor)"`
@@ -23,6 +21,10 @@ type PerfilFinanciero struct {
 	RangoFacturacionId               *RangoFacturacion   `orm:"column(rango_facturacion_id);rel(fk)"`
 	ResolucionFacturacion            string              `orm:"column(resolucion_facturacion);null"`
 	OperaMonedaExtranjera            bool                `orm:"column(opera_moneda_extranjera)"`
+	Activo                           bool                `orm:"column(activo)"`
+	FechaCreacion                    time.Time           `orm:"column(fecha_creacion);type(timestamp without time zone)"`
+	FechaModificacion                time.Time           `orm:"column(fecha_modificacion);type(timestamp without time zone);null"`
+	AutorModificacion                int                 `orm:"column(autor_modificacion);null"`
 }
 
 func (t *PerfilFinanciero) TableName() string {

@@ -12,10 +12,12 @@ import (
 
 type ResponsabilidadFiscalPerfil struct {
 	Id                      int               `orm:"column(id);pk;auto"`
-	Activo                  bool              `orm:"column(activo)"`
-	FechaCreacion           time.Time         `orm:"column(fecha_creacion);type(timestamp without time zone)"`
 	PerfilFinancieroId      *PerfilFinanciero `orm:"column(perfil_financiero_id);rel(fk)"`
 	ResponsabilidadFiscalId int               `orm:"column(responsabilidad_fiscal_id)"`
+	Activo                  bool              `orm:"column(activo)"`
+	FechaCreacion           time.Time         `orm:"column(fecha_creacion);type(timestamp without time zone)"`
+	FechaModificacion       time.Time         `orm:"column(fecha_modificacion);type(timestamp without time zone);null"`
+	AutorModificacion       int               `orm:"column(autor_modificacion);null"`
 }
 
 func (t *ResponsabilidadFiscalPerfil) TableName() string {

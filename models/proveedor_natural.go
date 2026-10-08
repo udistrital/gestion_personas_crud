@@ -12,11 +12,13 @@ import (
 
 type ProveedorNatural struct {
 	Id                          int       `orm:"column(id);pk;auto"`
-	Activo                      bool      `orm:"column(activo)"`
-	FechaCreacion               time.Time `orm:"column(fecha_creacion);type(timestamp without time zone)"`
 	PerfilDeclarado             *Perfil   `orm:"column(perfil_declarado);rel(fk)"`
 	ExperienciaLaboralMeses     int       `orm:"column(experiencia_laboral_meses)"`
 	ExperienciaProfesionalMeses int       `orm:"column(experiencia_profesional_meses)"`
+	Activo                      bool      `orm:"column(activo)"`
+	FechaCreacion               time.Time `orm:"column(fecha_creacion);type(timestamp without time zone)"`
+	FechaModificacion           time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);null"`
+	AutorModificacion           int       `orm:"column(autor_modificacion);null"`
 }
 
 func (t *ProveedorNatural) TableName() string {

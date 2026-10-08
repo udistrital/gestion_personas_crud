@@ -2796,10 +2796,18 @@
                 "Activo": {
                     "type": "boolean"
                 },
+                "AutorModificacion": {
+                    "type": "integer",
+                    "format": "int64"
+                },
                 "EsPrincipal": {
                     "type": "boolean"
                 },
                 "FechaCreacion": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "FechaModificacion": {
                     "type": "string",
                     "format": "datetime"
                 },
@@ -2819,6 +2827,10 @@
                 "Activo": {
                     "type": "boolean"
                 },
+                "AutorModificacion": {
+                    "type": "integer",
+                    "format": "int64"
+                },
                 "EsPrincipal": {
                     "type": "boolean"
                 },
@@ -2826,6 +2838,10 @@
                     "type": "string"
                 },
                 "FechaCreacion": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "FechaModificacion": {
                     "type": "string",
                     "format": "datetime"
                 },
@@ -2861,6 +2877,10 @@
                 "Activo": {
                     "type": "boolean"
                 },
+                "AutorModificacion": {
+                    "type": "integer",
+                    "format": "int64"
+                },
                 "CiudadAperturaId": {
                     "type": "integer",
                     "format": "int64"
@@ -2873,6 +2893,10 @@
                     "type": "boolean"
                 },
                 "FechaCreacion": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "FechaModificacion": {
                     "type": "string",
                     "format": "datetime"
                 },
@@ -2902,7 +2926,15 @@
                 "Activo": {
                     "type": "boolean"
                 },
+                "AutorModificacion": {
+                    "type": "integer",
+                    "format": "int64"
+                },
                 "FechaCreacion": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "FechaModificacion": {
                     "type": "string",
                     "format": "datetime"
                 },
@@ -2926,10 +2958,18 @@
                 "Activo": {
                     "type": "boolean"
                 },
+                "AutorModificacion": {
+                    "type": "integer",
+                    "format": "int64"
+                },
                 "Enlace": {
                     "type": "string"
                 },
                 "FechaCreacion": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "FechaModificacion": {
                     "type": "string",
                     "format": "datetime"
                 },
@@ -2957,6 +2997,10 @@
                     "type": "number",
                     "format": "double"
                 },
+                "AutorModificacion": {
+                    "type": "integer",
+                    "format": "int64"
+                },
                 "CapitalAutorizado": {
                     "type": "number",
                     "format": "double"
@@ -2966,6 +3010,10 @@
                     "format": "datetime"
                 },
                 "FechaCreacion": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "FechaModificacion": {
                     "type": "string",
                     "format": "datetime"
                 },
@@ -3023,6 +3071,10 @@
                 "Activo": {
                     "type": "boolean"
                 },
+                "AutorModificacion": {
+                    "type": "integer",
+                    "format": "int64"
+                },
                 "Autorretenedor": {
                     "type": "boolean"
                 },
@@ -3030,6 +3082,10 @@
                     "type": "boolean"
                 },
                 "FechaCreacion": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "FechaModificacion": {
                     "type": "string",
                     "format": "datetime"
                 },
@@ -3093,6 +3149,10 @@
                 "Activo": {
                     "type": "boolean"
                 },
+                "AutorModificacion": {
+                    "type": "integer",
+                    "format": "int64"
+                },
                 "DescripcionPortafolio": {
                     "type": "string"
                 },
@@ -3100,7 +3160,15 @@
                     "type": "string",
                     "format": "datetime"
                 },
+                "FechaModificacion": {
+                    "type": "string",
+                    "format": "datetime"
+                },
                 "Id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "TerceroId": {
                     "type": "integer",
                     "format": "int64"
                 },
@@ -3117,6 +3185,10 @@
                 "Activo": {
                     "type": "boolean"
                 },
+                "AutorModificacion": {
+                    "type": "integer",
+                    "format": "int64"
+                },
                 "CotizaBolsa": {
                     "type": "boolean"
                 },
@@ -3125,6 +3197,10 @@
                     "format": "datetime"
                 },
                 "FechaCreacion": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "FechaModificacion": {
                     "type": "string",
                     "format": "datetime"
                 },
@@ -3158,6 +3234,10 @@
                 "Activo": {
                     "type": "boolean"
                 },
+                "AutorModificacion": {
+                    "type": "integer",
+                    "format": "int64"
+                },
                 "ExperienciaLaboralMeses": {
                     "type": "integer",
                     "format": "int64"
@@ -3167,6 +3247,10 @@
                     "format": "int64"
                 },
                 "FechaCreacion": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "FechaModificacion": {
                     "type": "string",
                     "format": "datetime"
                 },
@@ -3212,6 +3296,10 @@
                 "Activo": {
                     "type": "boolean"
                 },
+                "AutorModificacion": {
+                    "type": "integer",
+                    "format": "int64"
+                },
                 "CargoId": {
                     "type": "integer",
                     "format": "int64"
@@ -3220,6 +3308,10 @@
                     "type": "string"
                 },
                 "FechaCreacion": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "FechaModificacion": {
                     "type": "string",
                     "format": "datetime"
                 },
@@ -3250,7 +3342,15 @@
                 "Activo": {
                     "type": "boolean"
                 },
+                "AutorModificacion": {
+                    "type": "integer",
+                    "format": "int64"
+                },
                 "FechaCreacion": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "FechaModificacion": {
                     "type": "string",
                     "format": "datetime"
                 },
@@ -3274,10 +3374,18 @@
                 "Activo": {
                     "type": "boolean"
                 },
+                "AutorModificacion": {
+                    "type": "integer",
+                    "format": "int64"
+                },
                 "DeclaracionId": {
                     "$ref": "#/definitions/models.Declaracion"
                 },
                 "FechaCreacion": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "FechaModificacion": {
                     "type": "string",
                     "format": "datetime"
                 },
