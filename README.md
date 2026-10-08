@@ -16,6 +16,9 @@ El API provee la gestión de proveedores para el sistema de gestión de personas
 Configurar antes de ejecutar (ver también `.env.example` y `conf/app.conf`).
 
 ```shell
+GESTION_PERSONAS_CRUD_API_NAME=[nombre de la API]
+GESTION_PERSONAS_CRUD_SERVICE_NAME=[nombre del servicio]
+GESTION_PERSONAS_CRUD_API_BASE_DIR=[directorio base de la API con respecto a $GOPATH/src]
 GESTION_PERSONAS_CRUD_HTTP_PORT=[puerto de la API]
 GESTION_PERSONAS_CRUD_RUN_MODE=[dev|prod]
 GESTION_PERSONAS_CRUD_PGUSER=[usuario BD]
