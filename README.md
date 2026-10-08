@@ -9,6 +9,7 @@ El API provee la gestión de proveedores para el sistema de gestión de personas
 - [Golang](https://github.com/udistrital/lineamientos_oas/blob/master/instalacion_de_herramientas/golang.md)
 - [Beego](https://github.com/udistrital/lineamientos_oas/blob/master/instalacion_de_herramientas/beego.md)
 - [PostgreSQL](https://github.com/udistrital/lineamientos_oas/blob/master/instalacion_de_herramientas/postgres.md)
+- [UtilsOAS](https://github.com/udistrital/lineamientos_oas/blob/master/generacion_de_apis/control_error_json_crud.md)
 
 ### Variables de Entorno
 
@@ -79,4 +80,4 @@ gestion_personas_crud is free software: you can redistribute it and/or modify it
 
 gestion_personas_crud is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License along with novedades_crud. If not, see https://www.gnu.org/licenses/.
+You should have received a copy of the GNU General Public License along with novedades_crud. If not, see [https://www.gnu.org/licenses/](https://www.gnu.org/licenses/).

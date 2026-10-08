@@ -3,11 +3,13 @@ package controllers
 import (
 	"encoding/json"
 	"errors"
-	"github.com/udistrital/gestion_personas_crud/models"
 	"strconv"
 	"strings"
 
+	"github.com/udistrital/gestion_personas_crud/models"
+
 	"github.com/astaxie/beego"
+	"github.com/beego/beego/logs"
 )
 
 // ContactoController operations for Contacto
@@ -29,19 +31,23 @@ func (c *ContactoController) URLMapping() {
 // @Description create Contacto
 // @Param	body		body 	models.Contacto	true		"body for Contacto content"
 // @Success 201 {int} models.Contacto
-// @Failure 403 body is empty
+// @Failure 400 the request contains incorrect syntax
 // @router / [post]
 func (c *ContactoController) Post() {
 	var v models.Contacto
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
 		if _, err := models.AddContacto(&v); err == nil {
 			c.Ctx.Output.SetStatus(201)
-			c.Data["json"] = v
+			c.Data["json"] = map[string]interface{}{"Success": true, "Status": "201", "Message": "Registration successful", "Data": v}
 		} else {
-			c.Data["json"] = err.Error()
+			logs.Error(err)
+			c.Data["mesaage"] = "Error service POST: The request contains an incorrect data type or an invalid parameter"
+			c.Abort("400")
 		}
 	} else {
-		c.Data["json"] = err.Error()
+		logs.Error(err)
+		c.Data["mesaage"] = "Error service POST: The request contains an incorrect data type or an invalid parameter"
+		c.Abort("400")
 	}
 	c.ServeJSON()
 }
@@ -51,16 +57,18 @@ func (c *ContactoController) Post() {
 // @Description get Contacto by id
 // @Param	id		path 	string	true		"The key for staticblock"
 // @Success 200 {object} models.Contacto
-// @Failure 403 :id is empty
+// @Failure 404 not found resource
 // @router /:id [get]
 func (c *ContactoController) GetOne() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
 	v, err := models.GetContactoById(id)
 	if err != nil {
-		c.Data["json"] = err.Error()
+		logs.Error(err)
+		c.Data["mesaage"] = "Error service GetOne: The request contains an incorrect parameter or no record exists"
+		c.Abort("404")
 	} else {
-		c.Data["json"] = v
+		c.Data["json"] = map[string]interface{}{"Success": true, "Status": "200", "Message": "Request successful", "Data": v}
 	}
 	c.ServeJSON()
 }
@@ -75,7 +83,7 @@ func (c *ContactoController) GetOne() {
 // @Param	limit	query	string	false	"Limit the size of result set. Must be an integer"
 // @Param	offset	query	string	false	"Start position of result set. Must be an integer"
 // @Success 200 {object} models.Contacto
-// @Failure 403
+// @Failure 404 not found resource
 // @router / [get]
 func (c *ContactoController) GetAll() {
 	var fields []string
@@ -121,9 +129,14 @@ func (c *ContactoController) GetAll() {
 
 	l, err := models.GetAllContacto(query, fields, sortby, order, offset, limit)
 	if err != nil {
-		c.Data["json"] = err.Error()
+		logs.Error(err)
+		c.Data["mesaage"] = "Error service GetAll: The request contains an incorrect parameter or no record exists"
+		c.Abort("404")
 	} else {
-		c.Data["json"] = l
+		if l == nil {
+			l = append(l, map[string]interface{}{})
+		}
+		c.Data["json"] = map[string]interface{}{"Success": true, "Status": "200", "Message": "Request successful", "Data": l}
 	}
 	c.ServeJSON()
 }
@@ -134,7 +147,7 @@ func (c *ContactoController) GetAll() {
 // @Param	id		path 	string	true		"The id you want to update"
 // @Param	body		body 	models.Contacto	true		"body for Contacto content"
 // @Success 200 {object} models.Contacto
-// @Failure 403 :id is not int
+// @Failure 400 the request contains incorrect syntax
 // @router /:id [put]
 func (c *ContactoController) Put() {
 	idStr := c.Ctx.Input.Param(":id")
@@ -142,12 +155,16 @@ func (c *ContactoController) Put() {
 	v := models.Contacto{Id: id}
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
 		if err := models.UpdateContactoById(&v); err == nil {
-			c.Data["json"] = "OK"
+			c.Data["json"] = map[string]interface{}{"Success": true, "Status": "200", "Message": "Update successful", "Data": v}
 		} else {
-			c.Data["json"] = err.Error()
+			logs.Error(err)
+			c.Data["mesaage"] = "Error service Put: The request contains an incorrect data type or an invalid parameter"
+			c.Abort("400")
 		}
 	} else {
-		c.Data["json"] = err.Error()
+		logs.Error(err)
+		c.Data["mesaage"] = "Error service Put: The request contains an incorrect data type or an invalid parameter"
+		c.Abort("400")
 	}
 	c.ServeJSON()
 }
@@ -157,15 +174,18 @@ func (c *ContactoController) Put() {
 // @Description delete the Contacto
 // @Param	id		path 	string	true		"The id you want to delete"
 // @Success 200 {string} delete success!
-// @Failure 403 id is empty
+// @Failure 404 not found resource
 // @router /:id [delete]
 func (c *ContactoController) Delete() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
 	if err := models.DeleteContacto(id); err == nil {
-		c.Data["json"] = "OK"
+		d := map[string]interface{}{"Id": id}
+		c.Data["json"] = map[string]interface{}{"Success": true, "Status": "200", "Message": "Delete successful", "Data": d}
 	} else {
-		c.Data["json"] = err.Error()
+		logs.Error(err)
+		c.Data["mesaage"] = "Error service Delete: Request contains incorrect parameter"
+		c.Abort("404")
 	}
 	c.ServeJSON()
 }

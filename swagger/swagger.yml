@@ -47,8 +47,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.ActividadEconomicaProveedor'
-        "403":
-          description: ""
+        "404":
+          description: not found resource
     post:
       tags:
       - actividad_economica_proveedor
@@ -64,8 +64,8 @@ paths:
       responses:
         "201":
           description: '{int} models.ActividadEconomicaProveedor'
-        "403":
-          description: body is empty
+        "400":
+          description: the request contains incorrect syntax
   /actividad_economica_proveedor/{id}:
     get:
       tags:
@@ -83,8 +83,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.ActividadEconomicaProveedor'
-        "403":
-          description: :id is empty
+        "404":
+          description: not found resource
     put:
       tags:
       - actividad_economica_proveedor
@@ -107,8 +107,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.ActividadEconomicaProveedor'
-        "403":
-          description: :id is not int
+        "400":
+          description: the request contains incorrect syntax
     delete:
       tags:
       - actividad_economica_proveedor
@@ -123,8 +123,8 @@ paths:
       responses:
         "200":
           description: '{string} delete success!'
-        "403":
-          description: id is empty
+        "404":
+          description: not found resource
   /contacto/:
     get:
       tags:
@@ -161,8 +161,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.Contacto'
-        "403":
-          description: ""
+        "404":
+          description: not found resource
     post:
       tags:
       - contacto
@@ -178,8 +178,8 @@ paths:
       responses:
         "201":
           description: '{int} models.Contacto'
-        "403":
-          description: body is empty
+        "400":
+          description: the request contains incorrect syntax
   /contacto/{id}:
     get:
       tags:
@@ -197,8 +197,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.Contacto'
-        "403":
-          description: :id is empty
+        "404":
+          description: not found resource
     put:
       tags:
       - contacto
@@ -221,8 +221,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.Contacto'
-        "403":
-          description: :id is not int
+        "400":
+          description: the request contains incorrect syntax
     delete:
       tags:
       - contacto
@@ -237,8 +237,8 @@ paths:
       responses:
         "200":
           description: '{string} delete success!'
-        "403":
-          description: id is empty
+        "404":
+          description: not found resource
   /cuenta_bancaria/:
     get:
       tags:
@@ -275,8 +275,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.CuentaBancaria'
-        "403":
-          description: ""
+        "404":
+          description: not found resource
     post:
       tags:
       - cuenta_bancaria
@@ -292,8 +292,8 @@ paths:
       responses:
         "201":
           description: '{int} models.CuentaBancaria'
-        "403":
-          description: body is empty
+        "400":
+          description: the request contains incorrect syntax
   /cuenta_bancaria/{id}:
     get:
       tags:
@@ -311,8 +311,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.CuentaBancaria'
-        "403":
-          description: :id is empty
+        "404":
+          description: not found resource
     put:
       tags:
       - cuenta_bancaria
@@ -335,8 +335,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.CuentaBancaria'
-        "403":
-          description: :id is not int
+        "400":
+          description: the request contains incorrect syntax
     delete:
       tags:
       - cuenta_bancaria
@@ -351,8 +351,8 @@ paths:
       responses:
         "200":
           description: '{string} delete success!'
-        "403":
-          description: id is empty
+        "404":
+          description: not found resource
   /declaracion/:
     get:
       tags:
@@ -389,8 +389,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.Declaracion'
-        "403":
-          description: ""
+        "404":
+          description: not found resource
     post:
       tags:
       - declaracion
@@ -406,8 +406,8 @@ paths:
       responses:
         "201":
           description: '{int} models.Declaracion'
-        "403":
-          description: body is empty
+        "400":
+          description: the request contains incorrect syntax
   /declaracion/{id}:
     get:
       tags:
@@ -425,8 +425,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.Declaracion'
-        "403":
-          description: :id is empty
+        "404":
+          description: not found resource
     put:
       tags:
       - declaracion
@@ -449,8 +449,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.Declaracion'
-        "403":
-          description: :id is not int
+        "400":
+          description: the request contains incorrect syntax
     delete:
       tags:
       - declaracion
@@ -465,8 +465,8 @@ paths:
       responses:
         "200":
           description: '{string} delete success!'
-        "403":
-          description: id is empty
+        "404":
+          description: not found resource
   /documento/:
     get:
       tags:
@@ -503,8 +503,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.Documento'
-        "403":
-          description: ""
+        "404":
+          description: not found resource
     post:
       tags:
       - documento
@@ -520,8 +520,8 @@ paths:
       responses:
         "201":
           description: '{int} models.Documento'
-        "403":
-          description: body is empty
+        "400":
+          description: the request contains incorrect syntax
   /documento/{id}:
     get:
       tags:
@@ -539,8 +539,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.Documento'
-        "403":
-          description: :id is empty
+        "404":
+          description: not found resource
     put:
       tags:
       - documento
@@ -563,8 +563,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.Documento'
-        "403":
-          description: :id is not int
+        "400":
+          description: the request contains incorrect syntax
     delete:
       tags:
       - documento
@@ -579,8 +579,8 @@ paths:
       responses:
         "200":
           description: '{string} delete success!'
-        "403":
-          description: id is empty
+        "404":
+          description: not found resource
   /informacion_financiera/:
     get:
       tags:
@@ -617,8 +617,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.InformacionFinanciera'
-        "403":
-          description: ""
+        "404":
+          description: not found resource
     post:
       tags:
       - informacion_financiera
@@ -634,8 +634,8 @@ paths:
       responses:
         "201":
           description: '{int} models.InformacionFinanciera'
-        "403":
-          description: body is empty
+        "400":
+          description: the request contains incorrect syntax
   /informacion_financiera/{id}:
     get:
       tags:
@@ -653,8 +653,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.InformacionFinanciera'
-        "403":
-          description: :id is empty
+        "404":
+          description: not found resource
     put:
       tags:
       - informacion_financiera
@@ -677,8 +677,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.InformacionFinanciera'
-        "403":
-          description: :id is not int
+        "400":
+          description: the request contains incorrect syntax
     delete:
       tags:
       - informacion_financiera
@@ -693,8 +693,8 @@ paths:
       responses:
         "200":
           description: '{string} delete success!'
-        "403":
-          description: id is empty
+        "404":
+          description: not found resource
   /perfil/:
     get:
       tags:
@@ -731,8 +731,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.Perfil'
-        "403":
-          description: ""
+        "404":
+          description: not found resource
     post:
       tags:
       - perfil
@@ -748,8 +748,8 @@ paths:
       responses:
         "201":
           description: '{int} models.Perfil'
-        "403":
-          description: body is empty
+        "400":
+          description: the request contains incorrect syntax
   /perfil/{id}:
     get:
       tags:
@@ -767,8 +767,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.Perfil'
-        "403":
-          description: :id is empty
+        "404":
+          description: not found resource
     put:
       tags:
       - perfil
@@ -791,8 +791,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.Perfil'
-        "403":
-          description: :id is not int
+        "400":
+          description: the request contains incorrect syntax
     delete:
       tags:
       - perfil
@@ -807,8 +807,8 @@ paths:
       responses:
         "200":
           description: '{string} delete success!'
-        "403":
-          description: id is empty
+        "404":
+          description: not found resource
   /perfil_financiero/:
     get:
       tags:
@@ -845,8 +845,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.PerfilFinanciero'
-        "403":
-          description: ""
+        "404":
+          description: not found resource
     post:
       tags:
       - perfil_financiero
@@ -862,8 +862,8 @@ paths:
       responses:
         "201":
           description: '{int} models.PerfilFinanciero'
-        "403":
-          description: body is empty
+        "400":
+          description: the request contains incorrect syntax
   /perfil_financiero/{id}:
     get:
       tags:
@@ -881,8 +881,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.PerfilFinanciero'
-        "403":
-          description: :id is empty
+        "404":
+          description: not found resource
     put:
       tags:
       - perfil_financiero
@@ -905,8 +905,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.PerfilFinanciero'
-        "403":
-          description: :id is not int
+        "400":
+          description: the request contains incorrect syntax
     delete:
       tags:
       - perfil_financiero
@@ -921,8 +921,8 @@ paths:
       responses:
         "200":
           description: '{string} delete success!'
-        "403":
-          description: id is empty
+        "404":
+          description: not found resource
   /prefijo_facturacion/:
     get:
       tags:
@@ -959,8 +959,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.PrefijoFacturacion'
-        "403":
-          description: ""
+        "404":
+          description: not found resource
     post:
       tags:
       - prefijo_facturacion
@@ -976,8 +976,8 @@ paths:
       responses:
         "201":
           description: '{int} models.PrefijoFacturacion'
-        "403":
-          description: body is empty
+        "400":
+          description: the request contains incorrect syntax
   /prefijo_facturacion/{id}:
     get:
       tags:
@@ -995,8 +995,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.PrefijoFacturacion'
-        "403":
-          description: :id is empty
+        "404":
+          description: not found resource
     put:
       tags:
       - prefijo_facturacion
@@ -1019,8 +1019,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.PrefijoFacturacion'
-        "403":
-          description: :id is not int
+        "400":
+          description: the request contains incorrect syntax
     delete:
       tags:
       - prefijo_facturacion
@@ -1035,8 +1035,8 @@ paths:
       responses:
         "200":
           description: '{string} delete success!'
-        "403":
-          description: id is empty
+        "404":
+          description: not found resource
   /proveedor/:
     get:
       tags:
@@ -1073,8 +1073,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.Proveedor'
-        "403":
-          description: ""
+        "404":
+          description: not found resource
     post:
       tags:
       - proveedor
@@ -1090,8 +1090,8 @@ paths:
       responses:
         "201":
           description: '{int} models.Proveedor'
-        "403":
-          description: body is empty
+        "400":
+          description: the request contains incorrect syntax
   /proveedor/{id}:
     get:
       tags:
@@ -1109,8 +1109,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.Proveedor'
-        "403":
-          description: :id is empty
+        "404":
+          description: not found resource
     put:
       tags:
       - proveedor
@@ -1133,8 +1133,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.Proveedor'
-        "403":
-          description: :id is not int
+        "400":
+          description: the request contains incorrect syntax
     delete:
       tags:
       - proveedor
@@ -1149,8 +1149,8 @@ paths:
       responses:
         "200":
           description: '{string} delete success!'
-        "403":
-          description: id is empty
+        "404":
+          description: not found resource
   /proveedor_juridico/:
     get:
       tags:
@@ -1187,8 +1187,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.ProveedorJuridico'
-        "403":
-          description: ""
+        "404":
+          description: not found resource
     post:
       tags:
       - proveedor_juridico
@@ -1204,8 +1204,8 @@ paths:
       responses:
         "201":
           description: '{int} models.ProveedorJuridico'
-        "403":
-          description: body is empty
+        "400":
+          description: the request contains incorrect syntax
   /proveedor_juridico/{id}:
     get:
       tags:
@@ -1223,8 +1223,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.ProveedorJuridico'
-        "403":
-          description: :id is empty
+        "404":
+          description: not found resource
     put:
       tags:
       - proveedor_juridico
@@ -1247,8 +1247,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.ProveedorJuridico'
-        "403":
-          description: :id is not int
+        "400":
+          description: the request contains incorrect syntax
     delete:
       tags:
       - proveedor_juridico
@@ -1263,8 +1263,8 @@ paths:
       responses:
         "200":
           description: '{string} delete success!'
-        "403":
-          description: id is empty
+        "404":
+          description: not found resource
   /proveedor_natural/:
     get:
       tags:
@@ -1301,8 +1301,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.ProveedorNatural'
-        "403":
-          description: ""
+        "404":
+          description: not found resource
     post:
       tags:
       - proveedor_natural
@@ -1318,8 +1318,8 @@ paths:
       responses:
         "201":
           description: '{int} models.ProveedorNatural'
-        "403":
-          description: body is empty
+        "400":
+          description: the request contains incorrect syntax
   /proveedor_natural/{id}:
     get:
       tags:
@@ -1337,8 +1337,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.ProveedorNatural'
-        "403":
-          description: :id is empty
+        "404":
+          description: not found resource
     put:
       tags:
       - proveedor_natural
@@ -1361,8 +1361,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.ProveedorNatural'
-        "403":
-          description: :id is not int
+        "400":
+          description: the request contains incorrect syntax
     delete:
       tags:
       - proveedor_natural
@@ -1377,8 +1377,8 @@ paths:
       responses:
         "200":
           description: '{string} delete success!'
-        "403":
-          description: id is empty
+        "404":
+          description: not found resource
   /rango_facturacion/:
     get:
       tags:
@@ -1415,8 +1415,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.RangoFacturacion'
-        "403":
-          description: ""
+        "404":
+          description: not found resource
     post:
       tags:
       - rango_facturacion
@@ -1432,8 +1432,8 @@ paths:
       responses:
         "201":
           description: '{int} models.RangoFacturacion'
-        "403":
-          description: body is empty
+        "400":
+          description: the request contains incorrect syntax
   /rango_facturacion/{id}:
     get:
       tags:
@@ -1451,8 +1451,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.RangoFacturacion'
-        "403":
-          description: :id is empty
+        "404":
+          description: not found resource
     put:
       tags:
       - rango_facturacion
@@ -1475,8 +1475,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.RangoFacturacion'
-        "403":
-          description: :id is not int
+        "400":
+          description: the request contains incorrect syntax
     delete:
       tags:
       - rango_facturacion
@@ -1491,8 +1491,8 @@ paths:
       responses:
         "200":
           description: '{string} delete success!'
-        "403":
-          description: id is empty
+        "404":
+          description: not found resource
   /representacion/:
     get:
       tags:
@@ -1529,8 +1529,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.Representacion'
-        "403":
-          description: ""
+        "404":
+          description: not found resource
     post:
       tags:
       - representacion
@@ -1546,8 +1546,8 @@ paths:
       responses:
         "201":
           description: '{int} models.Representacion'
-        "403":
-          description: body is empty
+        "400":
+          description: the request contains incorrect syntax
   /representacion/{id}:
     get:
       tags:
@@ -1565,8 +1565,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.Representacion'
-        "403":
-          description: :id is empty
+        "404":
+          description: not found resource
     put:
       tags:
       - representacion
@@ -1589,8 +1589,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.Representacion'
-        "403":
-          description: :id is not int
+        "400":
+          description: the request contains incorrect syntax
     delete:
       tags:
       - representacion
@@ -1605,8 +1605,8 @@ paths:
       responses:
         "200":
           description: '{string} delete success!'
-        "403":
-          description: id is empty
+        "404":
+          description: not found resource
   /responsabilidad_fiscal_perfil/:
     get:
       tags:
@@ -1643,8 +1643,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.ResponsabilidadFiscalPerfil'
-        "403":
-          description: ""
+        "404":
+          description: not found resource
     post:
       tags:
       - responsabilidad_fiscal_perfil
@@ -1660,8 +1660,8 @@ paths:
       responses:
         "201":
           description: '{int} models.ResponsabilidadFiscalPerfil'
-        "403":
-          description: body is empty
+        "400":
+          description: the request contains incorrect syntax
   /responsabilidad_fiscal_perfil/{id}:
     get:
       tags:
@@ -1679,8 +1679,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.ResponsabilidadFiscalPerfil'
-        "403":
-          description: :id is empty
+        "404":
+          description: not found resource
     put:
       tags:
       - responsabilidad_fiscal_perfil
@@ -1703,8 +1703,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.ResponsabilidadFiscalPerfil'
-        "403":
-          description: :id is not int
+        "400":
+          description: the request contains incorrect syntax
     delete:
       tags:
       - responsabilidad_fiscal_perfil
@@ -1719,8 +1719,8 @@ paths:
       responses:
         "200":
           description: '{string} delete success!'
-        "403":
-          description: id is empty
+        "404":
+          description: not found resource
   /tipo_declaracion_proveedor/:
     get:
       tags:
@@ -1757,8 +1757,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.TipoDeclaracionProveedor'
-        "403":
-          description: ""
+        "404":
+          description: not found resource
     post:
       tags:
       - tipo_declaracion_proveedor
@@ -1774,8 +1774,8 @@ paths:
       responses:
         "201":
           description: '{int} models.TipoDeclaracionProveedor'
-        "403":
-          description: body is empty
+        "400":
+          description: the request contains incorrect syntax
   /tipo_declaracion_proveedor/{id}:
     get:
       tags:
@@ -1793,8 +1793,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.TipoDeclaracionProveedor'
-        "403":
-          description: :id is empty
+        "404":
+          description: not found resource
     put:
       tags:
       - tipo_declaracion_proveedor
@@ -1817,8 +1817,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.TipoDeclaracionProveedor'
-        "403":
-          description: :id is not int
+        "400":
+          description: the request contains incorrect syntax
     delete:
       tags:
       - tipo_declaracion_proveedor
@@ -1833,8 +1833,8 @@ paths:
       responses:
         "200":
           description: '{string} delete success!'
-        "403":
-          description: id is empty
+        "404":
+          description: not found resource
 definitions:
   models.ActividadEconomicaProveedor:
     title: ActividadEconomicaProveedor
