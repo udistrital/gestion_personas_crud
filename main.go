@@ -2,30 +2,43 @@ package main
 
 import (
 	_ "github.com/udistrital/gestion_personas_crud/routers"
+	apistatus "github.com/udistrital/utils_oas/apiStatusLib"
+	"github.com/udistrital/utils_oas/customerrorv2"
+	"github.com/udistrital/utils_oas/database"
+	"github.com/udistrital/utils_oas/security"
 
 	"github.com/astaxie/beego"
+	"github.com/astaxie/beego/logs"
 	"github.com/astaxie/beego/orm"
 	"github.com/astaxie/beego/plugins/cors"
 	_ "github.com/lib/pq"
-	"github.com/udistrital/utils_oas/customerrorv2"
-	apistatus "github.com/udistrital/utils_oas/apiStatusLib"
+	"github.com/udistrital/utils_oas/auditoria"
+	"github.com/udistrital/utils_oas/xray"
 )
 
 func main() {
-	orm.Debug = true
-	orm.RegisterDataBase("default", "postgres", "postgres://"+
-		beego.AppConfig.String("PGuser")+":"+
-		beego.AppConfig.String("PGpass")+"@"+
-		beego.AppConfig.String("PGhost")+":"+
-		beego.AppConfig.String("PGport")+"/"+
-		beego.AppConfig.String("PGdb")+"?sslmode=disable&search_path="+
-		beego.AppConfig.String("PGschema")+"")
-	if beego.BConfig.RunMode == "dev" {
+	conn, err := database.BuildPostgresConnectionString()
+	if err != nil {
+		logs.Error("error consultando la cadena de conexión: %v", err)
+		return
+	}
+
+	err = orm.RegisterDataBase("default", "postgres", conn)
+	if err != nil {
+		logs.Error("error al conectarse a la base de datos: %v", err)
+		return
+	}
+
+	allowedOrigins := []string{"*.udistrital.edu.co"}
+	if beego.BConfig.RunMode == beego.DEV {
+		allowedOrigins = []string{"*"}
+		orm.Debug = true
 		beego.BConfig.WebConfig.DirectoryIndex = true
 		beego.BConfig.WebConfig.StaticDir["/swagger"] = "swagger"
 	}
+
 	beego.InsertFilter("*", beego.BeforeRouter, cors.Allow(&cors.Options{
-		AllowOrigins: []string{"*"},
+		AllowOrigins: allowedOrigins,
 		AllowMethods: []string{"PUT", "PATCH", "GET", "POST", "OPTIONS", "DELETE"},
 		AllowHeaders: []string{"Origin", "x-requested-with",
 			"content-type",
@@ -36,7 +49,13 @@ func main() {
 		ExposeHeaders:    []string{"Content-Length"},
 		AllowCredentials: true,
 	}))
-	beego.ErrorController(&customerrorv2.CustomErrorController{})
+
 	apistatus.Init()
+	auditoria.InitMiddleware()
+	security.SetSecurityHeaders()
+	xray.Init()
+
+	orm.RunCommand();
+	beego.ErrorController(&customerrorv2.CustomErrorController{})
 	beego.Run()
 }

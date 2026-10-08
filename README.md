@@ -28,31 +28,62 @@ GESTION_PERSONAS_CRUD_PGSCHEMA=[esquema BD]
 
 ### Ejecución del Proyecto
 
-#### Preparación de la base de datos
-
-Antes de ejecutar el proyecto, se debe contar con una base de datos [PostgreSQL](https://github.com/udistrital/lineamientos_oas/blob/master/instalacion_de_herramientas/postgres.md) con el esquema y tablas requeridas. Se puede correr el script `database/agora_proveedores.sql` para crear el esquema `proveedores` y las tablas necesarias.
-
-#### Comandos para ejecutar el proyecto
-
-Una vez se haya configurado el entorno con [Golang](https://github.com/udistrital/lineamientos_oas/blob/master/instalacion_de_herramientas/golang.md) y [Beego](https://github.com/udistrital/lineamientos_oas/blob/master/instalacion_de_herramientas/beego.md), ejecutar:
+#### Clonar el repositorio
 
 ```shell
-# 1. Clonar el repositorio
 mkdir -p $GOPATH/src/github.com/udistrital
 cd $GOPATH/src/github.com/udistrital
 git clone https://github.com/udistrital/gestion_personas_crud.git
 cd gestion_personas_crud
+```
 
-# 2. Exportar variables
-cp .env.example .env # Importar variables según corresponda
-set -a
-source .env
-set +a
+#### Ejecución para Desarrollo
 
-# 3. Instalar dependencias y correr
+Requiere una base de datos [PostgreSQL](https://github.com/udistrital/lineamientos_oas/blob/master/instalacion_de_herramientas/postgres.md) con el esquema y las tablas requeridas. Ejecute `database/agora_proveedores.sql` para prepararla y luego:
+
+```shell
+cp .env.example .env # Configurar las variables de entorno
+set -a && source .env && set +a
+
 go mod tidy
 bee run
 ```
+
+#### Ejecución con Docker
+
+Compile el proyecto y la imagen:
+
+```shell
+go mod tidy
+go build -o main
+docker build -t gestion_personas_crud .
+```
+
+Para ejecutar el servicio en un contenedor. Requiere una base de datos [PostgreSQL](https://github.com/udistrital/lineamientos_oas/blob/master/instalacion_de_herramientas/postgres.md) con el esquema y las tablas requeridas. Ejecute `database/agora_proveedores.sql` para prepararla y luego:
+
+```shell
+cp .env.example .env # Configurar las variables de entorno
+set -a && source .env && set +a
+docker run --name gestion_personas_crud -p "$GESTION_PERSONAS_CRUD_HTTP_PORT:$GESTION_PERSONAS_CRUD_HTTP_PORT" --env-file .env gestion_personas_crud
+```
+
+### Ejecución con Docker Compose
+
+Para consumo local durante el desarrollo de otros servicios, ejecute Docker Compose después de [compilar el proyecto y la imagen](#ejecución-con-docker). Incluye la base de datos y ejecuta `database/agora_proveedores.sql` al inicializarla:
+
+```shell
+# Creando red bridge para consumo local
+docker network create \
+  --driver bridge \
+  --subnet 172.28.0.0/16 \
+  --gateway 172.28.0.1 \
+  back_end
+
+cp .env.example .env # Configurar las variables de entorno
+docker compose --env-file .env up
+```
+
+El script se ejecuta únicamente cuando se crea el volumen de PostgreSQL. Para repetir la inicialización, elimine el volumen `postgres_data` y levante Compose nuevamente.
 
 ### Ejecución Pruebas
 
