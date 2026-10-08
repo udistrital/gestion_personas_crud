@@ -4,7 +4,6 @@ go 1.27
 
 require (
 	github.com/astaxie/beego v1.12.3
-	github.com/beego/beego v1.12.14
 	github.com/lib/pq v1.12.3
 	github.com/udistrital/utils_oas v0.6.0
 )

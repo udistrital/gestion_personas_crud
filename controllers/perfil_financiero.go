@@ -9,7 +9,7 @@ import (
 	"github.com/udistrital/gestion_personas_crud/models"
 
 	"github.com/astaxie/beego"
-	"github.com/beego/beego/logs"
+	"github.com/astaxie/beego/logs"
 )
 
 // PerfilFinancieroController operations for PerfilFinanciero
