@@ -1,7 +1,8 @@
 swagger: "2.0"
 info:
   title: beego Test API
-  description: beego has a very cool tools to autogenerate documents for your API
+  description: |
+    beego has a very cool tools to autogenerate documents for your API
   version: 1.0.0
   termsOfService: http://beego.me/
   contact:
@@ -15,7 +16,9 @@ paths:
     get:
       tags:
       - actividad_economica_proveedor
-      description: get ActividadEconomicaProveedor
+      description: |-
+        get ActividadEconomicaProveedor
+        <br>
       operationId: ActividadEconomicaProveedorController.Get All
       parameters:
       - in: query
@@ -32,7 +35,8 @@ paths:
         type: string
       - in: query
         name: order
-        description: Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
         type: string
       - in: query
         name: limit
@@ -52,7 +56,9 @@ paths:
     post:
       tags:
       - actividad_economica_proveedor
-      description: create ActividadEconomicaProveedor
+      description: |-
+        create ActividadEconomicaProveedor
+        <br>
       operationId: ActividadEconomicaProveedorController.Post
       parameters:
       - in: body
@@ -70,7 +76,9 @@ paths:
     get:
       tags:
       - actividad_economica_proveedor
-      description: get ActividadEconomicaProveedor by id
+      description: |-
+        get ActividadEconomicaProveedor by id
+        <br>
       operationId: ActividadEconomicaProveedorController.Get One
       parameters:
       - in: path
@@ -88,7 +96,9 @@ paths:
     put:
       tags:
       - actividad_economica_proveedor
-      description: update the ActividadEconomicaProveedor
+      description: |-
+        update the ActividadEconomicaProveedor
+        <br>
       operationId: ActividadEconomicaProveedorController.Put
       parameters:
       - in: path
@@ -112,7 +122,9 @@ paths:
     delete:
       tags:
       - actividad_economica_proveedor
-      description: delete the ActividadEconomicaProveedor
+      description: |-
+        delete the ActividadEconomicaProveedor
+        <br>
       operationId: ActividadEconomicaProveedorController.Delete
       parameters:
       - in: path
@@ -129,7 +141,9 @@ paths:
     get:
       tags:
       - contacto
-      description: get Contacto
+      description: |-
+        get Contacto
+        <br>
       operationId: ContactoController.Get All
       parameters:
       - in: query
@@ -146,7 +160,8 @@ paths:
         type: string
       - in: query
         name: order
-        description: Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
         type: string
       - in: query
         name: limit
@@ -166,7 +181,9 @@ paths:
     post:
       tags:
       - contacto
-      description: create Contacto
+      description: |-
+        create Contacto
+        <br>
       operationId: ContactoController.Post
       parameters:
       - in: body
@@ -184,7 +201,9 @@ paths:
     get:
       tags:
       - contacto
-      description: get Contacto by id
+      description: |-
+        get Contacto by id
+        <br>
       operationId: ContactoController.Get One
       parameters:
       - in: path
@@ -202,7 +221,9 @@ paths:
     put:
       tags:
       - contacto
-      description: update the Contacto
+      description: |-
+        update the Contacto
+        <br>
       operationId: ContactoController.Put
       parameters:
       - in: path
@@ -226,7 +247,9 @@ paths:
     delete:
       tags:
       - contacto
-      description: delete the Contacto
+      description: |-
+        delete the Contacto
+        <br>
       operationId: ContactoController.Delete
       parameters:
       - in: path
@@ -243,7 +266,9 @@ paths:
     get:
       tags:
       - cuenta_bancaria
-      description: get CuentaBancaria
+      description: |-
+        get CuentaBancaria
+        <br>
       operationId: CuentaBancariaController.Get All
       parameters:
       - in: query
@@ -260,7 +285,8 @@ paths:
         type: string
       - in: query
         name: order
-        description: Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
         type: string
       - in: query
         name: limit
@@ -280,7 +306,9 @@ paths:
     post:
       tags:
       - cuenta_bancaria
-      description: create CuentaBancaria
+      description: |-
+        create CuentaBancaria
+        <br>
       operationId: CuentaBancariaController.Post
       parameters:
       - in: body
@@ -298,7 +326,9 @@ paths:
     get:
       tags:
       - cuenta_bancaria
-      description: get CuentaBancaria by id
+      description: |-
+        get CuentaBancaria by id
+        <br>
       operationId: CuentaBancariaController.Get One
       parameters:
       - in: path
@@ -316,7 +346,9 @@ paths:
     put:
       tags:
       - cuenta_bancaria
-      description: update the CuentaBancaria
+      description: |-
+        update the CuentaBancaria
+        <br>
       operationId: CuentaBancariaController.Put
       parameters:
       - in: path
@@ -340,7 +372,9 @@ paths:
     delete:
       tags:
       - cuenta_bancaria
-      description: delete the CuentaBancaria
+      description: |-
+        delete the CuentaBancaria
+        <br>
       operationId: CuentaBancariaController.Delete
       parameters:
       - in: path
@@ -357,7 +391,9 @@ paths:
     get:
       tags:
       - declaracion
-      description: get Declaracion
+      description: |-
+        get Declaracion
+        <br>
       operationId: DeclaracionController.Get All
       parameters:
       - in: query
@@ -374,7 +410,8 @@ paths:
         type: string
       - in: query
         name: order
-        description: Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
         type: string
       - in: query
         name: limit
@@ -394,7 +431,9 @@ paths:
     post:
       tags:
       - declaracion
-      description: create Declaracion
+      description: |-
+        create Declaracion
+        <br>
       operationId: DeclaracionController.Post
       parameters:
       - in: body
@@ -412,7 +451,9 @@ paths:
     get:
       tags:
       - declaracion
-      description: get Declaracion by id
+      description: |-
+        get Declaracion by id
+        <br>
       operationId: DeclaracionController.Get One
       parameters:
       - in: path
@@ -430,7 +471,9 @@ paths:
     put:
       tags:
       - declaracion
-      description: update the Declaracion
+      description: |-
+        update the Declaracion
+        <br>
       operationId: DeclaracionController.Put
       parameters:
       - in: path
@@ -454,7 +497,9 @@ paths:
     delete:
       tags:
       - declaracion
-      description: delete the Declaracion
+      description: |-
+        delete the Declaracion
+        <br>
       operationId: DeclaracionController.Delete
       parameters:
       - in: path
@@ -471,7 +516,9 @@ paths:
     get:
       tags:
       - documento
-      description: get Documento
+      description: |-
+        get Documento
+        <br>
       operationId: DocumentoController.Get All
       parameters:
       - in: query
@@ -488,7 +535,8 @@ paths:
         type: string
       - in: query
         name: order
-        description: Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
         type: string
       - in: query
         name: limit
@@ -508,7 +556,9 @@ paths:
     post:
       tags:
       - documento
-      description: create Documento
+      description: |-
+        create Documento
+        <br>
       operationId: DocumentoController.Post
       parameters:
       - in: body
@@ -526,7 +576,9 @@ paths:
     get:
       tags:
       - documento
-      description: get Documento by id
+      description: |-
+        get Documento by id
+        <br>
       operationId: DocumentoController.Get One
       parameters:
       - in: path
@@ -544,7 +596,9 @@ paths:
     put:
       tags:
       - documento
-      description: update the Documento
+      description: |-
+        update the Documento
+        <br>
       operationId: DocumentoController.Put
       parameters:
       - in: path
@@ -568,7 +622,9 @@ paths:
     delete:
       tags:
       - documento
-      description: delete the Documento
+      description: |-
+        delete the Documento
+        <br>
       operationId: DocumentoController.Delete
       parameters:
       - in: path
@@ -585,7 +641,9 @@ paths:
     get:
       tags:
       - informacion_financiera
-      description: get InformacionFinanciera
+      description: |-
+        get InformacionFinanciera
+        <br>
       operationId: InformacionFinancieraController.Get All
       parameters:
       - in: query
@@ -602,7 +660,8 @@ paths:
         type: string
       - in: query
         name: order
-        description: Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
         type: string
       - in: query
         name: limit
@@ -622,7 +681,9 @@ paths:
     post:
       tags:
       - informacion_financiera
-      description: create InformacionFinanciera
+      description: |-
+        create InformacionFinanciera
+        <br>
       operationId: InformacionFinancieraController.Post
       parameters:
       - in: body
@@ -640,7 +701,9 @@ paths:
     get:
       tags:
       - informacion_financiera
-      description: get InformacionFinanciera by id
+      description: |-
+        get InformacionFinanciera by id
+        <br>
       operationId: InformacionFinancieraController.Get One
       parameters:
       - in: path
@@ -658,7 +721,9 @@ paths:
     put:
       tags:
       - informacion_financiera
-      description: update the InformacionFinanciera
+      description: |-
+        update the InformacionFinanciera
+        <br>
       operationId: InformacionFinancieraController.Put
       parameters:
       - in: path
@@ -682,7 +747,9 @@ paths:
     delete:
       tags:
       - informacion_financiera
-      description: delete the InformacionFinanciera
+      description: |-
+        delete the InformacionFinanciera
+        <br>
       operationId: InformacionFinancieraController.Delete
       parameters:
       - in: path
@@ -699,7 +766,9 @@ paths:
     get:
       tags:
       - perfil
-      description: get Perfil
+      description: |-
+        get Perfil
+        <br>
       operationId: PerfilController.Get All
       parameters:
       - in: query
@@ -716,7 +785,8 @@ paths:
         type: string
       - in: query
         name: order
-        description: Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
         type: string
       - in: query
         name: limit
@@ -736,7 +806,9 @@ paths:
     post:
       tags:
       - perfil
-      description: create Perfil
+      description: |-
+        create Perfil
+        <br>
       operationId: PerfilController.Post
       parameters:
       - in: body
@@ -754,7 +826,9 @@ paths:
     get:
       tags:
       - perfil
-      description: get Perfil by id
+      description: |-
+        get Perfil by id
+        <br>
       operationId: PerfilController.Get One
       parameters:
       - in: path
@@ -772,7 +846,9 @@ paths:
     put:
       tags:
       - perfil
-      description: update the Perfil
+      description: |-
+        update the Perfil
+        <br>
       operationId: PerfilController.Put
       parameters:
       - in: path
@@ -796,7 +872,9 @@ paths:
     delete:
       tags:
       - perfil
-      description: delete the Perfil
+      description: |-
+        delete the Perfil
+        <br>
       operationId: PerfilController.Delete
       parameters:
       - in: path
@@ -813,7 +891,9 @@ paths:
     get:
       tags:
       - perfil_financiero
-      description: get PerfilFinanciero
+      description: |-
+        get PerfilFinanciero
+        <br>
       operationId: PerfilFinancieroController.Get All
       parameters:
       - in: query
@@ -830,7 +910,8 @@ paths:
         type: string
       - in: query
         name: order
-        description: Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
         type: string
       - in: query
         name: limit
@@ -850,7 +931,9 @@ paths:
     post:
       tags:
       - perfil_financiero
-      description: create PerfilFinanciero
+      description: |-
+        create PerfilFinanciero
+        <br>
       operationId: PerfilFinancieroController.Post
       parameters:
       - in: body
@@ -868,7 +951,9 @@ paths:
     get:
       tags:
       - perfil_financiero
-      description: get PerfilFinanciero by id
+      description: |-
+        get PerfilFinanciero by id
+        <br>
       operationId: PerfilFinancieroController.Get One
       parameters:
       - in: path
@@ -886,7 +971,9 @@ paths:
     put:
       tags:
       - perfil_financiero
-      description: update the PerfilFinanciero
+      description: |-
+        update the PerfilFinanciero
+        <br>
       operationId: PerfilFinancieroController.Put
       parameters:
       - in: path
@@ -910,7 +997,9 @@ paths:
     delete:
       tags:
       - perfil_financiero
-      description: delete the PerfilFinanciero
+      description: |-
+        delete the PerfilFinanciero
+        <br>
       operationId: PerfilFinancieroController.Delete
       parameters:
       - in: path
@@ -927,7 +1016,9 @@ paths:
     get:
       tags:
       - prefijo_facturacion
-      description: get PrefijoFacturacion
+      description: |-
+        get PrefijoFacturacion
+        <br>
       operationId: PrefijoFacturacionController.Get All
       parameters:
       - in: query
@@ -944,7 +1035,8 @@ paths:
         type: string
       - in: query
         name: order
-        description: Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
         type: string
       - in: query
         name: limit
@@ -964,7 +1056,9 @@ paths:
     post:
       tags:
       - prefijo_facturacion
-      description: create PrefijoFacturacion
+      description: |-
+        create PrefijoFacturacion
+        <br>
       operationId: PrefijoFacturacionController.Post
       parameters:
       - in: body
@@ -982,7 +1076,9 @@ paths:
     get:
       tags:
       - prefijo_facturacion
-      description: get PrefijoFacturacion by id
+      description: |-
+        get PrefijoFacturacion by id
+        <br>
       operationId: PrefijoFacturacionController.Get One
       parameters:
       - in: path
@@ -1000,7 +1096,9 @@ paths:
     put:
       tags:
       - prefijo_facturacion
-      description: update the PrefijoFacturacion
+      description: |-
+        update the PrefijoFacturacion
+        <br>
       operationId: PrefijoFacturacionController.Put
       parameters:
       - in: path
@@ -1024,7 +1122,9 @@ paths:
     delete:
       tags:
       - prefijo_facturacion
-      description: delete the PrefijoFacturacion
+      description: |-
+        delete the PrefijoFacturacion
+        <br>
       operationId: PrefijoFacturacionController.Delete
       parameters:
       - in: path
@@ -1041,7 +1141,9 @@ paths:
     get:
       tags:
       - proveedor
-      description: get Proveedor
+      description: |-
+        get Proveedor
+        <br>
       operationId: ProveedorController.Get All
       parameters:
       - in: query
@@ -1058,7 +1160,8 @@ paths:
         type: string
       - in: query
         name: order
-        description: Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
         type: string
       - in: query
         name: limit
@@ -1078,7 +1181,9 @@ paths:
     post:
       tags:
       - proveedor
-      description: create Proveedor
+      description: |-
+        create Proveedor
+        <br>
       operationId: ProveedorController.Post
       parameters:
       - in: body
@@ -1096,7 +1201,9 @@ paths:
     get:
       tags:
       - proveedor
-      description: get Proveedor by id
+      description: |-
+        get Proveedor by id
+        <br>
       operationId: ProveedorController.Get One
       parameters:
       - in: path
@@ -1114,7 +1221,9 @@ paths:
     put:
       tags:
       - proveedor
-      description: update the Proveedor
+      description: |-
+        update the Proveedor
+        <br>
       operationId: ProveedorController.Put
       parameters:
       - in: path
@@ -1138,7 +1247,9 @@ paths:
     delete:
       tags:
       - proveedor
-      description: delete the Proveedor
+      description: |-
+        delete the Proveedor
+        <br>
       operationId: ProveedorController.Delete
       parameters:
       - in: path
@@ -1155,7 +1266,9 @@ paths:
     get:
       tags:
       - proveedor_juridico
-      description: get ProveedorJuridico
+      description: |-
+        get ProveedorJuridico
+        <br>
       operationId: ProveedorJuridicoController.Get All
       parameters:
       - in: query
@@ -1172,7 +1285,8 @@ paths:
         type: string
       - in: query
         name: order
-        description: Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
         type: string
       - in: query
         name: limit
@@ -1192,7 +1306,9 @@ paths:
     post:
       tags:
       - proveedor_juridico
-      description: create ProveedorJuridico
+      description: |-
+        create ProveedorJuridico
+        <br>
       operationId: ProveedorJuridicoController.Post
       parameters:
       - in: body
@@ -1210,7 +1326,9 @@ paths:
     get:
       tags:
       - proveedor_juridico
-      description: get ProveedorJuridico by id
+      description: |-
+        get ProveedorJuridico by id
+        <br>
       operationId: ProveedorJuridicoController.Get One
       parameters:
       - in: path
@@ -1228,7 +1346,9 @@ paths:
     put:
       tags:
       - proveedor_juridico
-      description: update the ProveedorJuridico
+      description: |-
+        update the ProveedorJuridico
+        <br>
       operationId: ProveedorJuridicoController.Put
       parameters:
       - in: path
@@ -1252,7 +1372,9 @@ paths:
     delete:
       tags:
       - proveedor_juridico
-      description: delete the ProveedorJuridico
+      description: |-
+        delete the ProveedorJuridico
+        <br>
       operationId: ProveedorJuridicoController.Delete
       parameters:
       - in: path
@@ -1269,7 +1391,9 @@ paths:
     get:
       tags:
       - proveedor_natural
-      description: get ProveedorNatural
+      description: |-
+        get ProveedorNatural
+        <br>
       operationId: ProveedorNaturalController.Get All
       parameters:
       - in: query
@@ -1286,7 +1410,8 @@ paths:
         type: string
       - in: query
         name: order
-        description: Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
         type: string
       - in: query
         name: limit
@@ -1306,7 +1431,9 @@ paths:
     post:
       tags:
       - proveedor_natural
-      description: create ProveedorNatural
+      description: |-
+        create ProveedorNatural
+        <br>
       operationId: ProveedorNaturalController.Post
       parameters:
       - in: body
@@ -1324,7 +1451,9 @@ paths:
     get:
       tags:
       - proveedor_natural
-      description: get ProveedorNatural by id
+      description: |-
+        get ProveedorNatural by id
+        <br>
       operationId: ProveedorNaturalController.Get One
       parameters:
       - in: path
@@ -1342,7 +1471,9 @@ paths:
     put:
       tags:
       - proveedor_natural
-      description: update the ProveedorNatural
+      description: |-
+        update the ProveedorNatural
+        <br>
       operationId: ProveedorNaturalController.Put
       parameters:
       - in: path
@@ -1366,7 +1497,9 @@ paths:
     delete:
       tags:
       - proveedor_natural
-      description: delete the ProveedorNatural
+      description: |-
+        delete the ProveedorNatural
+        <br>
       operationId: ProveedorNaturalController.Delete
       parameters:
       - in: path
@@ -1383,7 +1516,9 @@ paths:
     get:
       tags:
       - rango_facturacion
-      description: get RangoFacturacion
+      description: |-
+        get RangoFacturacion
+        <br>
       operationId: RangoFacturacionController.Get All
       parameters:
       - in: query
@@ -1400,7 +1535,8 @@ paths:
         type: string
       - in: query
         name: order
-        description: Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
         type: string
       - in: query
         name: limit
@@ -1420,7 +1556,9 @@ paths:
     post:
       tags:
       - rango_facturacion
-      description: create RangoFacturacion
+      description: |-
+        create RangoFacturacion
+        <br>
       operationId: RangoFacturacionController.Post
       parameters:
       - in: body
@@ -1438,7 +1576,9 @@ paths:
     get:
       tags:
       - rango_facturacion
-      description: get RangoFacturacion by id
+      description: |-
+        get RangoFacturacion by id
+        <br>
       operationId: RangoFacturacionController.Get One
       parameters:
       - in: path
@@ -1456,7 +1596,9 @@ paths:
     put:
       tags:
       - rango_facturacion
-      description: update the RangoFacturacion
+      description: |-
+        update the RangoFacturacion
+        <br>
       operationId: RangoFacturacionController.Put
       parameters:
       - in: path
@@ -1480,7 +1622,9 @@ paths:
     delete:
       tags:
       - rango_facturacion
-      description: delete the RangoFacturacion
+      description: |-
+        delete the RangoFacturacion
+        <br>
       operationId: RangoFacturacionController.Delete
       parameters:
       - in: path
@@ -1497,7 +1641,9 @@ paths:
     get:
       tags:
       - representacion
-      description: get Representacion
+      description: |-
+        get Representacion
+        <br>
       operationId: RepresentacionController.Get All
       parameters:
       - in: query
@@ -1514,7 +1660,8 @@ paths:
         type: string
       - in: query
         name: order
-        description: Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
         type: string
       - in: query
         name: limit
@@ -1534,7 +1681,9 @@ paths:
     post:
       tags:
       - representacion
-      description: create Representacion
+      description: |-
+        create Representacion
+        <br>
       operationId: RepresentacionController.Post
       parameters:
       - in: body
@@ -1552,7 +1701,9 @@ paths:
     get:
       tags:
       - representacion
-      description: get Representacion by id
+      description: |-
+        get Representacion by id
+        <br>
       operationId: RepresentacionController.Get One
       parameters:
       - in: path
@@ -1570,7 +1721,9 @@ paths:
     put:
       tags:
       - representacion
-      description: update the Representacion
+      description: |-
+        update the Representacion
+        <br>
       operationId: RepresentacionController.Put
       parameters:
       - in: path
@@ -1594,7 +1747,9 @@ paths:
     delete:
       tags:
       - representacion
-      description: delete the Representacion
+      description: |-
+        delete the Representacion
+        <br>
       operationId: RepresentacionController.Delete
       parameters:
       - in: path
@@ -1611,7 +1766,9 @@ paths:
     get:
       tags:
       - responsabilidad_fiscal_perfil
-      description: get ResponsabilidadFiscalPerfil
+      description: |-
+        get ResponsabilidadFiscalPerfil
+        <br>
       operationId: ResponsabilidadFiscalPerfilController.Get All
       parameters:
       - in: query
@@ -1628,7 +1785,8 @@ paths:
         type: string
       - in: query
         name: order
-        description: Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
         type: string
       - in: query
         name: limit
@@ -1648,7 +1806,9 @@ paths:
     post:
       tags:
       - responsabilidad_fiscal_perfil
-      description: create ResponsabilidadFiscalPerfil
+      description: |-
+        create ResponsabilidadFiscalPerfil
+        <br>
       operationId: ResponsabilidadFiscalPerfilController.Post
       parameters:
       - in: body
@@ -1666,7 +1826,9 @@ paths:
     get:
       tags:
       - responsabilidad_fiscal_perfil
-      description: get ResponsabilidadFiscalPerfil by id
+      description: |-
+        get ResponsabilidadFiscalPerfil by id
+        <br>
       operationId: ResponsabilidadFiscalPerfilController.Get One
       parameters:
       - in: path
@@ -1684,7 +1846,9 @@ paths:
     put:
       tags:
       - responsabilidad_fiscal_perfil
-      description: update the ResponsabilidadFiscalPerfil
+      description: |-
+        update the ResponsabilidadFiscalPerfil
+        <br>
       operationId: ResponsabilidadFiscalPerfilController.Put
       parameters:
       - in: path
@@ -1708,7 +1872,9 @@ paths:
     delete:
       tags:
       - responsabilidad_fiscal_perfil
-      description: delete the ResponsabilidadFiscalPerfil
+      description: |-
+        delete the ResponsabilidadFiscalPerfil
+        <br>
       operationId: ResponsabilidadFiscalPerfilController.Delete
       parameters:
       - in: path
@@ -1725,7 +1891,9 @@ paths:
     get:
       tags:
       - tipo_declaracion_proveedor
-      description: get TipoDeclaracionProveedor
+      description: |-
+        get TipoDeclaracionProveedor
+        <br>
       operationId: TipoDeclaracionProveedorController.Get All
       parameters:
       - in: query
@@ -1742,7 +1910,8 @@ paths:
         type: string
       - in: query
         name: order
-        description: Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
         type: string
       - in: query
         name: limit
@@ -1762,7 +1931,9 @@ paths:
     post:
       tags:
       - tipo_declaracion_proveedor
-      description: create TipoDeclaracionProveedor
+      description: |-
+        create TipoDeclaracionProveedor
+        <br>
       operationId: TipoDeclaracionProveedorController.Post
       parameters:
       - in: body
@@ -1780,7 +1951,9 @@ paths:
     get:
       tags:
       - tipo_declaracion_proveedor
-      description: get TipoDeclaracionProveedor by id
+      description: |-
+        get TipoDeclaracionProveedor by id
+        <br>
       operationId: TipoDeclaracionProveedorController.Get One
       parameters:
       - in: path
@@ -1798,7 +1971,9 @@ paths:
     put:
       tags:
       - tipo_declaracion_proveedor
-      description: update the TipoDeclaracionProveedor
+      description: |-
+        update the TipoDeclaracionProveedor
+        <br>
       operationId: TipoDeclaracionProveedorController.Put
       parameters:
       - in: path
@@ -1822,7 +1997,9 @@ paths:
     delete:
       tags:
       - tipo_declaracion_proveedor
-      description: delete the TipoDeclaracionProveedor
+      description: |-
+        delete the TipoDeclaracionProveedor
+        <br>
       operationId: TipoDeclaracionProveedorController.Delete
       parameters:
       - in: path

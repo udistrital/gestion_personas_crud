@@ -2,30 +2,30 @@ package main
 
 import (
 	_ "github.com/udistrital/gestion_personas_crud/routers"
-	apistatus "github.com/udistrital/utils_oas/apiStatusLib"
-	"github.com/udistrital/utils_oas/customerrorv2"
-	"github.com/udistrital/utils_oas/database"
-	"github.com/udistrital/utils_oas/security"
+	apistatus "github.com/udistrital/utils_oas/v2/apiStatusLib"
+	"github.com/udistrital/utils_oas/v2/customerror"
+	"github.com/udistrital/utils_oas/v2/database"
+	"github.com/udistrital/utils_oas/v2/security"
+	"github.com/udistrital/utils_oas/v2/auditoria"
+	"github.com/udistrital/utils_oas/v2/xray"
 
-	"github.com/astaxie/beego"
-	"github.com/astaxie/beego/logs"
-	"github.com/astaxie/beego/orm"
-	"github.com/astaxie/beego/plugins/cors"
+	beego "github.com/beego/beego/v2/server/web"
+	beeLogger "github.com/beego/bee/v2/logger"
+	"github.com/beego/beego/v2/client/orm"
+	"github.com/beego/beego/v2/server/web/filter/cors"
 	_ "github.com/lib/pq"
-	"github.com/udistrital/utils_oas/auditoria"
-	"github.com/udistrital/utils_oas/xray"
 )
 
 func main() {
 	conn, err := database.BuildPostgresConnectionString()
 	if err != nil {
-		logs.Error("error consultando la cadena de conexión: %v", err)
+		beeLogger.Log.Error("error consultando la cadena de conexión:" + err.Error())
 		return
 	}
 
 	err = orm.RegisterDataBase("default", "postgres", conn)
 	if err != nil {
-		logs.Error("error al conectarse a la base de datos: %v", err)
+		beeLogger.Log.Error("error al conectarse a la base de datos:" + err.Error())
 		return
 	}
 
@@ -56,6 +56,6 @@ func main() {
 	xray.Init()
 
 	orm.RunCommand();
-	beego.ErrorController(&customerrorv2.CustomErrorController{})
+	beego.ErrorController(&customerror.CustomErrorController{})
 	beego.Run()
 }

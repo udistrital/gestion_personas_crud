@@ -8,8 +8,8 @@ import (
 
 	"github.com/udistrital/gestion_personas_crud/models"
 
-	"github.com/astaxie/beego"
-	"github.com/astaxie/beego/logs"
+	beego "github.com/beego/beego/v2/server/web"
+	beeLogger "github.com/beego/bee/v2/logger"
 )
 
 // ResponsabilidadFiscalPerfilController operations for ResponsabilidadFiscalPerfil
@@ -40,12 +40,12 @@ func (c *ResponsabilidadFiscalPerfilController) Post() {
 			c.Ctx.Output.SetStatus(201)
 			c.Data["json"] = map[string]interface{}{"Success": true, "Status": "201", "Message": "Registration successful", "Data": v}
 		} else {
-			logs.Error(err)
+			beeLogger.Log.Error(err.Error())
 			c.Data["mesaage"] = "Error service POST: The request contains an incorrect data type or an invalid parameter"
 			c.Abort("400")
 		}
 	} else {
-		logs.Error(err)
+		beeLogger.Log.Error(err.Error())
 		c.Data["mesaage"] = "Error service POST: The request contains an incorrect data type or an invalid parameter"
 		c.Abort("400")
 	}
@@ -64,7 +64,7 @@ func (c *ResponsabilidadFiscalPerfilController) GetOne() {
 	id, _ := strconv.Atoi(idStr)
 	v, err := models.GetResponsabilidadFiscalPerfilById(id)
 	if err != nil {
-		logs.Error(err)
+		beeLogger.Log.Error(err.Error())
 		c.Data["mesaage"] = "Error service GetOne: The request contains an incorrect parameter or no record exists"
 		c.Abort("404")
 	} else {
@@ -129,7 +129,7 @@ func (c *ResponsabilidadFiscalPerfilController) GetAll() {
 
 	l, err := models.GetAllResponsabilidadFiscalPerfil(query, fields, sortby, order, offset, limit)
 	if err != nil {
-		logs.Error(err)
+		beeLogger.Log.Error(err.Error())
 		c.Data["mesaage"] = "Error service GetAll: The request contains an incorrect parameter or no record exists"
 		c.Abort("404")
 	} else {
@@ -157,12 +157,12 @@ func (c *ResponsabilidadFiscalPerfilController) Put() {
 		if err := models.UpdateResponsabilidadFiscalPerfilById(&v); err == nil {
 			c.Data["json"] = map[string]interface{}{"Success": true, "Status": "200", "Message": "Update successful", "Data": v}
 		} else {
-			logs.Error(err)
+			beeLogger.Log.Error(err.Error())
 			c.Data["mesaage"] = "Error service Put: The request contains an incorrect data type or an invalid parameter"
 			c.Abort("400")
 		}
 	} else {
-		logs.Error(err)
+		beeLogger.Log.Error(err.Error())
 		c.Data["mesaage"] = "Error service Put: The request contains an incorrect data type or an invalid parameter"
 		c.Abort("400")
 	}
@@ -183,7 +183,7 @@ func (c *ResponsabilidadFiscalPerfilController) Delete() {
 		d := map[string]interface{}{"Id": id}
 		c.Data["json"] = map[string]interface{}{"Success": true, "Status": "200", "Message": "Delete successful", "Data": d}
 	} else {
-		logs.Error(err)
+		beeLogger.Log.Error(err.Error())
 		c.Data["mesaage"] = "Error service Delete: Request contains incorrect parameter"
 		c.Abort("404")
 	}

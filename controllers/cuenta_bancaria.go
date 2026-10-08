@@ -8,8 +8,8 @@ import (
 
 	"github.com/udistrital/gestion_personas_crud/models"
 
-	"github.com/astaxie/beego"
-	"github.com/astaxie/beego/logs"
+	beego "github.com/beego/beego/v2/server/web"
+	beeLogger "github.com/beego/bee/v2/logger"
 )
 
 // CuentaBancariaController operations for CuentaBancaria
@@ -40,12 +40,12 @@ func (c *CuentaBancariaController) Post() {
 			c.Ctx.Output.SetStatus(201)
 			c.Data["json"] = map[string]interface{}{"Success": true, "Status": "201", "Message": "Registration successful", "Data": v}
 		} else {
-			logs.Error(err)
+			beeLogger.Log.Error(err.Error())
 			c.Data["mesaage"] = "Error service POST: The request contains an incorrect data type or an invalid parameter"
 			c.Abort("400")
 		}
 	} else {
-		logs.Error(err)
+		beeLogger.Log.Error(err.Error())
 		c.Data["mesaage"] = "Error service POST: The request contains an incorrect data type or an invalid parameter"
 		c.Abort("400")
 	}
@@ -64,7 +64,7 @@ func (c *CuentaBancariaController) GetOne() {
 	id, _ := strconv.Atoi(idStr)
 	v, err := models.GetCuentaBancariaById(id)
 	if err != nil {
-		logs.Error(err)
+		beeLogger.Log.Error(err.Error())
 		c.Data["mesaage"] = "Error service GetOne: The request contains an incorrect parameter or no record exists"
 		c.Abort("404")
 	} else {
@@ -129,7 +129,7 @@ func (c *CuentaBancariaController) GetAll() {
 
 	l, err := models.GetAllCuentaBancaria(query, fields, sortby, order, offset, limit)
 	if err != nil {
-		logs.Error(err)
+		beeLogger.Log.Error(err.Error())
 		c.Data["mesaage"] = "Error service GetAll: The request contains an incorrect parameter or no record exists"
 		c.Abort("404")
 	} else {
@@ -157,12 +157,12 @@ func (c *CuentaBancariaController) Put() {
 		if err := models.UpdateCuentaBancariaById(&v); err == nil {
 			c.Data["json"] = map[string]interface{}{"Success": true, "Status": "200", "Message": "Update successful", "Data": v}
 		} else {
-			logs.Error(err)
+			beeLogger.Log.Error(err.Error())
 			c.Data["mesaage"] = "Error service Put: The request contains an incorrect data type or an invalid parameter"
 			c.Abort("400")
 		}
 	} else {
-		logs.Error(err)
+		beeLogger.Log.Error(err.Error())
 		c.Data["mesaage"] = "Error service Put: The request contains an incorrect data type or an invalid parameter"
 		c.Abort("400")
 	}
@@ -183,7 +183,7 @@ func (c *CuentaBancariaController) Delete() {
 		d := map[string]interface{}{"Id": id}
 		c.Data["json"] = map[string]interface{}{"Success": true, "Status": "200", "Message": "Delete successful", "Data": d}
 	} else {
-		logs.Error(err)
+		beeLogger.Log.Error(err.Error())
 		c.Data["mesaage"] = "Error service Delete: Request contains incorrect parameter"
 		c.Abort("404")
 	}
