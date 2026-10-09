@@ -8,8 +8,8 @@ import (
 
 	"github.com/udistrital/gestion_personas_crud/models"
 
-	beego "github.com/beego/beego/v2/server/web"
 	beeLogger "github.com/beego/bee/v2/logger"
+	beego "github.com/beego/beego/v2/server/web"
 )
 
 // TipoDeclaracionProveedorController operations for TipoDeclaracionProveedor
@@ -153,7 +153,15 @@ func (c *TipoDeclaracionProveedorController) Put() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
 	v := models.TipoDeclaracionProveedor{Id: id}
-	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
+	var m models.TipoDeclaracionProveedor
+	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &m); err == nil {
+		if m.Id != 0 && m.Id != v.Id {
+			c.Data["mesaage"] = "Error service Put: The id cannot be modified"
+			c.Abort("400")
+		}
+		if m.Id == 0 {
+			m.Id = v.Id
+		}
 		if err := models.UpdateTipoDeclaracionProveedorById(&v); err == nil {
 			c.Data["json"] = map[string]interface{}{"Success": true, "Status": "200", "Message": "Update successful", "Data": v}
 		} else {
