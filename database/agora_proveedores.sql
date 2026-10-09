@@ -30,12 +30,12 @@ CREATE TABLE "proveedores"."rango_facturacion" (
 CREATE TABLE "proveedores"."proveedor" (
   "id" serial PRIMARY KEY,
   "tercero_id" integer NOT NULL,
-  "tipo_registro" integer NOT NULL,
+  "tipo_registro_id" integer NOT NULL,
   "descripcion_portafolio" varchar(250),
   "activo" boolean NOT NULL DEFAULT true,
   "fecha_creacion" timestamp NOT NULL DEFAULT (now()),
   "fecha_modificacion" timestamp,
-  "autor_modificacion" integer
+  "autor_modificacion_id" integer
 );
 
 CREATE TABLE "proveedores"."proveedor_natural" (
@@ -46,7 +46,7 @@ CREATE TABLE "proveedores"."proveedor_natural" (
   "activo" boolean NOT NULL DEFAULT true,
   "fecha_creacion" timestamp NOT NULL DEFAULT (now()),
   "fecha_modificacion" timestamp,
-  "autor_modificacion" integer
+  "autor_modificacion_id" integer
 );
 
 CREATE TABLE "proveedores"."proveedor_juridico" (
@@ -61,7 +61,7 @@ CREATE TABLE "proveedores"."proveedor_juridico" (
   "activo" boolean NOT NULL DEFAULT true,
   "fecha_creacion" timestamp NOT NULL DEFAULT (now()),
   "fecha_modificacion" timestamp,
-  "autor_modificacion" integer
+  "autor_modificacion_id" integer
 );
 
 CREATE TABLE "proveedores"."contacto" (
@@ -77,7 +77,7 @@ CREATE TABLE "proveedores"."contacto" (
   "activo" boolean NOT NULL DEFAULT true,
   "fecha_creacion" timestamp NOT NULL DEFAULT (now()),
   "fecha_modificacion" timestamp,
-  "autor_modificacion" integer
+  "autor_modificacion_id" integer
 );
 
 CREATE TABLE "proveedores"."cuenta_bancaria" (
@@ -92,7 +92,7 @@ CREATE TABLE "proveedores"."cuenta_bancaria" (
   "activo" boolean NOT NULL DEFAULT true,
   "fecha_creacion" timestamp NOT NULL DEFAULT (now()),
   "fecha_modificacion" timestamp,
-  "autor_modificacion" integer
+  "autor_modificacion_id" integer
 );
 
 CREATE TABLE "proveedores"."actividad_economica_proveedor" (
@@ -103,7 +103,7 @@ CREATE TABLE "proveedores"."actividad_economica_proveedor" (
   "activo" boolean NOT NULL DEFAULT true,
   "fecha_creacion" timestamp NOT NULL DEFAULT (now()),
   "fecha_modificacion" timestamp,
-  "autor_modificacion" integer
+  "autor_modificacion_id" integer
 );
 
 CREATE TABLE "proveedores"."perfil_financiero" (
@@ -120,7 +120,7 @@ CREATE TABLE "proveedores"."perfil_financiero" (
   "activo" boolean NOT NULL DEFAULT true,
   "fecha_creacion" timestamp NOT NULL DEFAULT (now()),
   "fecha_modificacion" timestamp,
-  "autor_modificacion" integer
+  "autor_modificacion_id" integer
 );
 
 CREATE TABLE "proveedores"."responsabilidad_fiscal_perfil" (
@@ -130,7 +130,7 @@ CREATE TABLE "proveedores"."responsabilidad_fiscal_perfil" (
   "activo" boolean NOT NULL DEFAULT true,
   "fecha_creacion" timestamp NOT NULL DEFAULT (now()),
   "fecha_modificacion" timestamp,
-  "autor_modificacion" integer
+  "autor_modificacion_id" integer
 );
 
 CREATE TABLE "proveedores"."informacion_financiera" (
@@ -145,7 +145,7 @@ CREATE TABLE "proveedores"."informacion_financiera" (
   "activo" boolean NOT NULL DEFAULT true,
   "fecha_creacion" timestamp NOT NULL DEFAULT (now()),
   "fecha_modificacion" timestamp,
-  "autor_modificacion" integer
+  "autor_modificacion_id" integer
 );
 
 CREATE TABLE "proveedores"."representacion" (
@@ -159,7 +159,7 @@ CREATE TABLE "proveedores"."representacion" (
   "activo" boolean NOT NULL DEFAULT true,
   "fecha_creacion" timestamp NOT NULL DEFAULT (now()),
   "fecha_modificacion" timestamp,
-  "autor_modificacion" integer
+  "autor_modificacion_id" integer
 );
 
 CREATE TABLE "proveedores"."documento" (
@@ -170,7 +170,7 @@ CREATE TABLE "proveedores"."documento" (
   "activo" boolean NOT NULL DEFAULT true,
   "fecha_creacion" timestamp NOT NULL DEFAULT (now()),
   "fecha_modificacion" timestamp,
-  "autor_modificacion" integer
+  "autor_modificacion_id" integer
 );
 
 CREATE TABLE "proveedores"."declaracion" (
@@ -180,7 +180,7 @@ CREATE TABLE "proveedores"."declaracion" (
   "activo" boolean NOT NULL DEFAULT true,
   "fecha_creacion" timestamp NOT NULL DEFAULT (now()),
   "fecha_modificacion" timestamp,
-  "autor_modificacion" integer
+  "autor_modificacion_id" integer
 );
 
 CREATE TABLE "proveedores"."tipo_declaracion_proveedor" (
@@ -190,7 +190,7 @@ CREATE TABLE "proveedores"."tipo_declaracion_proveedor" (
   "activo" boolean NOT NULL DEFAULT true,
   "fecha_creacion" timestamp NOT NULL DEFAULT (now()),
   "fecha_modificacion" timestamp,
-  "autor_modificacion" integer
+  "autor_modificacion_id" integer
 );
 
 CREATE INDEX "idx_perfil_activo" ON "proveedores"."perfil" ("activo");
@@ -201,7 +201,7 @@ CREATE INDEX "idx_rango_facturacion_activo" ON "proveedores"."rango_facturacion"
 
 CREATE UNIQUE INDEX "uq_proveedor_tercero_id" ON "proveedores"."proveedor" ("tercero_id");
 
-CREATE INDEX "idx_proveedor_tipo_registro" ON "proveedores"."proveedor" ("tipo_registro");
+CREATE INDEX "idx_proveedor_tipo_registro_id" ON "proveedores"."proveedor" ("tipo_registro_id");
 
 CREATE INDEX "idx_proveedor_activo" ON "proveedores"."proveedor" ("activo");
 
@@ -209,7 +209,7 @@ CREATE INDEX "idx_proveedor_fecha_creacion" ON "proveedores"."proveedor" ("fecha
 
 CREATE INDEX "idx_proveedor_fecha_modificacion" ON "proveedores"."proveedor" ("fecha_modificacion");
 
-CREATE INDEX "idx_proveedor_autor_modificacion" ON "proveedores"."proveedor" ("autor_modificacion");
+CREATE INDEX "idx_proveedor_autor_modificacion_id" ON "proveedores"."proveedor" ("autor_modificacion_id");
 
 CREATE INDEX "idx_proveedor_natural_perfil_declarado" ON "proveedores"."proveedor_natural" ("perfil_declarado");
 
@@ -219,7 +219,7 @@ CREATE INDEX "idx_proveedor_natural_fecha_creacion" ON "proveedores"."proveedor_
 
 CREATE INDEX "idx_proveedor_natural_fecha_modificacion" ON "proveedores"."proveedor_natural" ("fecha_modificacion");
 
-CREATE INDEX "idx_proveedor_natural_autor_modificacion" ON "proveedores"."proveedor_natural" ("autor_modificacion");
+CREATE INDEX "idx_proveedor_natural_autor_modificacion_id" ON "proveedores"."proveedor_natural" ("autor_modificacion_id");
 
 CREATE UNIQUE INDEX "uq_proveedor_juridico_matricula_mercantil" ON "proveedores"."proveedor_juridico" ("matricula_mercantil");
 
@@ -229,7 +229,7 @@ CREATE INDEX "idx_proveedor_juridico_fecha_creacion" ON "proveedores"."proveedor
 
 CREATE INDEX "idx_proveedor_juridico_fecha_modificacion" ON "proveedores"."proveedor_juridico" ("fecha_modificacion");
 
-CREATE INDEX "idx_proveedor_juridico_autor_modificacion" ON "proveedores"."proveedor_juridico" ("autor_modificacion");
+CREATE INDEX "idx_proveedor_juridico_autor_modificacion_id" ON "proveedores"."proveedor_juridico" ("autor_modificacion_id");
 
 CREATE INDEX "idx_contacto_info_complementaria_tercero_id" ON "proveedores"."contacto" ("info_complementaria_tercero_id");
 
@@ -239,7 +239,7 @@ CREATE INDEX "idx_contacto_fecha_creacion" ON "proveedores"."contacto" ("fecha_c
 
 CREATE INDEX "idx_contacto_fecha_modificacion" ON "proveedores"."contacto" ("fecha_modificacion");
 
-CREATE INDEX "idx_contacto_autor_modificacion" ON "proveedores"."contacto" ("autor_modificacion");
+CREATE INDEX "idx_contacto_autor_modificacion_id" ON "proveedores"."contacto" ("autor_modificacion_id");
 
 CREATE INDEX "idx_cuenta_bancaria_activo" ON "proveedores"."cuenta_bancaria" ("activo");
 
@@ -247,7 +247,7 @@ CREATE INDEX "idx_cuenta_bancaria_fecha_creacion" ON "proveedores"."cuenta_banca
 
 CREATE INDEX "idx_cuenta_bancaria_fecha_modificacion" ON "proveedores"."cuenta_bancaria" ("fecha_modificacion");
 
-CREATE INDEX "idx_cuenta_bancaria_autor_modificacion" ON "proveedores"."cuenta_bancaria" ("autor_modificacion");
+CREATE INDEX "idx_cuenta_bancaria_autor_modificacion_id" ON "proveedores"."cuenta_bancaria" ("autor_modificacion_id");
 
 CREATE INDEX "idx_actividad_economica_proveedor_activo" ON "proveedores"."actividad_economica_proveedor" ("activo");
 
@@ -255,7 +255,7 @@ CREATE INDEX "idx_actividad_economica_proveedor_fecha_creacion" ON "proveedores"
 
 CREATE INDEX "idx_actividad_economica_proveedor_fecha_modificacion" ON "proveedores"."actividad_economica_proveedor" ("fecha_modificacion");
 
-CREATE INDEX "idx_actividad_economica_proveedor_autor_modificacion" ON "proveedores"."actividad_economica_proveedor" ("autor_modificacion");
+CREATE INDEX "idx_actividad_economica_proveedor_autor_modificacion_id" ON "proveedores"."actividad_economica_proveedor" ("autor_modificacion_id");
 
 CREATE INDEX "idx_perfil_financiero_activo" ON "proveedores"."perfil_financiero" ("activo");
 
@@ -263,7 +263,7 @@ CREATE INDEX "idx_perfil_financiero_fecha_creacion" ON "proveedores"."perfil_fin
 
 CREATE INDEX "idx_perfil_financiero_fecha_modificacion" ON "proveedores"."perfil_financiero" ("fecha_modificacion");
 
-CREATE INDEX "idx_perfil_financiero_autor_modificacion" ON "proveedores"."perfil_financiero" ("autor_modificacion");
+CREATE INDEX "idx_perfil_financiero_autor_modificacion_id" ON "proveedores"."perfil_financiero" ("autor_modificacion_id");
 
 CREATE INDEX "idx_responsabilidad_fiscal_perfil_activo" ON "proveedores"."responsabilidad_fiscal_perfil" ("activo");
 
@@ -271,7 +271,7 @@ CREATE INDEX "idx_responsabilidad_fiscal_perfil_fecha_creacion" ON "proveedores"
 
 CREATE INDEX "idx_responsabilidad_fiscal_perfil_fecha_modificacion" ON "proveedores"."responsabilidad_fiscal_perfil" ("fecha_modificacion");
 
-CREATE INDEX "idx_responsabilidad_fiscal_perfil_autor_modificacion" ON "proveedores"."responsabilidad_fiscal_perfil" ("autor_modificacion");
+CREATE INDEX "idx_responsabilidad_fiscal_perfil_autor_modificacion_id" ON "proveedores"."responsabilidad_fiscal_perfil" ("autor_modificacion_id");
 
 CREATE INDEX "idx_informacion_financiera_activo" ON "proveedores"."informacion_financiera" ("activo");
 
@@ -279,7 +279,7 @@ CREATE INDEX "idx_informacion_financiera_fecha_creacion" ON "proveedores"."infor
 
 CREATE INDEX "idx_informacion_financiera_fecha_modificacion" ON "proveedores"."informacion_financiera" ("fecha_modificacion");
 
-CREATE INDEX "idx_informacion_financiera_autor_modificacion" ON "proveedores"."informacion_financiera" ("autor_modificacion");
+CREATE INDEX "idx_informacion_financiera_autor_modificacion_id" ON "proveedores"."informacion_financiera" ("autor_modificacion_id");
 
 CREATE INDEX "idx_representacion_activo" ON "proveedores"."representacion" ("activo");
 
@@ -287,7 +287,7 @@ CREATE INDEX "idx_representacion_fecha_creacion" ON "proveedores"."representacio
 
 CREATE INDEX "idx_representacion_fecha_modificacion" ON "proveedores"."representacion" ("fecha_modificacion");
 
-CREATE INDEX "idx_representacion_autor_modificacion" ON "proveedores"."representacion" ("autor_modificacion");
+CREATE INDEX "idx_representacion_autor_modificacion_id" ON "proveedores"."representacion" ("autor_modificacion_id");
 
 CREATE INDEX "idx_documento_activo" ON "proveedores"."documento" ("activo");
 
@@ -295,7 +295,7 @@ CREATE INDEX "idx_documento_fecha_creacion" ON "proveedores"."documento" ("fecha
 
 CREATE INDEX "idx_documento_fecha_modificacion" ON "proveedores"."documento" ("fecha_modificacion");
 
-CREATE INDEX "idx_documento_autor_modificacion" ON "proveedores"."documento" ("autor_modificacion");
+CREATE INDEX "idx_documento_autor_modificacion_id" ON "proveedores"."documento" ("autor_modificacion_id");
 
 CREATE INDEX "idx_declaracion_activo" ON "proveedores"."declaracion" ("activo");
 
@@ -303,7 +303,7 @@ CREATE INDEX "idx_declaracion_fecha_creacion" ON "proveedores"."declaracion" ("f
 
 CREATE INDEX "idx_declaracion_fecha_modificacion" ON "proveedores"."declaracion" ("fecha_modificacion");
 
-CREATE INDEX "idx_declaracion_autor_modificacion" ON "proveedores"."declaracion" ("autor_modificacion");
+CREATE INDEX "idx_declaracion_autor_modificacion_id" ON "proveedores"."declaracion" ("autor_modificacion_id");
 
 CREATE INDEX "idx_tipo_declaracion_proveedor_activo" ON "proveedores"."tipo_declaracion_proveedor" ("activo");
 
@@ -311,7 +311,7 @@ CREATE INDEX "idx_tipo_declaracion_proveedor_fecha_creacion" ON "proveedores"."t
 
 CREATE INDEX "idx_tipo_declaracion_proveedor_fecha_modificacion" ON "proveedores"."tipo_declaracion_proveedor" ("fecha_modificacion");
 
-CREATE INDEX "idx_tipo_declaracion_proveedor_autor_modificacion" ON "proveedores"."tipo_declaracion_proveedor" ("autor_modificacion");
+CREATE INDEX "idx_tipo_declaracion_proveedor_autor_modificacion_id" ON "proveedores"."tipo_declaracion_proveedor" ("autor_modificacion_id");
 
 COMMENT ON TABLE "proveedores"."perfil" IS 'Contratista, docente, investigador, etc. Posiblemente Terceros GrupoInfoComplementariaId 5: Tipo Perfil';
 
@@ -321,13 +321,13 @@ COMMENT ON TABLE "proveedores"."rango_facturacion" IS '0 a 100, 101 a 500, etc.'
 
 COMMENT ON COLUMN "proveedores"."proveedor"."tercero_id" IS 'Referencia externa a Terceros CRUD';
 
-COMMENT ON COLUMN "proveedores"."proveedor"."tipo_registro" IS 'Referencia externa a Terceros CRUD: info complementaria, tipo contribuyente';
+COMMENT ON COLUMN "proveedores"."proveedor"."tipo_registro_id" IS 'Referencia externa a Terceros CRUD: info complementaria, tipo contribuyente';
 
-COMMENT ON COLUMN "proveedores"."proveedor"."autor_modificacion" IS 'Referencia externa a Terceros CRUD';
+COMMENT ON COLUMN "proveedores"."proveedor"."autor_modificacion_id" IS 'Referencia externa a Terceros CRUD';
 
-COMMENT ON COLUMN "proveedores"."proveedor_natural"."autor_modificacion" IS 'Referencia externa a Terceros CRUD';
+COMMENT ON COLUMN "proveedores"."proveedor_natural"."autor_modificacion_id" IS 'Referencia externa a Terceros CRUD';
 
-COMMENT ON COLUMN "proveedores"."proveedor_juridico"."autor_modificacion" IS 'Referencia externa a Terceros CRUD';
+COMMENT ON COLUMN "proveedores"."proveedor_juridico"."autor_modificacion_id" IS 'Referencia externa a Terceros CRUD';
 
 COMMENT ON COLUMN "proveedores"."contacto"."nombre_contacto" IS 'Juan Pérez';
 
@@ -335,7 +335,7 @@ COMMENT ON COLUMN "proveedores"."contacto"."finalidad" IS 'Representante legal, 
 
 COMMENT ON COLUMN "proveedores"."contacto"."info_complementaria_tercero_id" IS 'Referencia externa a Terceros CRUD';
 
-COMMENT ON COLUMN "proveedores"."contacto"."autor_modificacion" IS 'Referencia externa a Terceros CRUD';
+COMMENT ON COLUMN "proveedores"."contacto"."autor_modificacion_id" IS 'Referencia externa a Terceros CRUD';
 
 COMMENT ON COLUMN "proveedores"."cuenta_bancaria"."entidad_bancaria_id" IS 'Referencia externa a Parametros CRUD';
 
@@ -343,23 +343,23 @@ COMMENT ON COLUMN "proveedores"."cuenta_bancaria"."tipo_cuenta_id" IS 'Referenci
 
 COMMENT ON COLUMN "proveedores"."cuenta_bancaria"."ciudad_apertura_id" IS 'Referencia externa a Ubicaciones CRUD';
 
-COMMENT ON COLUMN "proveedores"."cuenta_bancaria"."autor_modificacion" IS 'Referencia externa a Terceros CRUD';
+COMMENT ON COLUMN "proveedores"."cuenta_bancaria"."autor_modificacion_id" IS 'Referencia externa a Terceros CRUD';
 
 COMMENT ON COLUMN "proveedores"."actividad_economica_proveedor"."actividad_economica_id" IS 'Referencia externa a Parametros CRUD';
 
-COMMENT ON COLUMN "proveedores"."actividad_economica_proveedor"."autor_modificacion" IS 'Referencia externa a Terceros CRUD';
+COMMENT ON COLUMN "proveedores"."actividad_economica_proveedor"."autor_modificacion_id" IS 'Referencia externa a Terceros CRUD';
 
-COMMENT ON COLUMN "proveedores"."perfil_financiero"."autor_modificacion" IS 'Referencia externa a Terceros CRUD';
+COMMENT ON COLUMN "proveedores"."perfil_financiero"."autor_modificacion_id" IS 'Referencia externa a Terceros CRUD';
 
 COMMENT ON COLUMN "proveedores"."responsabilidad_fiscal_perfil"."responsabilidad_fiscal_id" IS 'Referencia externa a Parametros CRUD';
 
-COMMENT ON COLUMN "proveedores"."responsabilidad_fiscal_perfil"."autor_modificacion" IS 'Referencia externa a Terceros CRUD';
+COMMENT ON COLUMN "proveedores"."responsabilidad_fiscal_perfil"."autor_modificacion_id" IS 'Referencia externa a Terceros CRUD';
 
 COMMENT ON COLUMN "proveedores"."informacion_financiera"."fecha_corte" IS 'Por defecto se toma el último día del año en curso';
 
 COMMENT ON COLUMN "proveedores"."informacion_financiera"."moneda_id" IS 'Referencia externa a Parametros CRUD';
 
-COMMENT ON COLUMN "proveedores"."informacion_financiera"."autor_modificacion" IS 'Referencia externa a Terceros CRUD';
+COMMENT ON COLUMN "proveedores"."informacion_financiera"."autor_modificacion_id" IS 'Referencia externa a Terceros CRUD';
 
 COMMENT ON COLUMN "proveedores"."representacion"."representante_id" IS 'Referencia externa a Terceros CRUD';
 
@@ -367,7 +367,7 @@ COMMENT ON COLUMN "proveedores"."representacion"."tipo_representacion_id" IS 'Re
 
 COMMENT ON COLUMN "proveedores"."representacion"."cargo_id" IS 'Referencia externa a Parametros CRUD';
 
-COMMENT ON COLUMN "proveedores"."representacion"."autor_modificacion" IS 'Referencia externa a Terceros CRUD';
+COMMENT ON COLUMN "proveedores"."representacion"."autor_modificacion_id" IS 'Referencia externa a Terceros CRUD';
 
 COMMENT ON TABLE "proveedores"."documento" IS 'Se incluye certificado de registro.';
 
@@ -375,7 +375,7 @@ COMMENT ON COLUMN "proveedores"."documento"."tipo_documento_id" IS 'Referencia e
 
 COMMENT ON COLUMN "proveedores"."documento"."enlace" IS 'Archivo de registro único tributario (RUT)';
 
-COMMENT ON COLUMN "proveedores"."documento"."autor_modificacion" IS 'Referencia externa a Terceros CRUD';
+COMMENT ON COLUMN "proveedores"."documento"."autor_modificacion_id" IS 'Referencia externa a Terceros CRUD';
 
 COMMENT ON TABLE "proveedores"."declaracion" IS 'Versionado de las declaraciones que puede firmar el proveedor.';
 
@@ -383,11 +383,11 @@ COMMENT ON COLUMN "proveedores"."declaracion"."tipo_declaracion_id" IS 'Referenc
 
 COMMENT ON COLUMN "proveedores"."declaracion"."texto" IS 'Declaración de renta, declaración de IVA, declaración de retención en la fuente, etc.';
 
-COMMENT ON COLUMN "proveedores"."declaracion"."autor_modificacion" IS 'Referencia externa a Terceros CRUD';
+COMMENT ON COLUMN "proveedores"."declaracion"."autor_modificacion_id" IS 'Referencia externa a Terceros CRUD';
 
 COMMENT ON TABLE "proveedores"."tipo_declaracion_proveedor" IS 'Tabla de rompimiento entre un texto de declaración firmada y el proveedor que la firmó.';
 
-COMMENT ON COLUMN "proveedores"."tipo_declaracion_proveedor"."autor_modificacion" IS 'Referencia externa a Terceros CRUD';
+COMMENT ON COLUMN "proveedores"."tipo_declaracion_proveedor"."autor_modificacion_id" IS 'Referencia externa a Terceros CRUD';
 
 ALTER TABLE "proveedores"."proveedor" ADD CONSTRAINT "fk_proovedor_natural_proveedor" FOREIGN KEY ("id") REFERENCES "proveedores"."proveedor_natural" ("id") DEFERRABLE INITIALLY IMMEDIATE;
 

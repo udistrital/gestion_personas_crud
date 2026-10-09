@@ -2796,7 +2796,7 @@
                 "Activo": {
                     "type": "boolean"
                 },
-                "AutorModificacion": {
+                "AutorModificacionId": {
                     "type": "integer",
                     "format": "int64"
                 },
@@ -2827,7 +2827,7 @@
                 "Activo": {
                     "type": "boolean"
                 },
-                "AutorModificacion": {
+                "AutorModificacionId": {
                     "type": "integer",
                     "format": "int64"
                 },
@@ -2877,7 +2877,7 @@
                 "Activo": {
                     "type": "boolean"
                 },
-                "AutorModificacion": {
+                "AutorModificacionId": {
                     "type": "integer",
                     "format": "int64"
                 },
@@ -2926,7 +2926,7 @@
                 "Activo": {
                     "type": "boolean"
                 },
-                "AutorModificacion": {
+                "AutorModificacionId": {
                     "type": "integer",
                     "format": "int64"
                 },
@@ -2958,7 +2958,7 @@
                 "Activo": {
                     "type": "boolean"
                 },
-                "AutorModificacion": {
+                "AutorModificacionId": {
                     "type": "integer",
                     "format": "int64"
                 },
@@ -2997,7 +2997,7 @@
                     "type": "number",
                     "format": "double"
                 },
-                "AutorModificacion": {
+                "AutorModificacionId": {
                     "type": "integer",
                     "format": "int64"
                 },
@@ -3071,7 +3071,7 @@
                 "Activo": {
                     "type": "boolean"
                 },
-                "AutorModificacion": {
+                "AutorModificacionId": {
                     "type": "integer",
                     "format": "int64"
                 },
@@ -3149,7 +3149,7 @@
                 "Activo": {
                     "type": "boolean"
                 },
-                "AutorModificacion": {
+                "AutorModificacionId": {
                     "type": "integer",
                     "format": "int64"
                 },
@@ -3172,7 +3172,7 @@
                     "type": "integer",
                     "format": "int64"
                 },
-                "TipoRegistro": {
+                "TipoRegistroId": {
                     "type": "integer",
                     "format": "int64"
                 }
@@ -3185,7 +3185,7 @@
                 "Activo": {
                     "type": "boolean"
                 },
-                "AutorModificacion": {
+                "AutorModificacionId": {
                     "type": "integer",
                     "format": "int64"
                 },
@@ -3234,7 +3234,7 @@
                 "Activo": {
                     "type": "boolean"
                 },
-                "AutorModificacion": {
+                "AutorModificacionId": {
                     "type": "integer",
                     "format": "int64"
                 },
@@ -3296,7 +3296,7 @@
                 "Activo": {
                     "type": "boolean"
                 },
-                "AutorModificacion": {
+                "AutorModificacionId": {
                     "type": "integer",
                     "format": "int64"
                 },
@@ -3342,7 +3342,7 @@
                 "Activo": {
                     "type": "boolean"
                 },
-                "AutorModificacion": {
+                "AutorModificacionId": {
                     "type": "integer",
                     "format": "int64"
                 },
@@ -3374,7 +3374,7 @@
                 "Activo": {
                     "type": "boolean"
                 },
-                "AutorModificacion": {
+                "AutorModificacionId": {
                     "type": "integer",
                     "format": "int64"
                 },

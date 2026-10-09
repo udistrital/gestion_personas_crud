@@ -17,7 +17,7 @@ type ResponsabilidadFiscalPerfil struct {
 	Activo                  bool              `orm:"column(activo)"`
 	FechaCreacion           time.Time         `orm:"column(fecha_creacion);type(timestamp without time zone)"`
 	FechaModificacion       time.Time         `orm:"column(fecha_modificacion);type(timestamp without time zone);null"`
-	AutorModificacion       int               `orm:"column(autor_modificacion);null"`
+	AutorModificacionId     int               `orm:"column(autor_modificacion_id);null"`
 }
 
 func (t *ResponsabilidadFiscalPerfil) TableName() string {

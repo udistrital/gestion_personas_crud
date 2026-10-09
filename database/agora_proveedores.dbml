@@ -11,7 +11,7 @@ TablePartial campos_auditoria {
   activo boolean [not null, default: true]
   fecha_creacion timestamp [not null, default: `now()`]
   fecha_modificacion timestamp
-  autor_modificacion integer [note: 'Referencia externa a Terceros CRUD']
+  autor_modificacion_id integer [note: 'Referencia externa a Terceros CRUD']
 }
 
 TablePartial campos_parametro {
@@ -62,17 +62,17 @@ Table proveedores.rango_facturacion {
 Table proveedores.proveedor {
   ~id
   tercero_id integer [not null, note: 'Referencia externa a Terceros CRUD']
-  tipo_registro integer [not null, note: 'Referencia externa a Terceros CRUD: info complementaria, tipo contribuyente']
+  tipo_registro_id integer [not null, note: 'Referencia externa a Terceros CRUD: info complementaria, tipo contribuyente']
   descripcion_portafolio varchar(250)
   ~campos_auditoria
 
   indexes {
     tercero_id [unique, name: 'uq_proveedor_tercero_id']
-    tipo_registro [name: 'idx_proveedor_tipo_registro']
+    tipo_registro_id [name: 'idx_proveedor_tipo_registro_id']
     activo [name: 'idx_proveedor_activo']
     fecha_creacion [name: 'idx_proveedor_fecha_creacion']
     fecha_modificacion [name: 'idx_proveedor_fecha_modificacion']
-    autor_modificacion [name: 'idx_proveedor_autor_modificacion']
+    autor_modificacion_id [name: 'idx_proveedor_autor_modificacion_id']
   }
 }
 
@@ -91,7 +91,7 @@ Table proveedores.proveedor_natural {
     activo [name: 'idx_proveedor_natural_activo']
     fecha_creacion [name: 'idx_proveedor_natural_fecha_creacion']
     fecha_modificacion [name: 'idx_proveedor_natural_fecha_modificacion']
-    autor_modificacion [name: 'idx_proveedor_natural_autor_modificacion']
+    autor_modificacion_id [name: 'idx_proveedor_natural_autor_modificacion_id']
   }
 }
 
@@ -121,7 +121,7 @@ Table proveedores.proveedor_juridico {
     activo [name: 'idx_proveedor_juridico_activo']
     fecha_creacion [name: 'idx_proveedor_juridico_fecha_creacion']
     fecha_modificacion [name: 'idx_proveedor_juridico_fecha_modificacion']
-    autor_modificacion [name: 'idx_proveedor_juridico_autor_modificacion']
+    autor_modificacion_id [name: 'idx_proveedor_juridico_autor_modificacion_id']
   }
 }
 
@@ -148,7 +148,7 @@ Table proveedores.contacto {
     activo [name: 'idx_contacto_activo']
     fecha_creacion [name: 'idx_contacto_fecha_creacion']
     fecha_modificacion [name: 'idx_contacto_fecha_modificacion']
-    autor_modificacion [name: 'idx_contacto_autor_modificacion']
+    autor_modificacion_id [name: 'idx_contacto_autor_modificacion_id']
   }
 }
 
@@ -173,7 +173,7 @@ Table proveedores.cuenta_bancaria {
     activo [name: 'idx_cuenta_bancaria_activo']
     fecha_creacion [name: 'idx_cuenta_bancaria_fecha_creacion']
     fecha_modificacion [name: 'idx_cuenta_bancaria_fecha_modificacion']
-    autor_modificacion [name: 'idx_cuenta_bancaria_autor_modificacion']
+    autor_modificacion_id [name: 'idx_cuenta_bancaria_autor_modificacion_id']
   }
 }
 
@@ -194,7 +194,7 @@ Table proveedores.actividad_economica_proveedor {
     activo [name: 'idx_actividad_economica_proveedor_activo']
     fecha_creacion [name: 'idx_actividad_economica_proveedor_fecha_creacion']
     fecha_modificacion [name: 'idx_actividad_economica_proveedor_fecha_modificacion']
-    autor_modificacion [name: 'idx_actividad_economica_proveedor_autor_modificacion']
+    autor_modificacion_id [name: 'idx_actividad_economica_proveedor_autor_modificacion_id']
   }
 }
 
@@ -221,7 +221,7 @@ Table proveedores.perfil_financiero {
     activo [name: 'idx_perfil_financiero_activo']
     fecha_creacion [name: 'idx_perfil_financiero_fecha_creacion']
     fecha_modificacion [name: 'idx_perfil_financiero_fecha_modificacion']
-    autor_modificacion [name: 'idx_perfil_financiero_autor_modificacion']
+    autor_modificacion_id [name: 'idx_perfil_financiero_autor_modificacion_id']
   }
 }
 
@@ -249,7 +249,7 @@ Table proveedores.responsabilidad_fiscal_perfil {
     activo [name: 'idx_responsabilidad_fiscal_perfil_activo']
     fecha_creacion [name: 'idx_responsabilidad_fiscal_perfil_fecha_creacion']
     fecha_modificacion [name: 'idx_responsabilidad_fiscal_perfil_fecha_modificacion']
-    autor_modificacion [name: 'idx_responsabilidad_fiscal_perfil_autor_modificacion']
+    autor_modificacion_id [name: 'idx_responsabilidad_fiscal_perfil_autor_modificacion_id']
   }
 }
 
@@ -274,7 +274,7 @@ Table proveedores.informacion_financiera {
     activo [name: 'idx_informacion_financiera_activo']
     fecha_creacion [name: 'idx_informacion_financiera_fecha_creacion']
     fecha_modificacion [name: 'idx_informacion_financiera_fecha_modificacion']
-    autor_modificacion [name: 'idx_informacion_financiera_autor_modificacion']
+    autor_modificacion_id [name: 'idx_informacion_financiera_autor_modificacion_id']
   }
 }
 
@@ -298,7 +298,7 @@ Table proveedores.representacion {
     activo [name: 'idx_representacion_activo']
     fecha_creacion [name: 'idx_representacion_fecha_creacion']
     fecha_modificacion [name: 'idx_representacion_fecha_modificacion']
-    autor_modificacion [name: 'idx_representacion_autor_modificacion']
+    autor_modificacion_id [name: 'idx_representacion_autor_modificacion_id']
   }
 }
 
@@ -320,7 +320,7 @@ Table proveedores.documento {
     activo [name: 'idx_documento_activo']
     fecha_creacion [name: 'idx_documento_fecha_creacion']
     fecha_modificacion [name: 'idx_documento_fecha_modificacion']
-    autor_modificacion [name: 'idx_documento_autor_modificacion']
+    autor_modificacion_id [name: 'idx_documento_autor_modificacion_id']
   }
 }
 
@@ -341,7 +341,7 @@ Table proveedores.declaracion {
     activo [name: 'idx_declaracion_activo']
     fecha_creacion [name: 'idx_declaracion_fecha_creacion']
     fecha_modificacion [name: 'idx_declaracion_fecha_modificacion']
-    autor_modificacion [name: 'idx_declaracion_autor_modificacion']
+    autor_modificacion_id [name: 'idx_declaracion_autor_modificacion_id']
   }
 }
 
@@ -358,7 +358,7 @@ Table proveedores.tipo_declaracion_proveedor {
     activo [name: 'idx_tipo_declaracion_proveedor_activo']
     fecha_creacion [name: 'idx_tipo_declaracion_proveedor_fecha_creacion']
     fecha_modificacion [name: 'idx_tipo_declaracion_proveedor_fecha_modificacion']
-    autor_modificacion [name: 'idx_tipo_declaracion_proveedor_autor_modificacion']
+    autor_modificacion_id [name: 'idx_tipo_declaracion_proveedor_autor_modificacion_id']
   }
 }
 

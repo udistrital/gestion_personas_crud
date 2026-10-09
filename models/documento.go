@@ -11,14 +11,14 @@ import (
 )
 
 type Documento struct {
-	Id                int        `orm:"column(id);pk;auto"`
-	ProveedorId       *Proveedor `orm:"column(proveedor_id);rel(fk)"`
-	TipoDocumentoId   int        `orm:"column(tipo_documento_id)"`
-	Enlace            string     `orm:"column(enlace);type(uuid);null"`
-	Activo            bool       `orm:"column(activo)"`
-	FechaCreacion     time.Time  `orm:"column(fecha_creacion);type(timestamp without time zone)"`
-	FechaModificacion time.Time  `orm:"column(fecha_modificacion);type(timestamp without time zone);null"`
-	AutorModificacion int        `orm:"column(autor_modificacion);null"`
+	Id                  int        `orm:"column(id);pk;auto"`
+	ProveedorId         *Proveedor `orm:"column(proveedor_id);rel(fk)"`
+	TipoDocumentoId     int        `orm:"column(tipo_documento_id)"`
+	Enlace              string     `orm:"column(enlace);type(uuid);null"`
+	Activo              bool       `orm:"column(activo)"`
+	FechaCreacion       time.Time  `orm:"column(fecha_creacion);type(timestamp without time zone)"`
+	FechaModificacion   time.Time  `orm:"column(fecha_modificacion);type(timestamp without time zone);null"`
+	AutorModificacionId int        `orm:"column(autor_modificacion_id);null"`
 }
 
 func (t *Documento) TableName() string {

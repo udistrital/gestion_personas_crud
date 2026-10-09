@@ -11,18 +11,18 @@ import (
 )
 
 type CuentaBancaria struct {
-	Id                int        `orm:"column(id);pk;auto"`
-	ProveedorId       *Proveedor `orm:"column(proveedor_id);rel(fk)"`
-	EntidadBancariaId int        `orm:"column(entidad_bancaria_id)"`
-	TipoCuentaId      int        `orm:"column(tipo_cuenta_id)"`
-	NumeroCuenta      string     `orm:"column(numero_cuenta)"`
-	NombreTitular     string     `orm:"column(nombre_titular)"`
-	CiudadAperturaId  int        `orm:"column(ciudad_apertura_id);null"`
-	EsPrincipal       bool       `orm:"column(es_principal);null"`
-	Activo            bool       `orm:"column(activo)"`
-	FechaCreacion     time.Time  `orm:"column(fecha_creacion);type(timestamp without time zone)"`
-	FechaModificacion time.Time  `orm:"column(fecha_modificacion);type(timestamp without time zone);null"`
-	AutorModificacion int        `orm:"column(autor_modificacion);null"`
+	Id                  int        `orm:"column(id);pk;auto"`
+	ProveedorId         *Proveedor `orm:"column(proveedor_id);rel(fk)"`
+	EntidadBancariaId   int        `orm:"column(entidad_bancaria_id)"`
+	TipoCuentaId        int        `orm:"column(tipo_cuenta_id)"`
+	NumeroCuenta        string     `orm:"column(numero_cuenta)"`
+	NombreTitular       string     `orm:"column(nombre_titular)"`
+	CiudadAperturaId    int        `orm:"column(ciudad_apertura_id);null"`
+	EsPrincipal         bool       `orm:"column(es_principal);null"`
+	Activo              bool       `orm:"column(activo)"`
+	FechaCreacion       time.Time  `orm:"column(fecha_creacion);type(timestamp without time zone)"`
+	FechaModificacion   time.Time  `orm:"column(fecha_modificacion);type(timestamp without time zone);null"`
+	AutorModificacionId int        `orm:"column(autor_modificacion_id);null"`
 }
 
 func (t *CuentaBancaria) TableName() string {

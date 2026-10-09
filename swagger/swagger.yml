@@ -2022,7 +2022,7 @@ definitions:
         format: int64
       Activo:
         type: boolean
-      AutorModificacion:
+      AutorModificacionId:
         type: integer
         format: int64
       EsPrincipal:
@@ -2044,7 +2044,7 @@ definitions:
     properties:
       Activo:
         type: boolean
-      AutorModificacion:
+      AutorModificacionId:
         type: integer
         format: int64
       EsPrincipal:
@@ -2079,7 +2079,7 @@ definitions:
     properties:
       Activo:
         type: boolean
-      AutorModificacion:
+      AutorModificacionId:
         type: integer
         format: int64
       CiudadAperturaId:
@@ -2114,7 +2114,7 @@ definitions:
     properties:
       Activo:
         type: boolean
-      AutorModificacion:
+      AutorModificacionId:
         type: integer
         format: int64
       FechaCreacion:
@@ -2137,7 +2137,7 @@ definitions:
     properties:
       Activo:
         type: boolean
-      AutorModificacion:
+      AutorModificacionId:
         type: integer
         format: int64
       Enlace:
@@ -2165,7 +2165,7 @@ definitions:
       ActivosTotales:
         type: number
         format: double
-      AutorModificacion:
+      AutorModificacionId:
         type: integer
         format: int64
       CapitalAutorizado:
@@ -2218,7 +2218,7 @@ definitions:
     properties:
       Activo:
         type: boolean
-      AutorModificacion:
+      AutorModificacionId:
         type: integer
         format: int64
       Autorretenedor:
@@ -2272,7 +2272,7 @@ definitions:
     properties:
       Activo:
         type: boolean
-      AutorModificacion:
+      AutorModificacionId:
         type: integer
         format: int64
       DescripcionPortafolio:
@@ -2289,7 +2289,7 @@ definitions:
       TerceroId:
         type: integer
         format: int64
-      TipoRegistro:
+      TipoRegistroId:
         type: integer
         format: int64
   models.ProveedorJuridico:
@@ -2298,7 +2298,7 @@ definitions:
     properties:
       Activo:
         type: boolean
-      AutorModificacion:
+      AutorModificacionId:
         type: integer
         format: int64
       CotizaBolsa:
@@ -2333,7 +2333,7 @@ definitions:
     properties:
       Activo:
         type: boolean
-      AutorModificacion:
+      AutorModificacionId:
         type: integer
         format: int64
       ExperienciaLaboralMeses:
@@ -2377,7 +2377,7 @@ definitions:
     properties:
       Activo:
         type: boolean
-      AutorModificacion:
+      AutorModificacionId:
         type: integer
         format: int64
       CargoId:
@@ -2410,7 +2410,7 @@ definitions:
     properties:
       Activo:
         type: boolean
-      AutorModificacion:
+      AutorModificacionId:
         type: integer
         format: int64
       FechaCreacion:
@@ -2433,7 +2433,7 @@ definitions:
     properties:
       Activo:
         type: boolean
-      AutorModificacion:
+      AutorModificacionId:
         type: integer
         format: int64
       DeclaracionId:
