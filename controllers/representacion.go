@@ -160,8 +160,8 @@ func (c *RepresentacionController) Put() {
 		if m.Id == 0 {
 			m.Id = v.Id
 		}
-		if err := models.UpdateRepresentacionById(&v); err == nil {
-			c.Data["json"] = map[string]interface{}{"Success": true, "Status": "200", "Message": "Update successful", "Data": v}
+		if err := models.UpdateRepresentacionById(&m); err == nil {
+			c.Data["json"] = map[string]interface{}{"Success": true, "Status": "200", "Message": "Update successful", "Data": m}
 		} else {
 			beeLogger.Log.Error(err.Error())
 			c.Data["message"] = "Error service Put: The request contains an incorrect data type or an invalid parameter"
