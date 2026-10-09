@@ -37,6 +37,7 @@ func init() {
 // last inserted Id on success.
 func AddProveedorJuridico(m *ProveedorJuridico) (id int64, err error) {
 	o := orm.NewOrm()
+	m.FechaCreacion = time.Now().UTC()
 	id, err = o.Insert(m)
 	return
 }
@@ -137,6 +138,8 @@ func UpdateProveedorJuridicoById(m *ProveedorJuridico) (err error) {
 	v := ProveedorJuridico{Id: m.Id}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
+		m.FechaCreacion = v.FechaCreacion
+		m.FechaModificacion = time.Now().UTC()
 		var num int64
 		if num, err = o.Update(m); err == nil {
 			fmt.Println("Number of records updated in database:", num)

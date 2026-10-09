@@ -37,6 +37,11 @@ func init() {
 // last inserted Id on success.
 func AddInformacionFinanciera(m *InformacionFinanciera) (id int64, err error) {
 	o := orm.NewOrm()
+	m.FechaCreacion = time.Now().UTC()
+	if m.FechaCorte.IsZero() {
+		var currentYear = time.Now().UTC().Year()
+		m.FechaCorte = time.Date(currentYear, 12, 31, 0, 0, 0, 0, time.UTC)
+	}
 	id, err = o.Insert(m)
 	return
 }
@@ -137,6 +142,8 @@ func UpdateInformacionFinancieraById(m *InformacionFinanciera) (err error) {
 	v := InformacionFinanciera{Id: m.Id}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
+		m.FechaCreacion = v.FechaCreacion
+		m.FechaModificacion = time.Now().UTC()
 		var num int64
 		if num, err = o.Update(m); err == nil {
 			fmt.Println("Number of records updated in database:", num)
