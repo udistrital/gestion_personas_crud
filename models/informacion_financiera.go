@@ -37,6 +37,7 @@ func init() {
 // last inserted Id on success.
 func AddInformacionFinanciera(m *InformacionFinanciera) (id int64, err error) {
 	o := orm.NewOrm()
+	m.Activo = true
 	m.FechaCreacion = time.Now().UTC()
 	if m.FechaCorte.IsZero() {
 		var currentYear = time.Now().UTC().Year()

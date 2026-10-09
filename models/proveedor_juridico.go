@@ -37,6 +37,7 @@ func init() {
 // last inserted Id on success.
 func AddProveedorJuridico(m *ProveedorJuridico) (id int64, err error) {
 	o := orm.NewOrm()
+	m.Activo = true
 	m.FechaCreacion = time.Now().UTC()
 	id, err = o.Insert(m)
 	return
