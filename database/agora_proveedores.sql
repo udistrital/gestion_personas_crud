@@ -389,11 +389,11 @@ COMMENT ON TABLE "proveedores"."tipo_declaracion_proveedor" IS 'Tabla de rompimi
 
 COMMENT ON COLUMN "proveedores"."tipo_declaracion_proveedor"."autor_modificacion_id" IS 'Referencia externa a Terceros CRUD';
 
-ALTER TABLE "proveedores"."proveedor" ADD CONSTRAINT "fk_proovedor_natural_proveedor" FOREIGN KEY ("id") REFERENCES "proveedores"."proveedor_natural" ("id") DEFERRABLE INITIALLY IMMEDIATE;
+ALTER TABLE "proveedores"."proveedor_natural" ADD CONSTRAINT "fk_proovedor_natural_proveedor" FOREIGN KEY ("id") REFERENCES "proveedores"."proveedor" ("id") DEFERRABLE INITIALLY IMMEDIATE;
 
 ALTER TABLE "proveedores"."proveedor_natural" ADD CONSTRAINT "fk_proovedor_natural_perfil" FOREIGN KEY ("perfil_declarado") REFERENCES "proveedores"."perfil" ("id") DEFERRABLE INITIALLY IMMEDIATE;
 
-ALTER TABLE "proveedores"."proveedor" ADD CONSTRAINT "fk_proovedor_juridico_proveedor" FOREIGN KEY ("id") REFERENCES "proveedores"."proveedor_juridico" ("id") DEFERRABLE INITIALLY IMMEDIATE;
+ALTER TABLE "proveedores"."proveedor_juridico" ADD CONSTRAINT "fk_proovedor_juridico_proveedor" FOREIGN KEY ("id") REFERENCES "proveedores"."proveedor" ("id") DEFERRABLE INITIALLY IMMEDIATE;
 
 ALTER TABLE "proveedores"."contacto" ADD CONSTRAINT "fk_contacto_proveedor" FOREIGN KEY ("proveedor_id") REFERENCES "proveedores"."proveedor" ("id") DEFERRABLE INITIALLY IMMEDIATE;
 

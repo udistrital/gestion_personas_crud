@@ -96,7 +96,7 @@ Table proveedores.proveedor_natural {
 }
 
 Ref fk_proovedor_natural_proveedor {
-  proveedores.proveedor_natural.id - proveedores.proveedor.id
+  proveedores.proveedor.id - proveedores.proveedor_natural.id
 }
 
 Ref fk_proovedor_natural_perfil {
@@ -126,7 +126,7 @@ Table proveedores.proveedor_juridico {
 }
 
 Ref fk_proovedor_juridico_proveedor {
-  proveedores.proveedor_juridico.id - proveedores.proveedor.id
+  proveedores.proveedor.id - proveedores.proveedor_juridico.id
 }
 
 
