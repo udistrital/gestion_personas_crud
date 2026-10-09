@@ -146,8 +146,9 @@ func DeleteRangoFacturacion(id int) (err error) {
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
-		if num, err = o.Delete(&RangoFacturacion{Id: id}); err == nil {
-			fmt.Println("Number of records deleted in database:", num)
+		v.Activo = false
+		if num, err = o.Update(&v); err == nil {
+			fmt.Println("Number of records updated in database:", num)
 		}
 	}
 	return
