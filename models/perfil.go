@@ -30,6 +30,7 @@ func init() {
 // last inserted Id on success.
 func AddPerfil(m *Perfil) (id int64, err error) {
 	o := orm.NewOrm()
+	m.Activo = true
 	id, err = o.Insert(m)
 	return
 }

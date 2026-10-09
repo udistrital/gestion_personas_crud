@@ -30,6 +30,7 @@ func init() {
 // last inserted Id on success.
 func AddPrefijoFacturacion(m *PrefijoFacturacion) (id int64, err error) {
 	o := orm.NewOrm()
+	m.Activo = true
 	id, err = o.Insert(m)
 	return
 }
