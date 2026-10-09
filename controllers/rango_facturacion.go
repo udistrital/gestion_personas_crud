@@ -2,14 +2,13 @@ package controllers
 
 import (
 	"encoding/json"
-	"errors"
 	"strconv"
 	"strings"
 
 	"github.com/udistrital/gestion_personas_crud/models"
 
-	beego "github.com/beego/beego/v2/server/web"
 	beeLogger "github.com/beego/bee/v2/logger"
+	beego "github.com/beego/beego/v2/server/web"
 )
 
 // RangoFacturacionController operations for RangoFacturacion
@@ -118,7 +117,8 @@ func (c *RangoFacturacionController) GetAll() {
 		for _, cond := range strings.Split(v, ",") {
 			kv := strings.SplitN(cond, ":", 2)
 			if len(kv) != 2 {
-				c.Data["json"] = errors.New("Error: invalid query key/value pair")
+				c.Ctx.Output.SetStatus(400)
+				c.Data["json"] = map[string]interface{}{"Success": false, "Status": "400", "Message": "Error service GetAll: invalid query parameter. Expected format: query=campo:valor,campo2:valor2", "Data": nil}
 				c.ServeJSON()
 				return
 			}
