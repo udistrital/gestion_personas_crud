@@ -20,7 +20,7 @@
                 "tags": [
                     "actividad_economica_proveedor"
                 ],
-                "description": "get ActividadEconomicaProveedor\n\u003cbr\u003e",
+                "description": "get ActividadEconomicaProveedor. Total es la cantidad de registros que cumplen los filtros, sin limit ni offset; Data contiene los registros de la pagina\n\u003cbr\u003e",
                 "operationId": "ActividadEconomicaProveedorController.Get All",
                 "parameters": [
                     {
@@ -44,7 +44,7 @@
                     {
                         "in": "query",
                         "name": "order",
-                        "description": "Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...",
+                        "description": "Order corresponding to each sortby field. e.g. desc,asc ...",
                         "type": "string"
                     },
                     {
@@ -58,17 +58,26 @@
                         "name": "offset",
                         "description": "Start position of result set. Must be an integer",
                         "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "activo",
+                        "description": "Registros activos (true, predeterminado) o inactivos (false)",
+                        "type": "boolean"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.ActividadEconomicaProveedor"
+                            "$ref": "#/definitions/controllers.ActividadEconomicaProveedorLista"
                         }
                     },
+                    "400": {
+                        "description": "parametros invalidos"
+                    },
                     "404": {
-                        "description": "not found resource"
+                        "description": "error al consultar los registros"
                     }
                 }
             },
@@ -91,10 +100,13 @@
                 ],
                 "responses": {
                     "201": {
-                        "description": "{int} models.ActividadEconomicaProveedor"
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.APIResponse"
+                        }
                     },
                     "400": {
-                        "description": "the request contains incorrect syntax"
+                        "description": "body o datos invalidos"
                     }
                 }
             }
@@ -110,20 +122,29 @@
                     {
                         "in": "path",
                         "name": "id",
-                        "description": "The key for staticblock",
+                        "description": "The id",
                         "required": true,
                         "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "activo",
+                        "description": "Registros activos (true, predeterminado) o inactivos (false)",
+                        "type": "boolean"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.ActividadEconomicaProveedor"
+                            "$ref": "#/definitions/controllers.APIResponse"
                         }
                     },
+                    "400": {
+                        "description": "parametro activo invalido"
+                    },
                     "404": {
-                        "description": "not found resource"
+                        "description": "id invalido o registro inexistente"
                     }
                 }
             },
@@ -155,11 +176,11 @@
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.ActividadEconomicaProveedor"
+                            "$ref": "#/definitions/controllers.APIResponse"
                         }
                     },
                     "400": {
-                        "description": "the request contains incorrect syntax"
+                        "description": "id, body o datos invalidos, Id distinto al de la ruta o registro inexistente"
                     }
                 }
             },
@@ -180,10 +201,13 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "{string} delete success!"
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.APIResponse"
+                        }
                     },
                     "404": {
-                        "description": "not found resource"
+                        "description": "id invalido o registro inexistente"
                     }
                 }
             }
@@ -193,7 +217,7 @@
                 "tags": [
                     "contacto"
                 ],
-                "description": "get Contacto\n\u003cbr\u003e",
+                "description": "get Contacto. Total es la cantidad de registros que cumplen los filtros, sin limit ni offset; Data contiene los registros de la pagina\n\u003cbr\u003e",
                 "operationId": "ContactoController.Get All",
                 "parameters": [
                     {
@@ -217,7 +241,7 @@
                     {
                         "in": "query",
                         "name": "order",
-                        "description": "Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...",
+                        "description": "Order corresponding to each sortby field. e.g. desc,asc ...",
                         "type": "string"
                     },
                     {
@@ -231,17 +255,26 @@
                         "name": "offset",
                         "description": "Start position of result set. Must be an integer",
                         "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "activo",
+                        "description": "Registros activos (true, predeterminado) o inactivos (false)",
+                        "type": "boolean"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.Contacto"
+                            "$ref": "#/definitions/controllers.ContactoLista"
                         }
                     },
+                    "400": {
+                        "description": "parametros invalidos"
+                    },
                     "404": {
-                        "description": "not found resource"
+                        "description": "error al consultar los registros"
                     }
                 }
             },
@@ -264,10 +297,13 @@
                 ],
                 "responses": {
                     "201": {
-                        "description": "{int} models.Contacto"
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.APIResponse"
+                        }
                     },
                     "400": {
-                        "description": "the request contains incorrect syntax"
+                        "description": "body o datos invalidos"
                     }
                 }
             }
@@ -283,20 +319,29 @@
                     {
                         "in": "path",
                         "name": "id",
-                        "description": "The key for staticblock",
+                        "description": "The id",
                         "required": true,
                         "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "activo",
+                        "description": "Registros activos (true, predeterminado) o inactivos (false)",
+                        "type": "boolean"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.Contacto"
+                            "$ref": "#/definitions/controllers.APIResponse"
                         }
                     },
+                    "400": {
+                        "description": "parametro activo invalido"
+                    },
                     "404": {
-                        "description": "not found resource"
+                        "description": "id invalido o registro inexistente"
                     }
                 }
             },
@@ -328,11 +373,11 @@
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.Contacto"
+                            "$ref": "#/definitions/controllers.APIResponse"
                         }
                     },
                     "400": {
-                        "description": "the request contains incorrect syntax"
+                        "description": "id, body o datos invalidos, Id distinto al de la ruta o registro inexistente"
                     }
                 }
             },
@@ -353,10 +398,13 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "{string} delete success!"
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.APIResponse"
+                        }
                     },
                     "404": {
-                        "description": "not found resource"
+                        "description": "id invalido o registro inexistente"
                     }
                 }
             }
@@ -366,7 +414,7 @@
                 "tags": [
                     "cuenta_bancaria"
                 ],
-                "description": "get CuentaBancaria\n\u003cbr\u003e",
+                "description": "get CuentaBancaria. Total es la cantidad de registros que cumplen los filtros, sin limit ni offset; Data contiene los registros de la pagina\n\u003cbr\u003e",
                 "operationId": "CuentaBancariaController.Get All",
                 "parameters": [
                     {
@@ -390,7 +438,7 @@
                     {
                         "in": "query",
                         "name": "order",
-                        "description": "Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...",
+                        "description": "Order corresponding to each sortby field. e.g. desc,asc ...",
                         "type": "string"
                     },
                     {
@@ -404,17 +452,26 @@
                         "name": "offset",
                         "description": "Start position of result set. Must be an integer",
                         "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "activo",
+                        "description": "Registros activos (true, predeterminado) o inactivos (false)",
+                        "type": "boolean"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.CuentaBancaria"
+                            "$ref": "#/definitions/controllers.CuentaBancariaLista"
                         }
                     },
+                    "400": {
+                        "description": "parametros invalidos"
+                    },
                     "404": {
-                        "description": "not found resource"
+                        "description": "error al consultar los registros"
                     }
                 }
             },
@@ -437,10 +494,13 @@
                 ],
                 "responses": {
                     "201": {
-                        "description": "{int} models.CuentaBancaria"
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.APIResponse"
+                        }
                     },
                     "400": {
-                        "description": "the request contains incorrect syntax"
+                        "description": "body o datos invalidos"
                     }
                 }
             }
@@ -456,20 +516,29 @@
                     {
                         "in": "path",
                         "name": "id",
-                        "description": "The key for staticblock",
+                        "description": "The id",
                         "required": true,
                         "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "activo",
+                        "description": "Registros activos (true, predeterminado) o inactivos (false)",
+                        "type": "boolean"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.CuentaBancaria"
+                            "$ref": "#/definitions/controllers.APIResponse"
                         }
                     },
+                    "400": {
+                        "description": "parametro activo invalido"
+                    },
                     "404": {
-                        "description": "not found resource"
+                        "description": "id invalido o registro inexistente"
                     }
                 }
             },
@@ -501,11 +570,11 @@
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.CuentaBancaria"
+                            "$ref": "#/definitions/controllers.APIResponse"
                         }
                     },
                     "400": {
-                        "description": "the request contains incorrect syntax"
+                        "description": "id, body o datos invalidos, Id distinto al de la ruta o registro inexistente"
                     }
                 }
             },
@@ -526,10 +595,13 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "{string} delete success!"
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.APIResponse"
+                        }
                     },
                     "404": {
-                        "description": "not found resource"
+                        "description": "id invalido o registro inexistente"
                     }
                 }
             }
@@ -539,7 +611,7 @@
                 "tags": [
                     "declaracion"
                 ],
-                "description": "get Declaracion\n\u003cbr\u003e",
+                "description": "get Declaracion. Total es la cantidad de registros que cumplen los filtros, sin limit ni offset; Data contiene los registros de la pagina\n\u003cbr\u003e",
                 "operationId": "DeclaracionController.Get All",
                 "parameters": [
                     {
@@ -563,7 +635,7 @@
                     {
                         "in": "query",
                         "name": "order",
-                        "description": "Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...",
+                        "description": "Order corresponding to each sortby field. e.g. desc,asc ...",
                         "type": "string"
                     },
                     {
@@ -577,17 +649,26 @@
                         "name": "offset",
                         "description": "Start position of result set. Must be an integer",
                         "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "activo",
+                        "description": "Registros activos (true, predeterminado) o inactivos (false)",
+                        "type": "boolean"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.Declaracion"
+                            "$ref": "#/definitions/controllers.DeclaracionLista"
                         }
                     },
+                    "400": {
+                        "description": "parametros invalidos"
+                    },
                     "404": {
-                        "description": "not found resource"
+                        "description": "error al consultar los registros"
                     }
                 }
             },
@@ -610,10 +691,13 @@
                 ],
                 "responses": {
                     "201": {
-                        "description": "{int} models.Declaracion"
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.APIResponse"
+                        }
                     },
                     "400": {
-                        "description": "the request contains incorrect syntax"
+                        "description": "body o datos invalidos"
                     }
                 }
             }
@@ -629,20 +713,29 @@
                     {
                         "in": "path",
                         "name": "id",
-                        "description": "The key for staticblock",
+                        "description": "The id",
                         "required": true,
                         "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "activo",
+                        "description": "Registros activos (true, predeterminado) o inactivos (false)",
+                        "type": "boolean"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.Declaracion"
+                            "$ref": "#/definitions/controllers.APIResponse"
                         }
                     },
+                    "400": {
+                        "description": "parametro activo invalido"
+                    },
                     "404": {
-                        "description": "not found resource"
+                        "description": "id invalido o registro inexistente"
                     }
                 }
             },
@@ -674,11 +767,11 @@
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.Declaracion"
+                            "$ref": "#/definitions/controllers.APIResponse"
                         }
                     },
                     "400": {
-                        "description": "the request contains incorrect syntax"
+                        "description": "id, body o datos invalidos, Id distinto al de la ruta o registro inexistente"
                     }
                 }
             },
@@ -699,10 +792,13 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "{string} delete success!"
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.APIResponse"
+                        }
                     },
                     "404": {
-                        "description": "not found resource"
+                        "description": "id invalido o registro inexistente"
                     }
                 }
             }
@@ -712,7 +808,7 @@
                 "tags": [
                     "documento"
                 ],
-                "description": "get Documento\n\u003cbr\u003e",
+                "description": "get Documento. Total es la cantidad de registros que cumplen los filtros, sin limit ni offset; Data contiene los registros de la pagina\n\u003cbr\u003e",
                 "operationId": "DocumentoController.Get All",
                 "parameters": [
                     {
@@ -736,7 +832,7 @@
                     {
                         "in": "query",
                         "name": "order",
-                        "description": "Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...",
+                        "description": "Order corresponding to each sortby field. e.g. desc,asc ...",
                         "type": "string"
                     },
                     {
@@ -750,17 +846,26 @@
                         "name": "offset",
                         "description": "Start position of result set. Must be an integer",
                         "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "activo",
+                        "description": "Registros activos (true, predeterminado) o inactivos (false)",
+                        "type": "boolean"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.Documento"
+                            "$ref": "#/definitions/controllers.DocumentoLista"
                         }
                     },
+                    "400": {
+                        "description": "parametros invalidos"
+                    },
                     "404": {
-                        "description": "not found resource"
+                        "description": "error al consultar los registros"
                     }
                 }
             },
@@ -783,10 +888,13 @@
                 ],
                 "responses": {
                     "201": {
-                        "description": "{int} models.Documento"
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.APIResponse"
+                        }
                     },
                     "400": {
-                        "description": "the request contains incorrect syntax"
+                        "description": "body o datos invalidos"
                     }
                 }
             }
@@ -802,20 +910,29 @@
                     {
                         "in": "path",
                         "name": "id",
-                        "description": "The key for staticblock",
+                        "description": "The id",
                         "required": true,
                         "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "activo",
+                        "description": "Registros activos (true, predeterminado) o inactivos (false)",
+                        "type": "boolean"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.Documento"
+                            "$ref": "#/definitions/controllers.APIResponse"
                         }
                     },
+                    "400": {
+                        "description": "parametro activo invalido"
+                    },
                     "404": {
-                        "description": "not found resource"
+                        "description": "id invalido o registro inexistente"
                     }
                 }
             },
@@ -847,11 +964,11 @@
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.Documento"
+                            "$ref": "#/definitions/controllers.APIResponse"
                         }
                     },
                     "400": {
-                        "description": "the request contains incorrect syntax"
+                        "description": "id, body o datos invalidos, Id distinto al de la ruta o registro inexistente"
                     }
                 }
             },
@@ -872,10 +989,13 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "{string} delete success!"
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.APIResponse"
+                        }
                     },
                     "404": {
-                        "description": "not found resource"
+                        "description": "id invalido o registro inexistente"
                     }
                 }
             }
@@ -885,7 +1005,7 @@
                 "tags": [
                     "informacion_financiera"
                 ],
-                "description": "get InformacionFinanciera\n\u003cbr\u003e",
+                "description": "get InformacionFinanciera. Total es la cantidad de registros que cumplen los filtros, sin limit ni offset; Data contiene los registros de la pagina\n\u003cbr\u003e",
                 "operationId": "InformacionFinancieraController.Get All",
                 "parameters": [
                     {
@@ -909,7 +1029,7 @@
                     {
                         "in": "query",
                         "name": "order",
-                        "description": "Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...",
+                        "description": "Order corresponding to each sortby field. e.g. desc,asc ...",
                         "type": "string"
                     },
                     {
@@ -923,17 +1043,26 @@
                         "name": "offset",
                         "description": "Start position of result set. Must be an integer",
                         "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "activo",
+                        "description": "Registros activos (true, predeterminado) o inactivos (false)",
+                        "type": "boolean"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.InformacionFinanciera"
+                            "$ref": "#/definitions/controllers.InformacionFinancieraLista"
                         }
                     },
+                    "400": {
+                        "description": "parametros invalidos"
+                    },
                     "404": {
-                        "description": "not found resource"
+                        "description": "error al consultar los registros"
                     }
                 }
             },
@@ -956,10 +1085,13 @@
                 ],
                 "responses": {
                     "201": {
-                        "description": "{int} models.InformacionFinanciera"
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.APIResponse"
+                        }
                     },
                     "400": {
-                        "description": "the request contains incorrect syntax"
+                        "description": "body o datos invalidos"
                     }
                 }
             }
@@ -975,20 +1107,29 @@
                     {
                         "in": "path",
                         "name": "id",
-                        "description": "The key for staticblock",
+                        "description": "The id",
                         "required": true,
                         "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "activo",
+                        "description": "Registros activos (true, predeterminado) o inactivos (false)",
+                        "type": "boolean"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.InformacionFinanciera"
+                            "$ref": "#/definitions/controllers.APIResponse"
                         }
                     },
+                    "400": {
+                        "description": "parametro activo invalido"
+                    },
                     "404": {
-                        "description": "not found resource"
+                        "description": "id invalido o registro inexistente"
                     }
                 }
             },
@@ -1020,11 +1161,11 @@
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.InformacionFinanciera"
+                            "$ref": "#/definitions/controllers.APIResponse"
                         }
                     },
                     "400": {
-                        "description": "the request contains incorrect syntax"
+                        "description": "id, body o datos invalidos, Id distinto al de la ruta o registro inexistente"
                     }
                 }
             },
@@ -1045,10 +1186,13 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "{string} delete success!"
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.APIResponse"
+                        }
                     },
                     "404": {
-                        "description": "not found resource"
+                        "description": "id invalido o registro inexistente"
                     }
                 }
             }
@@ -1058,7 +1202,7 @@
                 "tags": [
                     "perfil"
                 ],
-                "description": "get Perfil\n\u003cbr\u003e",
+                "description": "get Perfil. Total es la cantidad de registros que cumplen los filtros, sin limit ni offset; Data contiene los registros de la pagina\n\u003cbr\u003e",
                 "operationId": "PerfilController.Get All",
                 "parameters": [
                     {
@@ -1082,7 +1226,7 @@
                     {
                         "in": "query",
                         "name": "order",
-                        "description": "Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...",
+                        "description": "Order corresponding to each sortby field. e.g. desc,asc ...",
                         "type": "string"
                     },
                     {
@@ -1096,17 +1240,26 @@
                         "name": "offset",
                         "description": "Start position of result set. Must be an integer",
                         "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "activo",
+                        "description": "Registros activos (true, predeterminado) o inactivos (false)",
+                        "type": "boolean"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.Perfil"
+                            "$ref": "#/definitions/controllers.PerfilLista"
                         }
                     },
+                    "400": {
+                        "description": "parametros invalidos"
+                    },
                     "404": {
-                        "description": "not found resource"
+                        "description": "error al consultar los registros"
                     }
                 }
             },
@@ -1129,10 +1282,13 @@
                 ],
                 "responses": {
                     "201": {
-                        "description": "{int} models.Perfil"
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.APIResponse"
+                        }
                     },
                     "400": {
-                        "description": "the request contains incorrect syntax"
+                        "description": "body o datos invalidos"
                     }
                 }
             }
@@ -1148,20 +1304,29 @@
                     {
                         "in": "path",
                         "name": "id",
-                        "description": "The key for staticblock",
+                        "description": "The id",
                         "required": true,
                         "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "activo",
+                        "description": "Registros activos (true, predeterminado) o inactivos (false)",
+                        "type": "boolean"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.Perfil"
+                            "$ref": "#/definitions/controllers.APIResponse"
                         }
                     },
+                    "400": {
+                        "description": "parametro activo invalido"
+                    },
                     "404": {
-                        "description": "not found resource"
+                        "description": "id invalido o registro inexistente"
                     }
                 }
             },
@@ -1193,11 +1358,11 @@
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.Perfil"
+                            "$ref": "#/definitions/controllers.APIResponse"
                         }
                     },
                     "400": {
-                        "description": "the request contains incorrect syntax"
+                        "description": "id, body o datos invalidos, Id distinto al de la ruta o registro inexistente"
                     }
                 }
             },
@@ -1218,10 +1383,13 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "{string} delete success!"
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.APIResponse"
+                        }
                     },
                     "404": {
-                        "description": "not found resource"
+                        "description": "id invalido o registro inexistente"
                     }
                 }
             }
@@ -1231,7 +1399,7 @@
                 "tags": [
                     "perfil_financiero"
                 ],
-                "description": "get PerfilFinanciero\n\u003cbr\u003e",
+                "description": "get PerfilFinanciero. Total es la cantidad de registros que cumplen los filtros, sin limit ni offset; Data contiene los registros de la pagina\n\u003cbr\u003e",
                 "operationId": "PerfilFinancieroController.Get All",
                 "parameters": [
                     {
@@ -1255,7 +1423,7 @@
                     {
                         "in": "query",
                         "name": "order",
-                        "description": "Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...",
+                        "description": "Order corresponding to each sortby field. e.g. desc,asc ...",
                         "type": "string"
                     },
                     {
@@ -1269,17 +1437,26 @@
                         "name": "offset",
                         "description": "Start position of result set. Must be an integer",
                         "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "activo",
+                        "description": "Registros activos (true, predeterminado) o inactivos (false)",
+                        "type": "boolean"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.PerfilFinanciero"
+                            "$ref": "#/definitions/controllers.PerfilFinancieroLista"
                         }
                     },
+                    "400": {
+                        "description": "parametros invalidos"
+                    },
                     "404": {
-                        "description": "not found resource"
+                        "description": "error al consultar los registros"
                     }
                 }
             },
@@ -1302,10 +1479,13 @@
                 ],
                 "responses": {
                     "201": {
-                        "description": "{int} models.PerfilFinanciero"
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.APIResponse"
+                        }
                     },
                     "400": {
-                        "description": "the request contains incorrect syntax"
+                        "description": "body o datos invalidos"
                     }
                 }
             }
@@ -1321,20 +1501,29 @@
                     {
                         "in": "path",
                         "name": "id",
-                        "description": "The key for staticblock",
+                        "description": "The id",
                         "required": true,
                         "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "activo",
+                        "description": "Registros activos (true, predeterminado) o inactivos (false)",
+                        "type": "boolean"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.PerfilFinanciero"
+                            "$ref": "#/definitions/controllers.APIResponse"
                         }
                     },
+                    "400": {
+                        "description": "parametro activo invalido"
+                    },
                     "404": {
-                        "description": "not found resource"
+                        "description": "id invalido o registro inexistente"
                     }
                 }
             },
@@ -1366,11 +1555,11 @@
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.PerfilFinanciero"
+                            "$ref": "#/definitions/controllers.APIResponse"
                         }
                     },
                     "400": {
-                        "description": "the request contains incorrect syntax"
+                        "description": "id, body o datos invalidos, Id distinto al de la ruta o registro inexistente"
                     }
                 }
             },
@@ -1391,10 +1580,13 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "{string} delete success!"
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.APIResponse"
+                        }
                     },
                     "404": {
-                        "description": "not found resource"
+                        "description": "id invalido o registro inexistente"
                     }
                 }
             }
@@ -1404,7 +1596,7 @@
                 "tags": [
                     "prefijo_facturacion"
                 ],
-                "description": "get PrefijoFacturacion\n\u003cbr\u003e",
+                "description": "get PrefijoFacturacion. Total es la cantidad de registros que cumplen los filtros, sin limit ni offset; Data contiene los registros de la pagina\n\u003cbr\u003e",
                 "operationId": "PrefijoFacturacionController.Get All",
                 "parameters": [
                     {
@@ -1428,7 +1620,7 @@
                     {
                         "in": "query",
                         "name": "order",
-                        "description": "Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...",
+                        "description": "Order corresponding to each sortby field. e.g. desc,asc ...",
                         "type": "string"
                     },
                     {
@@ -1442,17 +1634,26 @@
                         "name": "offset",
                         "description": "Start position of result set. Must be an integer",
                         "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "activo",
+                        "description": "Registros activos (true, predeterminado) o inactivos (false)",
+                        "type": "boolean"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.PrefijoFacturacion"
+                            "$ref": "#/definitions/controllers.PrefijoFacturacionLista"
                         }
                     },
+                    "400": {
+                        "description": "parametros invalidos"
+                    },
                     "404": {
-                        "description": "not found resource"
+                        "description": "error al consultar los registros"
                     }
                 }
             },
@@ -1475,10 +1676,13 @@
                 ],
                 "responses": {
                     "201": {
-                        "description": "{int} models.PrefijoFacturacion"
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.APIResponse"
+                        }
                     },
                     "400": {
-                        "description": "the request contains incorrect syntax"
+                        "description": "body o datos invalidos"
                     }
                 }
             }
@@ -1494,20 +1698,29 @@
                     {
                         "in": "path",
                         "name": "id",
-                        "description": "The key for staticblock",
+                        "description": "The id",
                         "required": true,
                         "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "activo",
+                        "description": "Registros activos (true, predeterminado) o inactivos (false)",
+                        "type": "boolean"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.PrefijoFacturacion"
+                            "$ref": "#/definitions/controllers.APIResponse"
                         }
                     },
+                    "400": {
+                        "description": "parametro activo invalido"
+                    },
                     "404": {
-                        "description": "not found resource"
+                        "description": "id invalido o registro inexistente"
                     }
                 }
             },
@@ -1539,11 +1752,11 @@
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.PrefijoFacturacion"
+                            "$ref": "#/definitions/controllers.APIResponse"
                         }
                     },
                     "400": {
-                        "description": "the request contains incorrect syntax"
+                        "description": "id, body o datos invalidos, Id distinto al de la ruta o registro inexistente"
                     }
                 }
             },
@@ -1564,10 +1777,13 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "{string} delete success!"
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.APIResponse"
+                        }
                     },
                     "404": {
-                        "description": "not found resource"
+                        "description": "id invalido o registro inexistente"
                     }
                 }
             }
@@ -1577,7 +1793,7 @@
                 "tags": [
                     "proveedor"
                 ],
-                "description": "get Proveedor\n\u003cbr\u003e",
+                "description": "get Proveedor. Total es la cantidad de registros que cumplen los filtros, sin limit ni offset; Data contiene los registros de la pagina\n\u003cbr\u003e",
                 "operationId": "ProveedorController.Get All",
                 "parameters": [
                     {
@@ -1601,7 +1817,7 @@
                     {
                         "in": "query",
                         "name": "order",
-                        "description": "Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...",
+                        "description": "Order corresponding to each sortby field. e.g. desc,asc ...",
                         "type": "string"
                     },
                     {
@@ -1615,17 +1831,26 @@
                         "name": "offset",
                         "description": "Start position of result set. Must be an integer",
                         "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "activo",
+                        "description": "Registros activos (true, predeterminado) o inactivos (false)",
+                        "type": "boolean"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.Proveedor"
+                            "$ref": "#/definitions/controllers.ProveedorLista"
                         }
                     },
+                    "400": {
+                        "description": "parametros invalidos"
+                    },
                     "404": {
-                        "description": "not found resource"
+                        "description": "error al consultar los registros"
                     }
                 }
             },
@@ -1648,10 +1873,13 @@
                 ],
                 "responses": {
                     "201": {
-                        "description": "{int} models.Proveedor"
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.APIResponse"
+                        }
                     },
                     "400": {
-                        "description": "the request contains incorrect syntax"
+                        "description": "body o datos invalidos"
                     }
                 }
             }
@@ -1667,20 +1895,29 @@
                     {
                         "in": "path",
                         "name": "id",
-                        "description": "The key for staticblock",
+                        "description": "The id",
                         "required": true,
                         "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "activo",
+                        "description": "Registros activos (true, predeterminado) o inactivos (false)",
+                        "type": "boolean"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.Proveedor"
+                            "$ref": "#/definitions/controllers.APIResponse"
                         }
                     },
+                    "400": {
+                        "description": "parametro activo invalido"
+                    },
                     "404": {
-                        "description": "not found resource"
+                        "description": "id invalido o registro inexistente"
                     }
                 }
             },
@@ -1712,11 +1949,11 @@
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.Proveedor"
+                            "$ref": "#/definitions/controllers.APIResponse"
                         }
                     },
                     "400": {
-                        "description": "the request contains incorrect syntax"
+                        "description": "id, body o datos invalidos, Id distinto al de la ruta o registro inexistente"
                     }
                 }
             },
@@ -1737,10 +1974,13 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "{string} delete success!"
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.APIResponse"
+                        }
                     },
                     "404": {
-                        "description": "not found resource"
+                        "description": "id invalido o registro inexistente"
                     }
                 }
             }
@@ -1750,7 +1990,7 @@
                 "tags": [
                     "proveedor_juridico"
                 ],
-                "description": "get ProveedorJuridico\n\u003cbr\u003e",
+                "description": "get ProveedorJuridico. Total es la cantidad de registros que cumplen los filtros, sin limit ni offset; Data contiene los registros de la pagina\n\u003cbr\u003e",
                 "operationId": "ProveedorJuridicoController.Get All",
                 "parameters": [
                     {
@@ -1774,7 +2014,7 @@
                     {
                         "in": "query",
                         "name": "order",
-                        "description": "Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...",
+                        "description": "Order corresponding to each sortby field. e.g. desc,asc ...",
                         "type": "string"
                     },
                     {
@@ -1788,17 +2028,26 @@
                         "name": "offset",
                         "description": "Start position of result set. Must be an integer",
                         "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "activo",
+                        "description": "Registros activos (true, predeterminado) o inactivos (false)",
+                        "type": "boolean"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.ProveedorJuridico"
+                            "$ref": "#/definitions/controllers.ProveedorJuridicoLista"
                         }
                     },
+                    "400": {
+                        "description": "parametros invalidos"
+                    },
                     "404": {
-                        "description": "not found resource"
+                        "description": "error al consultar los registros"
                     }
                 }
             },
@@ -1821,10 +2070,13 @@
                 ],
                 "responses": {
                     "201": {
-                        "description": "{int} models.ProveedorJuridico"
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.APIResponse"
+                        }
                     },
                     "400": {
-                        "description": "the request contains incorrect syntax"
+                        "description": "body o datos invalidos"
                     }
                 }
             }
@@ -1840,20 +2092,29 @@
                     {
                         "in": "path",
                         "name": "id",
-                        "description": "The key for staticblock",
+                        "description": "The id",
                         "required": true,
                         "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "activo",
+                        "description": "Registros activos (true, predeterminado) o inactivos (false)",
+                        "type": "boolean"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.ProveedorJuridico"
+                            "$ref": "#/definitions/controllers.APIResponse"
                         }
                     },
+                    "400": {
+                        "description": "parametro activo invalido"
+                    },
                     "404": {
-                        "description": "not found resource"
+                        "description": "id invalido o registro inexistente"
                     }
                 }
             },
@@ -1885,11 +2146,11 @@
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.ProveedorJuridico"
+                            "$ref": "#/definitions/controllers.APIResponse"
                         }
                     },
                     "400": {
-                        "description": "the request contains incorrect syntax"
+                        "description": "id, body o datos invalidos, Id distinto al de la ruta o registro inexistente"
                     }
                 }
             },
@@ -1910,10 +2171,13 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "{string} delete success!"
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.APIResponse"
+                        }
                     },
                     "404": {
-                        "description": "not found resource"
+                        "description": "id invalido o registro inexistente"
                     }
                 }
             }
@@ -1923,7 +2187,7 @@
                 "tags": [
                     "proveedor_natural"
                 ],
-                "description": "get ProveedorNatural\n\u003cbr\u003e",
+                "description": "get ProveedorNatural. Total es la cantidad de registros que cumplen los filtros, sin limit ni offset; Data contiene los registros de la pagina\n\u003cbr\u003e",
                 "operationId": "ProveedorNaturalController.Get All",
                 "parameters": [
                     {
@@ -1947,7 +2211,7 @@
                     {
                         "in": "query",
                         "name": "order",
-                        "description": "Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...",
+                        "description": "Order corresponding to each sortby field. e.g. desc,asc ...",
                         "type": "string"
                     },
                     {
@@ -1961,17 +2225,26 @@
                         "name": "offset",
                         "description": "Start position of result set. Must be an integer",
                         "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "activo",
+                        "description": "Registros activos (true, predeterminado) o inactivos (false)",
+                        "type": "boolean"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.ProveedorNatural"
+                            "$ref": "#/definitions/controllers.ProveedorNaturalLista"
                         }
                     },
+                    "400": {
+                        "description": "parametros invalidos"
+                    },
                     "404": {
-                        "description": "not found resource"
+                        "description": "error al consultar los registros"
                     }
                 }
             },
@@ -1994,10 +2267,13 @@
                 ],
                 "responses": {
                     "201": {
-                        "description": "{int} models.ProveedorNatural"
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.APIResponse"
+                        }
                     },
                     "400": {
-                        "description": "the request contains incorrect syntax"
+                        "description": "body o datos invalidos"
                     }
                 }
             }
@@ -2013,20 +2289,29 @@
                     {
                         "in": "path",
                         "name": "id",
-                        "description": "The key for staticblock",
+                        "description": "The id",
                         "required": true,
                         "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "activo",
+                        "description": "Registros activos (true, predeterminado) o inactivos (false)",
+                        "type": "boolean"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.ProveedorNatural"
+                            "$ref": "#/definitions/controllers.APIResponse"
                         }
                     },
+                    "400": {
+                        "description": "parametro activo invalido"
+                    },
                     "404": {
-                        "description": "not found resource"
+                        "description": "id invalido o registro inexistente"
                     }
                 }
             },
@@ -2058,11 +2343,11 @@
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.ProveedorNatural"
+                            "$ref": "#/definitions/controllers.APIResponse"
                         }
                     },
                     "400": {
-                        "description": "the request contains incorrect syntax"
+                        "description": "id, body o datos invalidos, Id distinto al de la ruta o registro inexistente"
                     }
                 }
             },
@@ -2083,10 +2368,13 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "{string} delete success!"
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.APIResponse"
+                        }
                     },
                     "404": {
-                        "description": "not found resource"
+                        "description": "id invalido o registro inexistente"
                     }
                 }
             }
@@ -2096,7 +2384,7 @@
                 "tags": [
                     "rango_facturacion"
                 ],
-                "description": "get RangoFacturacion\n\u003cbr\u003e",
+                "description": "get RangoFacturacion. Total es la cantidad de registros que cumplen los filtros, sin limit ni offset; Data contiene los registros de la pagina\n\u003cbr\u003e",
                 "operationId": "RangoFacturacionController.Get All",
                 "parameters": [
                     {
@@ -2120,7 +2408,7 @@
                     {
                         "in": "query",
                         "name": "order",
-                        "description": "Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...",
+                        "description": "Order corresponding to each sortby field. e.g. desc,asc ...",
                         "type": "string"
                     },
                     {
@@ -2134,17 +2422,26 @@
                         "name": "offset",
                         "description": "Start position of result set. Must be an integer",
                         "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "activo",
+                        "description": "Registros activos (true, predeterminado) o inactivos (false)",
+                        "type": "boolean"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.RangoFacturacion"
+                            "$ref": "#/definitions/controllers.RangoFacturacionLista"
                         }
                     },
+                    "400": {
+                        "description": "parametros invalidos"
+                    },
                     "404": {
-                        "description": "not found resource"
+                        "description": "error al consultar los registros"
                     }
                 }
             },
@@ -2167,10 +2464,13 @@
                 ],
                 "responses": {
                     "201": {
-                        "description": "{int} models.RangoFacturacion"
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.APIResponse"
+                        }
                     },
                     "400": {
-                        "description": "the request contains incorrect syntax"
+                        "description": "body o datos invalidos"
                     }
                 }
             }
@@ -2186,20 +2486,29 @@
                     {
                         "in": "path",
                         "name": "id",
-                        "description": "The key for staticblock",
+                        "description": "The id",
                         "required": true,
                         "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "activo",
+                        "description": "Registros activos (true, predeterminado) o inactivos (false)",
+                        "type": "boolean"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.RangoFacturacion"
+                            "$ref": "#/definitions/controllers.APIResponse"
                         }
                     },
+                    "400": {
+                        "description": "parametro activo invalido"
+                    },
                     "404": {
-                        "description": "not found resource"
+                        "description": "id invalido o registro inexistente"
                     }
                 }
             },
@@ -2231,11 +2540,11 @@
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.RangoFacturacion"
+                            "$ref": "#/definitions/controllers.APIResponse"
                         }
                     },
                     "400": {
-                        "description": "the request contains incorrect syntax"
+                        "description": "id, body o datos invalidos, Id distinto al de la ruta o registro inexistente"
                     }
                 }
             },
@@ -2256,10 +2565,13 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "{string} delete success!"
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.APIResponse"
+                        }
                     },
                     "404": {
-                        "description": "not found resource"
+                        "description": "id invalido o registro inexistente"
                     }
                 }
             }
@@ -2269,7 +2581,7 @@
                 "tags": [
                     "representacion"
                 ],
-                "description": "get Representacion\n\u003cbr\u003e",
+                "description": "get Representacion. Total es la cantidad de registros que cumplen los filtros, sin limit ni offset; Data contiene los registros de la pagina\n\u003cbr\u003e",
                 "operationId": "RepresentacionController.Get All",
                 "parameters": [
                     {
@@ -2293,7 +2605,7 @@
                     {
                         "in": "query",
                         "name": "order",
-                        "description": "Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...",
+                        "description": "Order corresponding to each sortby field. e.g. desc,asc ...",
                         "type": "string"
                     },
                     {
@@ -2307,17 +2619,26 @@
                         "name": "offset",
                         "description": "Start position of result set. Must be an integer",
                         "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "activo",
+                        "description": "Registros activos (true, predeterminado) o inactivos (false)",
+                        "type": "boolean"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.Representacion"
+                            "$ref": "#/definitions/controllers.RepresentacionLista"
                         }
                     },
+                    "400": {
+                        "description": "parametros invalidos"
+                    },
                     "404": {
-                        "description": "not found resource"
+                        "description": "error al consultar los registros"
                     }
                 }
             },
@@ -2340,10 +2661,13 @@
                 ],
                 "responses": {
                     "201": {
-                        "description": "{int} models.Representacion"
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.APIResponse"
+                        }
                     },
                     "400": {
-                        "description": "the request contains incorrect syntax"
+                        "description": "body o datos invalidos"
                     }
                 }
             }
@@ -2359,20 +2683,29 @@
                     {
                         "in": "path",
                         "name": "id",
-                        "description": "The key for staticblock",
+                        "description": "The id",
                         "required": true,
                         "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "activo",
+                        "description": "Registros activos (true, predeterminado) o inactivos (false)",
+                        "type": "boolean"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.Representacion"
+                            "$ref": "#/definitions/controllers.APIResponse"
                         }
                     },
+                    "400": {
+                        "description": "parametro activo invalido"
+                    },
                     "404": {
-                        "description": "not found resource"
+                        "description": "id invalido o registro inexistente"
                     }
                 }
             },
@@ -2404,11 +2737,11 @@
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.Representacion"
+                            "$ref": "#/definitions/controllers.APIResponse"
                         }
                     },
                     "400": {
-                        "description": "the request contains incorrect syntax"
+                        "description": "id, body o datos invalidos, Id distinto al de la ruta o registro inexistente"
                     }
                 }
             },
@@ -2429,10 +2762,13 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "{string} delete success!"
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.APIResponse"
+                        }
                     },
                     "404": {
-                        "description": "not found resource"
+                        "description": "id invalido o registro inexistente"
                     }
                 }
             }
@@ -2442,7 +2778,7 @@
                 "tags": [
                     "responsabilidad_fiscal_perfil"
                 ],
-                "description": "get ResponsabilidadFiscalPerfil\n\u003cbr\u003e",
+                "description": "get ResponsabilidadFiscalPerfil. Total es la cantidad de registros que cumplen los filtros, sin limit ni offset; Data contiene los registros de la pagina\n\u003cbr\u003e",
                 "operationId": "ResponsabilidadFiscalPerfilController.Get All",
                 "parameters": [
                     {
@@ -2466,7 +2802,7 @@
                     {
                         "in": "query",
                         "name": "order",
-                        "description": "Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...",
+                        "description": "Order corresponding to each sortby field. e.g. desc,asc ...",
                         "type": "string"
                     },
                     {
@@ -2480,17 +2816,26 @@
                         "name": "offset",
                         "description": "Start position of result set. Must be an integer",
                         "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "activo",
+                        "description": "Registros activos (true, predeterminado) o inactivos (false)",
+                        "type": "boolean"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.ResponsabilidadFiscalPerfil"
+                            "$ref": "#/definitions/controllers.ResponsabilidadFiscalPerfilLista"
                         }
                     },
+                    "400": {
+                        "description": "parametros invalidos"
+                    },
                     "404": {
-                        "description": "not found resource"
+                        "description": "error al consultar los registros"
                     }
                 }
             },
@@ -2513,10 +2858,13 @@
                 ],
                 "responses": {
                     "201": {
-                        "description": "{int} models.ResponsabilidadFiscalPerfil"
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.APIResponse"
+                        }
                     },
                     "400": {
-                        "description": "the request contains incorrect syntax"
+                        "description": "body o datos invalidos"
                     }
                 }
             }
@@ -2532,20 +2880,29 @@
                     {
                         "in": "path",
                         "name": "id",
-                        "description": "The key for staticblock",
+                        "description": "The id",
                         "required": true,
                         "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "activo",
+                        "description": "Registros activos (true, predeterminado) o inactivos (false)",
+                        "type": "boolean"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.ResponsabilidadFiscalPerfil"
+                            "$ref": "#/definitions/controllers.APIResponse"
                         }
                     },
+                    "400": {
+                        "description": "parametro activo invalido"
+                    },
                     "404": {
-                        "description": "not found resource"
+                        "description": "id invalido o registro inexistente"
                     }
                 }
             },
@@ -2577,11 +2934,11 @@
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.ResponsabilidadFiscalPerfil"
+                            "$ref": "#/definitions/controllers.APIResponse"
                         }
                     },
                     "400": {
-                        "description": "the request contains incorrect syntax"
+                        "description": "id, body o datos invalidos, Id distinto al de la ruta o registro inexistente"
                     }
                 }
             },
@@ -2602,10 +2959,13 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "{string} delete success!"
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.APIResponse"
+                        }
                     },
                     "404": {
-                        "description": "not found resource"
+                        "description": "id invalido o registro inexistente"
                     }
                 }
             }
@@ -2615,7 +2975,7 @@
                 "tags": [
                     "tipo_declaracion_proveedor"
                 ],
-                "description": "get TipoDeclaracionProveedor\n\u003cbr\u003e",
+                "description": "get TipoDeclaracionProveedor. Total es la cantidad de registros que cumplen los filtros, sin limit ni offset; Data contiene los registros de la pagina\n\u003cbr\u003e",
                 "operationId": "TipoDeclaracionProveedorController.Get All",
                 "parameters": [
                     {
@@ -2639,7 +2999,7 @@
                     {
                         "in": "query",
                         "name": "order",
-                        "description": "Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...",
+                        "description": "Order corresponding to each sortby field. e.g. desc,asc ...",
                         "type": "string"
                     },
                     {
@@ -2653,17 +3013,26 @@
                         "name": "offset",
                         "description": "Start position of result set. Must be an integer",
                         "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "activo",
+                        "description": "Registros activos (true, predeterminado) o inactivos (false)",
+                        "type": "boolean"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.TipoDeclaracionProveedor"
+                            "$ref": "#/definitions/controllers.TipoDeclaracionProveedorLista"
                         }
                     },
+                    "400": {
+                        "description": "parametros invalidos"
+                    },
                     "404": {
-                        "description": "not found resource"
+                        "description": "error al consultar los registros"
                     }
                 }
             },
@@ -2686,10 +3055,13 @@
                 ],
                 "responses": {
                     "201": {
-                        "description": "{int} models.TipoDeclaracionProveedor"
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.APIResponse"
+                        }
                     },
                     "400": {
-                        "description": "the request contains incorrect syntax"
+                        "description": "body o datos invalidos"
                     }
                 }
             }
@@ -2705,20 +3077,29 @@
                     {
                         "in": "path",
                         "name": "id",
-                        "description": "The key for staticblock",
+                        "description": "The id",
                         "required": true,
                         "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "activo",
+                        "description": "Registros activos (true, predeterminado) o inactivos (false)",
+                        "type": "boolean"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.TipoDeclaracionProveedor"
+                            "$ref": "#/definitions/controllers.APIResponse"
                         }
                     },
+                    "400": {
+                        "description": "parametro activo invalido"
+                    },
                     "404": {
-                        "description": "not found resource"
+                        "description": "id invalido o registro inexistente"
                     }
                 }
             },
@@ -2750,11 +3131,11 @@
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.TipoDeclaracionProveedor"
+                            "$ref": "#/definitions/controllers.APIResponse"
                         }
                     },
                     "400": {
-                        "description": "the request contains incorrect syntax"
+                        "description": "id, body o datos invalidos, Id distinto al de la ruta o registro inexistente"
                     }
                 }
             },
@@ -2775,16 +3156,460 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "{string} delete success!"
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.APIResponse"
+                        }
                     },
                     "404": {
-                        "description": "not found resource"
+                        "description": "id invalido o registro inexistente"
                     }
                 }
             }
         }
     },
     "definitions": {
+        "controllers.APIResponse": {
+            "title": "APIResponse",
+            "type": "object",
+            "properties": {
+                "Data": {
+                    "$ref": "#/definitions/controllers.interface"
+                },
+                "Message": {
+                    "type": "string"
+                },
+                "Status": {
+                    "type": "string"
+                },
+                "Success": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "controllers.APIResponseLista": {
+            "title": "APIResponseLista",
+            "type": "object",
+            "properties": {
+                "Message": {
+                    "type": "string"
+                },
+                "Status": {
+                    "type": "string"
+                },
+                "Success": {
+                    "type": "boolean"
+                },
+                "Total": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        },
+        "controllers.ActividadEconomicaProveedorLista": {
+            "title": "ActividadEconomicaProveedorLista",
+            "type": "object",
+            "properties": {
+                "Data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.ActividadEconomicaProveedor"
+                    }
+                },
+                "Message": {
+                    "type": "string"
+                },
+                "Status": {
+                    "type": "string"
+                },
+                "Success": {
+                    "type": "boolean"
+                },
+                "Total": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        },
+        "controllers.ContactoLista": {
+            "title": "ContactoLista",
+            "type": "object",
+            "properties": {
+                "Data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.Contacto"
+                    }
+                },
+                "Message": {
+                    "type": "string"
+                },
+                "Status": {
+                    "type": "string"
+                },
+                "Success": {
+                    "type": "boolean"
+                },
+                "Total": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        },
+        "controllers.CuentaBancariaLista": {
+            "title": "CuentaBancariaLista",
+            "type": "object",
+            "properties": {
+                "Data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.CuentaBancaria"
+                    }
+                },
+                "Message": {
+                    "type": "string"
+                },
+                "Status": {
+                    "type": "string"
+                },
+                "Success": {
+                    "type": "boolean"
+                },
+                "Total": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        },
+        "controllers.DeclaracionLista": {
+            "title": "DeclaracionLista",
+            "type": "object",
+            "properties": {
+                "Data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.Declaracion"
+                    }
+                },
+                "Message": {
+                    "type": "string"
+                },
+                "Status": {
+                    "type": "string"
+                },
+                "Success": {
+                    "type": "boolean"
+                },
+                "Total": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        },
+        "controllers.DocumentoLista": {
+            "title": "DocumentoLista",
+            "type": "object",
+            "properties": {
+                "Data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.Documento"
+                    }
+                },
+                "Message": {
+                    "type": "string"
+                },
+                "Status": {
+                    "type": "string"
+                },
+                "Success": {
+                    "type": "boolean"
+                },
+                "Total": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        },
+        "controllers.InformacionFinancieraLista": {
+            "title": "InformacionFinancieraLista",
+            "type": "object",
+            "properties": {
+                "Data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.InformacionFinanciera"
+                    }
+                },
+                "Message": {
+                    "type": "string"
+                },
+                "Status": {
+                    "type": "string"
+                },
+                "Success": {
+                    "type": "boolean"
+                },
+                "Total": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        },
+        "controllers.PerfilFinancieroLista": {
+            "title": "PerfilFinancieroLista",
+            "type": "object",
+            "properties": {
+                "Data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.PerfilFinanciero"
+                    }
+                },
+                "Message": {
+                    "type": "string"
+                },
+                "Status": {
+                    "type": "string"
+                },
+                "Success": {
+                    "type": "boolean"
+                },
+                "Total": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        },
+        "controllers.PerfilLista": {
+            "title": "PerfilLista",
+            "type": "object",
+            "properties": {
+                "Data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.Perfil"
+                    }
+                },
+                "Message": {
+                    "type": "string"
+                },
+                "Status": {
+                    "type": "string"
+                },
+                "Success": {
+                    "type": "boolean"
+                },
+                "Total": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        },
+        "controllers.PrefijoFacturacionLista": {
+            "title": "PrefijoFacturacionLista",
+            "type": "object",
+            "properties": {
+                "Data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.PrefijoFacturacion"
+                    }
+                },
+                "Message": {
+                    "type": "string"
+                },
+                "Status": {
+                    "type": "string"
+                },
+                "Success": {
+                    "type": "boolean"
+                },
+                "Total": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        },
+        "controllers.ProveedorJuridicoLista": {
+            "title": "ProveedorJuridicoLista",
+            "type": "object",
+            "properties": {
+                "Data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.ProveedorJuridico"
+                    }
+                },
+                "Message": {
+                    "type": "string"
+                },
+                "Status": {
+                    "type": "string"
+                },
+                "Success": {
+                    "type": "boolean"
+                },
+                "Total": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        },
+        "controllers.ProveedorLista": {
+            "title": "ProveedorLista",
+            "type": "object",
+            "properties": {
+                "Data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.Proveedor"
+                    }
+                },
+                "Message": {
+                    "type": "string"
+                },
+                "Status": {
+                    "type": "string"
+                },
+                "Success": {
+                    "type": "boolean"
+                },
+                "Total": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        },
+        "controllers.ProveedorNaturalLista": {
+            "title": "ProveedorNaturalLista",
+            "type": "object",
+            "properties": {
+                "Data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.ProveedorNatural"
+                    }
+                },
+                "Message": {
+                    "type": "string"
+                },
+                "Status": {
+                    "type": "string"
+                },
+                "Success": {
+                    "type": "boolean"
+                },
+                "Total": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        },
+        "controllers.RangoFacturacionLista": {
+            "title": "RangoFacturacionLista",
+            "type": "object",
+            "properties": {
+                "Data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.RangoFacturacion"
+                    }
+                },
+                "Message": {
+                    "type": "string"
+                },
+                "Status": {
+                    "type": "string"
+                },
+                "Success": {
+                    "type": "boolean"
+                },
+                "Total": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        },
+        "controllers.RepresentacionLista": {
+            "title": "RepresentacionLista",
+            "type": "object",
+            "properties": {
+                "Data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.Representacion"
+                    }
+                },
+                "Message": {
+                    "type": "string"
+                },
+                "Status": {
+                    "type": "string"
+                },
+                "Success": {
+                    "type": "boolean"
+                },
+                "Total": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        },
+        "controllers.ResponsabilidadFiscalPerfilLista": {
+            "title": "ResponsabilidadFiscalPerfilLista",
+            "type": "object",
+            "properties": {
+                "Data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.ResponsabilidadFiscalPerfil"
+                    }
+                },
+                "Message": {
+                    "type": "string"
+                },
+                "Status": {
+                    "type": "string"
+                },
+                "Success": {
+                    "type": "boolean"
+                },
+                "Total": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        },
+        "controllers.TipoDeclaracionProveedorLista": {
+            "title": "TipoDeclaracionProveedorLista",
+            "type": "object",
+            "properties": {
+                "Data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.TipoDeclaracionProveedor"
+                    }
+                },
+                "Message": {
+                    "type": "string"
+                },
+                "Status": {
+                    "type": "string"
+                },
+                "Success": {
+                    "type": "boolean"
+                },
+                "Total": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        },
+        "controllers.interface": {
+            "title": "interface",
+            "type": "object"
+        },
         "models.ActividadEconomicaProveedor": {
             "title": "ActividadEconomicaProveedor",
             "type": "object",
