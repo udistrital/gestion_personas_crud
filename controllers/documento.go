@@ -52,6 +52,7 @@ func (c *DocumentoController) Post() {
 // @Param	id		path 	string	true		"The id"
 // @Param	activo	query	bool	false	"Registros activos (true, predeterminado) o inactivos (false)"
 // @Success 200 {object} controllers.APIResponse
+// @Failure 400 parametro activo invalido
 // @Failure 404 id invalido o registro inexistente
 // @router /:id [get]
 func (c *DocumentoController) GetOne() {
@@ -63,7 +64,7 @@ func (c *DocumentoController) GetOne() {
 
 	activo, err := leerActivo(&c.Controller)
 	if err != nil {
-		abortWithError(&c.Controller, 404, err.Error(), nil)
+		abortWithError(&c.Controller, 400, err.Error(), nil)
 		return
 	}
 
@@ -86,7 +87,7 @@ func (c *DocumentoController) GetOne() {
 // @Param	limit	query	string	false	"Limit the size of result set. Must be an integer"
 // @Param	offset	query	string	false	"Start position of result set. Must be an integer"
 // @Param	activo	query	bool	false	"Registros activos (true, predeterminado) o inactivos (false)"
-// @Success 200 {object} controllers.APIResponseLista
+// @Success 200 {object} controllers.DocumentoLista
 // @Failure 400 parametros invalidos
 // @Failure 404 error al consultar los registros
 // @router / [get]

@@ -53,7 +53,7 @@ paths:
         "200":
           description: ""
           schema:
-            $ref: '#/definitions/controllers.APIResponseLista'
+            $ref: '#/definitions/controllers.ActividadEconomicaProveedorLista'
         "400":
           description: parametros invalidos
         "404":
@@ -102,6 +102,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/controllers.APIResponse'
+        "400":
+          description: parametro activo invalido
         "404":
           description: id invalido o registro inexistente
     put:
@@ -192,7 +194,7 @@ paths:
         "200":
           description: ""
           schema:
-            $ref: '#/definitions/controllers.APIResponseLista'
+            $ref: '#/definitions/controllers.ContactoLista'
         "400":
           description: parametros invalidos
         "404":
@@ -241,6 +243,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/controllers.APIResponse'
+        "400":
+          description: parametro activo invalido
         "404":
           description: id invalido o registro inexistente
     put:
@@ -331,7 +335,7 @@ paths:
         "200":
           description: ""
           schema:
-            $ref: '#/definitions/controllers.APIResponseLista'
+            $ref: '#/definitions/controllers.CuentaBancariaLista'
         "400":
           description: parametros invalidos
         "404":
@@ -380,6 +384,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/controllers.APIResponse'
+        "400":
+          description: parametro activo invalido
         "404":
           description: id invalido o registro inexistente
     put:
@@ -470,7 +476,7 @@ paths:
         "200":
           description: ""
           schema:
-            $ref: '#/definitions/controllers.APIResponseLista'
+            $ref: '#/definitions/controllers.DeclaracionLista'
         "400":
           description: parametros invalidos
         "404":
@@ -519,6 +525,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/controllers.APIResponse'
+        "400":
+          description: parametro activo invalido
         "404":
           description: id invalido o registro inexistente
     put:
@@ -609,7 +617,7 @@ paths:
         "200":
           description: ""
           schema:
-            $ref: '#/definitions/controllers.APIResponseLista'
+            $ref: '#/definitions/controllers.DocumentoLista'
         "400":
           description: parametros invalidos
         "404":
@@ -658,6 +666,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/controllers.APIResponse'
+        "400":
+          description: parametro activo invalido
         "404":
           description: id invalido o registro inexistente
     put:
@@ -748,7 +758,7 @@ paths:
         "200":
           description: ""
           schema:
-            $ref: '#/definitions/controllers.APIResponseLista'
+            $ref: '#/definitions/controllers.InformacionFinancieraLista'
         "400":
           description: parametros invalidos
         "404":
@@ -797,6 +807,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/controllers.APIResponse'
+        "400":
+          description: parametro activo invalido
         "404":
           description: id invalido o registro inexistente
     put:
@@ -887,7 +899,7 @@ paths:
         "200":
           description: ""
           schema:
-            $ref: '#/definitions/controllers.APIResponseLista'
+            $ref: '#/definitions/controllers.PerfilLista'
         "400":
           description: parametros invalidos
         "404":
@@ -936,6 +948,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/controllers.APIResponse'
+        "400":
+          description: parametro activo invalido
         "404":
           description: id invalido o registro inexistente
     put:
@@ -1026,7 +1040,7 @@ paths:
         "200":
           description: ""
           schema:
-            $ref: '#/definitions/controllers.APIResponseLista'
+            $ref: '#/definitions/controllers.PerfilFinancieroLista'
         "400":
           description: parametros invalidos
         "404":
@@ -1075,6 +1089,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/controllers.APIResponse'
+        "400":
+          description: parametro activo invalido
         "404":
           description: id invalido o registro inexistente
     put:
@@ -1165,7 +1181,7 @@ paths:
         "200":
           description: ""
           schema:
-            $ref: '#/definitions/controllers.APIResponseLista'
+            $ref: '#/definitions/controllers.PrefijoFacturacionLista'
         "400":
           description: parametros invalidos
         "404":
@@ -1214,6 +1230,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/controllers.APIResponse'
+        "400":
+          description: parametro activo invalido
         "404":
           description: id invalido o registro inexistente
     put:
@@ -1304,7 +1322,7 @@ paths:
         "200":
           description: ""
           schema:
-            $ref: '#/definitions/controllers.APIResponseLista'
+            $ref: '#/definitions/controllers.ProveedorLista'
         "400":
           description: parametros invalidos
         "404":
@@ -1353,6 +1371,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/controllers.APIResponse'
+        "400":
+          description: parametro activo invalido
         "404":
           description: id invalido o registro inexistente
     put:
@@ -1443,7 +1463,7 @@ paths:
         "200":
           description: ""
           schema:
-            $ref: '#/definitions/controllers.APIResponseLista'
+            $ref: '#/definitions/controllers.ProveedorJuridicoLista'
         "400":
           description: parametros invalidos
         "404":
@@ -1492,6 +1512,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/controllers.APIResponse'
+        "400":
+          description: parametro activo invalido
         "404":
           description: id invalido o registro inexistente
     put:
@@ -1582,7 +1604,7 @@ paths:
         "200":
           description: ""
           schema:
-            $ref: '#/definitions/controllers.APIResponseLista'
+            $ref: '#/definitions/controllers.ProveedorNaturalLista'
         "400":
           description: parametros invalidos
         "404":
@@ -1631,6 +1653,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/controllers.APIResponse'
+        "400":
+          description: parametro activo invalido
         "404":
           description: id invalido o registro inexistente
     put:
@@ -1721,7 +1745,7 @@ paths:
         "200":
           description: ""
           schema:
-            $ref: '#/definitions/controllers.APIResponseLista'
+            $ref: '#/definitions/controllers.RangoFacturacionLista'
         "400":
           description: parametros invalidos
         "404":
@@ -1770,6 +1794,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/controllers.APIResponse'
+        "400":
+          description: parametro activo invalido
         "404":
           description: id invalido o registro inexistente
     put:
@@ -1860,7 +1886,7 @@ paths:
         "200":
           description: ""
           schema:
-            $ref: '#/definitions/controllers.APIResponseLista'
+            $ref: '#/definitions/controllers.RepresentacionLista'
         "400":
           description: parametros invalidos
         "404":
@@ -1909,6 +1935,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/controllers.APIResponse'
+        "400":
+          description: parametro activo invalido
         "404":
           description: id invalido o registro inexistente
     put:
@@ -1999,7 +2027,7 @@ paths:
         "200":
           description: ""
           schema:
-            $ref: '#/definitions/controllers.APIResponseLista'
+            $ref: '#/definitions/controllers.ResponsabilidadFiscalPerfilLista'
         "400":
           description: parametros invalidos
         "404":
@@ -2048,6 +2076,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/controllers.APIResponse'
+        "400":
+          description: parametro activo invalido
         "404":
           description: id invalido o registro inexistente
     put:
@@ -2138,7 +2168,7 @@ paths:
         "200":
           description: ""
           schema:
-            $ref: '#/definitions/controllers.APIResponseLista'
+            $ref: '#/definitions/controllers.TipoDeclaracionProveedorLista'
         "400":
           description: parametros invalidos
         "404":
@@ -2187,6 +2217,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/controllers.APIResponse'
+        "400":
+          description: parametro activo invalido
         "404":
           description: id invalido o registro inexistente
     put:
@@ -2253,8 +2285,278 @@ definitions:
     title: APIResponseLista
     type: object
     properties:
+      Message:
+        type: string
+      Status:
+        type: string
+      Success:
+        type: boolean
+      Total:
+        type: integer
+        format: int64
+  controllers.ActividadEconomicaProveedorLista:
+    title: ActividadEconomicaProveedorLista
+    type: object
+    properties:
       Data:
-        $ref: '#/definitions/controllers.interface'
+        type: array
+        items:
+          $ref: '#/definitions/models.ActividadEconomicaProveedor'
+      Message:
+        type: string
+      Status:
+        type: string
+      Success:
+        type: boolean
+      Total:
+        type: integer
+        format: int64
+  controllers.ContactoLista:
+    title: ContactoLista
+    type: object
+    properties:
+      Data:
+        type: array
+        items:
+          $ref: '#/definitions/models.Contacto'
+      Message:
+        type: string
+      Status:
+        type: string
+      Success:
+        type: boolean
+      Total:
+        type: integer
+        format: int64
+  controllers.CuentaBancariaLista:
+    title: CuentaBancariaLista
+    type: object
+    properties:
+      Data:
+        type: array
+        items:
+          $ref: '#/definitions/models.CuentaBancaria'
+      Message:
+        type: string
+      Status:
+        type: string
+      Success:
+        type: boolean
+      Total:
+        type: integer
+        format: int64
+  controllers.DeclaracionLista:
+    title: DeclaracionLista
+    type: object
+    properties:
+      Data:
+        type: array
+        items:
+          $ref: '#/definitions/models.Declaracion'
+      Message:
+        type: string
+      Status:
+        type: string
+      Success:
+        type: boolean
+      Total:
+        type: integer
+        format: int64
+  controllers.DocumentoLista:
+    title: DocumentoLista
+    type: object
+    properties:
+      Data:
+        type: array
+        items:
+          $ref: '#/definitions/models.Documento'
+      Message:
+        type: string
+      Status:
+        type: string
+      Success:
+        type: boolean
+      Total:
+        type: integer
+        format: int64
+  controllers.InformacionFinancieraLista:
+    title: InformacionFinancieraLista
+    type: object
+    properties:
+      Data:
+        type: array
+        items:
+          $ref: '#/definitions/models.InformacionFinanciera'
+      Message:
+        type: string
+      Status:
+        type: string
+      Success:
+        type: boolean
+      Total:
+        type: integer
+        format: int64
+  controllers.PerfilFinancieroLista:
+    title: PerfilFinancieroLista
+    type: object
+    properties:
+      Data:
+        type: array
+        items:
+          $ref: '#/definitions/models.PerfilFinanciero'
+      Message:
+        type: string
+      Status:
+        type: string
+      Success:
+        type: boolean
+      Total:
+        type: integer
+        format: int64
+  controllers.PerfilLista:
+    title: PerfilLista
+    type: object
+    properties:
+      Data:
+        type: array
+        items:
+          $ref: '#/definitions/models.Perfil'
+      Message:
+        type: string
+      Status:
+        type: string
+      Success:
+        type: boolean
+      Total:
+        type: integer
+        format: int64
+  controllers.PrefijoFacturacionLista:
+    title: PrefijoFacturacionLista
+    type: object
+    properties:
+      Data:
+        type: array
+        items:
+          $ref: '#/definitions/models.PrefijoFacturacion'
+      Message:
+        type: string
+      Status:
+        type: string
+      Success:
+        type: boolean
+      Total:
+        type: integer
+        format: int64
+  controllers.ProveedorJuridicoLista:
+    title: ProveedorJuridicoLista
+    type: object
+    properties:
+      Data:
+        type: array
+        items:
+          $ref: '#/definitions/models.ProveedorJuridico'
+      Message:
+        type: string
+      Status:
+        type: string
+      Success:
+        type: boolean
+      Total:
+        type: integer
+        format: int64
+  controllers.ProveedorLista:
+    title: ProveedorLista
+    type: object
+    properties:
+      Data:
+        type: array
+        items:
+          $ref: '#/definitions/models.Proveedor'
+      Message:
+        type: string
+      Status:
+        type: string
+      Success:
+        type: boolean
+      Total:
+        type: integer
+        format: int64
+  controllers.ProveedorNaturalLista:
+    title: ProveedorNaturalLista
+    type: object
+    properties:
+      Data:
+        type: array
+        items:
+          $ref: '#/definitions/models.ProveedorNatural'
+      Message:
+        type: string
+      Status:
+        type: string
+      Success:
+        type: boolean
+      Total:
+        type: integer
+        format: int64
+  controllers.RangoFacturacionLista:
+    title: RangoFacturacionLista
+    type: object
+    properties:
+      Data:
+        type: array
+        items:
+          $ref: '#/definitions/models.RangoFacturacion'
+      Message:
+        type: string
+      Status:
+        type: string
+      Success:
+        type: boolean
+      Total:
+        type: integer
+        format: int64
+  controllers.RepresentacionLista:
+    title: RepresentacionLista
+    type: object
+    properties:
+      Data:
+        type: array
+        items:
+          $ref: '#/definitions/models.Representacion'
+      Message:
+        type: string
+      Status:
+        type: string
+      Success:
+        type: boolean
+      Total:
+        type: integer
+        format: int64
+  controllers.ResponsabilidadFiscalPerfilLista:
+    title: ResponsabilidadFiscalPerfilLista
+    type: object
+    properties:
+      Data:
+        type: array
+        items:
+          $ref: '#/definitions/models.ResponsabilidadFiscalPerfil'
+      Message:
+        type: string
+      Status:
+        type: string
+      Success:
+        type: boolean
+      Total:
+        type: integer
+        format: int64
+  controllers.TipoDeclaracionProveedorLista:
+    title: TipoDeclaracionProveedorLista
+    type: object
+    properties:
+      Data:
+        type: array
+        items:
+          $ref: '#/definitions/models.TipoDeclaracionProveedor'
       Message:
         type: string
       Status:
