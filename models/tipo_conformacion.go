@@ -5,65 +5,52 @@ import (
 	"fmt"
 	"reflect"
 	"strings"
-	"time"
 
 	"github.com/beego/beego/v2/client/orm"
 )
 
-type InformacionFinanciera struct {
-	Id                  int        `orm:"column(id);pk;auto"`
-	ProveedorId         *Proveedor `orm:"column(proveedor_id);rel(fk)"`
-	FechaCorte          time.Time  `orm:"column(fecha_corte);type(date)"`
-	MonedaId            int        `orm:"column(moneda_id);null"`
-	CapitalAutorizado   float64    `orm:"column(capital_autorizado)"`
-	ActivosTotales      float64    `orm:"column(activos_totales);null"`
-	PasivosTotales      float64    `orm:"column(pasivos_totales);null"`
-	IndiceLiquidez      float64    `orm:"column(indice_liquidez)"`
-	Activo              bool       `orm:"column(activo)"`
-	FechaCreacion       time.Time  `orm:"column(fecha_creacion);type(timestamp without time zone)"`
-	FechaModificacion   time.Time  `orm:"column(fecha_modificacion);type(timestamp without time zone);null"`
-	AutorModificacionId int        `orm:"column(autor_modificacion_id);null"`
+type TipoConformacion struct {
+	Id                int     `orm:"column(id);pk;auto"`
+	Nombre            string  `orm:"column(nombre)"`
+	Descripcion       string  `orm:"column(descripcion);null"`
+	CodigoAbreviacion string  `orm:"column(codigo_abreviacion);null"`
+	Activo            bool    `orm:"column(activo)"`
+	NumeroOrden       float64 `orm:"column(numero_orden);null"`
 }
 
-func (t *InformacionFinanciera) TableName() string {
-	return "informacion_financiera"
+func (t *TipoConformacion) TableName() string {
+	return "tipo_conformacion"
 }
 
 func init() {
-	orm.RegisterModel(new(InformacionFinanciera))
+	orm.RegisterModel(new(TipoConformacion))
 }
 
-// AddInformacionFinanciera insert a new InformacionFinanciera into database and returns
+// AddTipoConformacion insert a new TipoConformacion into database and returns
 // last inserted Id on success.
-func AddInformacionFinanciera(m *InformacionFinanciera) (id int64, err error) {
+func AddTipoConformacion(m *TipoConformacion) (id int64, err error) {
 	o := orm.NewOrm()
-	m.Activo = true
-	m.FechaCreacion = time.Now().UTC()
-	if m.FechaCorte.IsZero() {
-		var currentYear = time.Now().UTC().Year()
-		m.FechaCorte = time.Date(currentYear, 12, 31, 0, 0, 0, 0, time.UTC)
-	}
 	id, err = o.Insert(m)
 	return
 }
 
-// GetInformacionFinancieraById retrieves InformacionFinanciera by Id. Returns error if
+// GetTipoConformacionById retrieves TipoConformacion by Id. Returns error if
 // Id doesn't exist
-func GetInformacionFinancieraById(id int) (v *InformacionFinanciera, err error) {
+func GetTipoConformacionById(id int) (v *TipoConformacion, err error) {
 	o := orm.NewOrm()
-	v = &InformacionFinanciera{Id: id}
+	v = &TipoConformacion{Id: id}
 	if err = o.Read(v); err == nil {
 		return v, nil
 	}
 	return nil, err
 }
 
-// GetAllInformacionFinanciera retrieves all InformacionFinanciera matches certain condition. Returns empty list if
+// GetAllTipoConformacion retrieves all TipoConformacion matches certain condition. Returns empty list if
 // no records exist
-func GetAllInformacionFinanciera(query map[string]string, fields []string, sortby []string, order []string,
+func GetAllTipoConformacion(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(InformacionFinanciera)).RelatedSel()
+	qs := o.QueryTable(new(TipoConformacion)).RelatedSel()
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute
@@ -113,7 +100,7 @@ func GetAllInformacionFinanciera(query map[string]string, fields []string, sortb
 		}
 	}
 
-	var l []InformacionFinanciera
+	var l []TipoConformacion
 	qs = qs.OrderBy(sortFields...)
 	if _, err = qs.Limit(limit, offset).All(&l, fields...); err == nil {
 		if len(fields) == 0 {
@@ -136,15 +123,13 @@ func GetAllInformacionFinanciera(query map[string]string, fields []string, sortb
 	return nil, err
 }
 
-// UpdateInformacionFinanciera updates InformacionFinanciera by Id and returns error if
+// UpdateTipoConformacion updates TipoConformacion by Id and returns error if
 // the record to be updated doesn't exist
-func UpdateInformacionFinancieraById(m *InformacionFinanciera) (err error) {
+func UpdateTipoConformacionById(m *TipoConformacion) (err error) {
 	o := orm.NewOrm()
-	v := InformacionFinanciera{Id: m.Id}
+	v := TipoConformacion{Id: m.Id}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
-		m.FechaCreacion = v.FechaCreacion
-		m.FechaModificacion = time.Now().UTC()
 		var num int64
 		if num, err = o.Update(m); err == nil {
 			fmt.Println("Number of records updated in database:", num)
@@ -153,17 +138,16 @@ func UpdateInformacionFinancieraById(m *InformacionFinanciera) (err error) {
 	return
 }
 
-// DeleteInformacionFinanciera deletes InformacionFinanciera by Id and returns error if
+// DeleteTipoConformacion deletes TipoConformacion by Id and returns error if
 // the record to be deleted doesn't exist
-func DeleteInformacionFinanciera(id int) (err error) {
+func DeleteTipoConformacion(id int) (err error) {
 	o := orm.NewOrm()
-	v := InformacionFinanciera{Id: id}
+	v := TipoConformacion{Id: id}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
-		v.Activo = false
-		if num, err = o.Update(&v); err == nil {
-			fmt.Println("Number of records updated in database:", num)
+		if num, err = o.Delete(&TipoConformacion{Id: id}); err == nil {
+			fmt.Println("Number of records deleted in database:", num)
 		}
 	}
 	return

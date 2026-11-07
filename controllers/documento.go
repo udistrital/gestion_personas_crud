@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/udistrital/gestion_personas_crud/models"
+	"github.com/udistrital/utils_oas/time_bogota"
 
 	beeLogger "github.com/beego/bee/v2/logger"
 	beego "github.com/beego/beego/v2/server/web"
@@ -35,6 +36,9 @@ func (c *DocumentoController) URLMapping() {
 func (c *DocumentoController) Post() {
 	var v models.Documento
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
+		v.Activo = true
+		v.FechaCreacion = time_bogota.Tiempo_bogota()
+		v.FechaModificacion = time_bogota.Tiempo_bogota()
 		if _, err := models.AddDocumento(&v); err == nil {
 			c.Ctx.Output.SetStatus(201)
 			c.Data["json"] = map[string]interface{}{"Success": true, "Status": "201", "Message": "Registration successful", "Data": v}
@@ -117,8 +121,10 @@ func (c *DocumentoController) GetAll() {
 		for _, cond := range strings.Split(v, ",") {
 			kv := strings.SplitN(cond, ":", 2)
 			if len(kv) != 2 {
-				c.Data["message"] = "Error service GetAll: invalid query parameter. Expected format: query=campo:valor,campo2:valor2"
-				c.Abort("400")
+				c.Ctx.Output.SetStatus(400)
+				c.Data["json"] = map[string]interface{}{"Success": false, "Status": "400", "Message": "Error service GetAll: invalid query parameter. Expected format: query=campo:valor,campo2:valor2", "Data": nil}
+				c.ServeJSON()
+				return
 			}
 			k, v := kv[0], kv[1]
 			query[k] = v
@@ -132,7 +138,7 @@ func (c *DocumentoController) GetAll() {
 		c.Abort("404")
 	} else {
 		if l == nil {
-			l = append(l, map[string]interface{}{})
+			l = []interface{}{}
 		}
 		c.Data["json"] = map[string]interface{}{"Success": true, "Status": "200", "Message": "Request successful", "Data": l}
 	}
@@ -151,17 +157,19 @@ func (c *DocumentoController) Put() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
 	v := models.Documento{Id: id}
-	var m models.Documento
-	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &m); err == nil {
-		if m.Id != 0 && m.Id != v.Id {
+	fechaCreacionOriginal := v.FechaCreacion
+	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
+		if v.Id != id {
 			c.Data["message"] = "Error service Put: The id cannot be modified"
 			c.Abort("400")
 		}
-		if m.Id == 0 {
-			m.Id = v.Id
+		if v.Id == 0 {
+			v.Id = id
 		}
-		if err := models.UpdateDocumentoById(&m); err == nil {
-			c.Data["json"] = map[string]interface{}{"Success": true, "Status": "200", "Message": "Update successful", "Data": m}
+		v.FechaCreacion = fechaCreacionOriginal
+		v.FechaModificacion = time_bogota.Tiempo_bogota()
+		if err := models.UpdateDocumentoById(&v); err == nil {
+			c.Data["json"] = map[string]interface{}{"Success": true, "Status": "200", "Message": "Update successful", "Data": v}
 		} else {
 			beeLogger.Log.Error(err.Error())
 			c.Data["message"] = "Error service Put: The request contains an incorrect data type or an invalid parameter"
@@ -185,13 +193,15 @@ func (c *DocumentoController) Put() {
 func (c *DocumentoController) Delete() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
-	if err := models.DeleteDocumento(id); err == nil {
-		d := map[string]interface{}{"Id": id}
-		c.Data["json"] = map[string]interface{}{"Success": true, "Status": "200", "Message": "Delete successful", "Data": d}
+	v := models.Documento{Id: id}
+	v.Activo = false
+	v.FechaModificacion = time_bogota.Tiempo_bogota()
+	if err := models.UpdateDocumentoById(&v); err == nil {
+		c.Data["json"] = map[string]interface{}{"Success": true, "Status": "200", "Message": "Update successful", "Data": v}
 	} else {
 		beeLogger.Log.Error(err.Error())
-		c.Data["message"] = "Error service Delete: Request contains incorrect parameter"
-		c.Abort("404")
+		c.Data["message"] = "Error service Put: The request contains an incorrect data type or an invalid parameter"
+		c.Abort("400")
 	}
 	c.ServeJSON()
 }

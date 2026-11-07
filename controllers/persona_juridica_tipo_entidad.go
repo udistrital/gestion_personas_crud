@@ -6,18 +6,19 @@ import (
 	"strings"
 
 	"github.com/udistrital/gestion_personas_crud/models"
+	"github.com/udistrital/utils_oas/time_bogota"
 
 	beeLogger "github.com/beego/bee/v2/logger"
 	beego "github.com/beego/beego/v2/server/web"
 )
 
-// InformacionFinancieraController operations for InformacionFinanciera
-type InformacionFinancieraController struct {
+// PersonaJuridicaTipoEntidadController operations for PersonaJuridicaTipoEntidad
+type PersonaJuridicaTipoEntidadController struct {
 	beego.Controller
 }
 
 // URLMapping ...
-func (c *InformacionFinancieraController) URLMapping() {
+func (c *PersonaJuridicaTipoEntidadController) URLMapping() {
 	c.Mapping("Post", c.Post)
 	c.Mapping("GetOne", c.GetOne)
 	c.Mapping("GetAll", c.GetAll)
@@ -27,15 +28,18 @@ func (c *InformacionFinancieraController) URLMapping() {
 
 // Post ...
 // @Title Post
-// @Description create InformacionFinanciera
-// @Param	body		body 	models.InformacionFinanciera	true		"body for InformacionFinanciera content"
-// @Success 201 {int} models.InformacionFinanciera
+// @Description create PersonaJuridicaTipoEntidad
+// @Param	body		body 	models.PersonaJuridicaTipoEntidad	true		"body for PersonaJuridicaTipoEntidad content"
+// @Success 201 {int} models.PersonaJuridicaTipoEntidad
 // @Failure 400 the request contains incorrect syntax
 // @router / [post]
-func (c *InformacionFinancieraController) Post() {
-	var v models.InformacionFinanciera
+func (c *PersonaJuridicaTipoEntidadController) Post() {
+	var v models.PersonaJuridicaTipoEntidad
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
-		if _, err := models.AddInformacionFinanciera(&v); err == nil {
+		v.Activo = true
+		v.FechaCreacion = time_bogota.Tiempo_bogota()
+		v.FechaModificacion = time_bogota.Tiempo_bogota()
+		if _, err := models.AddPersonaJuridicaTipoEntidad(&v); err == nil {
 			c.Ctx.Output.SetStatus(201)
 			c.Data["json"] = map[string]interface{}{"Success": true, "Status": "201", "Message": "Registration successful", "Data": v}
 		} else {
@@ -53,15 +57,15 @@ func (c *InformacionFinancieraController) Post() {
 
 // GetOne ...
 // @Title Get One
-// @Description get InformacionFinanciera by id
+// @Description get PersonaJuridicaTipoEntidad by id
 // @Param	id		path 	string	true		"The key for staticblock"
-// @Success 200 {object} models.InformacionFinanciera
+// @Success 200 {object} models.PersonaJuridicaTipoEntidad
 // @Failure 404 not found resource
 // @router /:id [get]
-func (c *InformacionFinancieraController) GetOne() {
+func (c *PersonaJuridicaTipoEntidadController) GetOne() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
-	v, err := models.GetInformacionFinancieraById(id)
+	v, err := models.GetPersonaJuridicaTipoEntidadById(id)
 	if err != nil {
 		beeLogger.Log.Error(err.Error())
 		c.Data["message"] = "Error service GetOne: The request contains an incorrect parameter or no record exists"
@@ -74,17 +78,17 @@ func (c *InformacionFinancieraController) GetOne() {
 
 // GetAll ...
 // @Title Get All
-// @Description get InformacionFinanciera
+// @Description get PersonaJuridicaTipoEntidad
 // @Param	query	query	string	false	"Filter. e.g. col1:v1,col2:v2 ..."
 // @Param	fields	query	string	false	"Fields returned. e.g. col1,col2 ..."
 // @Param	sortby	query	string	false	"Sorted-by fields. e.g. col1,col2 ..."
 // @Param	order	query	string	false	"Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ..."
 // @Param	limit	query	string	false	"Limit the size of result set. Must be an integer"
 // @Param	offset	query	string	false	"Start position of result set. Must be an integer"
-// @Success 200 {object} models.InformacionFinanciera
+// @Success 200 {object} models.PersonaJuridicaTipoEntidad
 // @Failure 404 not found resource
 // @router / [get]
-func (c *InformacionFinancieraController) GetAll() {
+func (c *PersonaJuridicaTipoEntidadController) GetAll() {
 	var fields []string
 	var sortby []string
 	var order []string
@@ -117,22 +121,24 @@ func (c *InformacionFinancieraController) GetAll() {
 		for _, cond := range strings.Split(v, ",") {
 			kv := strings.SplitN(cond, ":", 2)
 			if len(kv) != 2 {
-				c.Data["message"] = "Error service GetAll: invalid query parameter. Expected format: query=campo:valor,campo2:valor2"
-				c.Abort("400")
+				c.Ctx.Output.SetStatus(400)
+				c.Data["json"] = map[string]interface{}{"Success": false, "Status": "400", "Message": "Error service GetAll: invalid query parameter. Expected format: query=campo:valor,campo2:valor2", "Data": nil}
+				c.ServeJSON()
+				return
 			}
 			k, v := kv[0], kv[1]
 			query[k] = v
 		}
 	}
 
-	l, err := models.GetAllInformacionFinanciera(query, fields, sortby, order, offset, limit)
+	l, err := models.GetAllPersonaJuridicaTipoEntidad(query, fields, sortby, order, offset, limit)
 	if err != nil {
 		beeLogger.Log.Error(err.Error())
 		c.Data["message"] = "Error service GetAll: The request contains an incorrect parameter or no record exists"
 		c.Abort("404")
 	} else {
 		if l == nil {
-			l = append(l, map[string]interface{}{})
+			l = []interface{}{}
 		}
 		c.Data["json"] = map[string]interface{}{"Success": true, "Status": "200", "Message": "Request successful", "Data": l}
 	}
@@ -141,27 +147,29 @@ func (c *InformacionFinancieraController) GetAll() {
 
 // Put ...
 // @Title Put
-// @Description update the InformacionFinanciera
+// @Description update the PersonaJuridicaTipoEntidad
 // @Param	id		path 	string	true		"The id you want to update"
-// @Param	body		body 	models.InformacionFinanciera	true		"body for InformacionFinanciera content"
-// @Success 200 {object} models.InformacionFinanciera
+// @Param	body		body 	models.PersonaJuridicaTipoEntidad	true		"body for PersonaJuridicaTipoEntidad content"
+// @Success 200 {object} models.PersonaJuridicaTipoEntidad
 // @Failure 400 the request contains incorrect syntax
 // @router /:id [put]
-func (c *InformacionFinancieraController) Put() {
+func (c *PersonaJuridicaTipoEntidadController) Put() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
-	v := models.InformacionFinanciera{Id: id}
-	var m models.InformacionFinanciera
-	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &m); err == nil {
-		if m.Id != 0 && m.Id != v.Id {
+	v := models.PersonaJuridicaTipoEntidad{Id: id}
+	fechaCreacionOriginal := v.FechaCreacion
+	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
+		if v.Id != id {
 			c.Data["message"] = "Error service Put: The id cannot be modified"
 			c.Abort("400")
 		}
-		if m.Id == 0 {
-			m.Id = v.Id
+		if v.Id == 0 {
+			v.Id = id
 		}
-		if err := models.UpdateInformacionFinancieraById(&m); err == nil {
-			c.Data["json"] = map[string]interface{}{"Success": true, "Status": "200", "Message": "Update successful", "Data": m}
+		v.FechaCreacion = fechaCreacionOriginal
+		v.FechaModificacion = time_bogota.Tiempo_bogota()
+		if err := models.UpdatePersonaJuridicaTipoEntidadById(&v); err == nil {
+			c.Data["json"] = map[string]interface{}{"Success": true, "Status": "200", "Message": "Update successful", "Data": v}
 		} else {
 			beeLogger.Log.Error(err.Error())
 			c.Data["message"] = "Error service Put: The request contains an incorrect data type or an invalid parameter"
@@ -177,21 +185,23 @@ func (c *InformacionFinancieraController) Put() {
 
 // Delete ...
 // @Title Delete
-// @Description delete the InformacionFinanciera
+// @Description delete the PersonaJuridicaTipoEntidad
 // @Param	id		path 	string	true		"The id you want to delete"
 // @Success 200 {string} delete success!
 // @Failure 404 not found resource
 // @router /:id [delete]
-func (c *InformacionFinancieraController) Delete() {
+func (c *PersonaJuridicaTipoEntidadController) Delete() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
-	if err := models.DeleteInformacionFinanciera(id); err == nil {
-		d := map[string]interface{}{"Id": id}
-		c.Data["json"] = map[string]interface{}{"Success": true, "Status": "200", "Message": "Delete successful", "Data": d}
+	v := models.PersonaJuridicaTipoEntidad{Id: id}
+	v.Activo = false
+	v.FechaModificacion = time_bogota.Tiempo_bogota()
+	if err := models.UpdatePersonaJuridicaTipoEntidadById(&v); err == nil {
+		c.Data["json"] = map[string]interface{}{"Success": true, "Status": "200", "Message": "Update successful", "Data": v}
 	} else {
 		beeLogger.Log.Error(err.Error())
-		c.Data["message"] = "Error service Delete: Request contains incorrect parameter"
-		c.Abort("404")
+		c.Data["message"] = "Error service Put: The request contains an incorrect data type or an invalid parameter"
+		c.Abort("400")
 	}
 	c.ServeJSON()
 }

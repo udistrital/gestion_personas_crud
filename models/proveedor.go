@@ -12,13 +12,13 @@ import (
 
 type Proveedor struct {
 	Id                    int       `orm:"column(id);pk;auto"`
-	TerceroId             int       `orm:"column(tercero_id)"`
-	TipoRegistroId        int       `orm:"column(tipo_registro_id)"`
+	TipoProveedor         int       `orm:"column(tipo_proveedor)"`
 	DescripcionPortafolio string    `orm:"column(descripcion_portafolio);null"`
+	Consentimiento        bool      `orm:"column(consentimiento);null"`
 	Activo                bool      `orm:"column(activo)"`
 	FechaCreacion         time.Time `orm:"column(fecha_creacion);type(timestamp without time zone)"`
 	FechaModificacion     time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);null"`
-	AutorModificacionId   int       `orm:"column(autor_modificacion_id);null"`
+	UsuarioModificacionId int       `orm:"column(usuario_modificacion_id);null"`
 }
 
 func (t *Proveedor) TableName() string {
@@ -33,8 +33,6 @@ func init() {
 // last inserted Id on success.
 func AddProveedor(m *Proveedor) (id int64, err error) {
 	o := orm.NewOrm()
-	m.Activo = true
-	m.FechaCreacion = time.Now().UTC()
 	id, err = o.Insert(m)
 	return
 }
@@ -135,8 +133,6 @@ func UpdateProveedorById(m *Proveedor) (err error) {
 	v := Proveedor{Id: m.Id}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
-		m.FechaCreacion = v.FechaCreacion
-		m.FechaModificacion = time.Now().UTC()
 		var num int64
 		if num, err = o.Update(m); err == nil {
 			fmt.Println("Number of records updated in database:", num)
@@ -153,9 +149,8 @@ func DeleteProveedor(id int) (err error) {
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
-		v.Activo = false
-		if num, err = o.Update(&v); err == nil {
-			fmt.Println("Number of records updated in database:", num)
+		if num, err = o.Delete(&Proveedor{Id: id}); err == nil {
+			fmt.Println("Number of records deleted in database:", num)
 		}
 	}
 	return

@@ -11,13 +11,13 @@ import (
 	beego "github.com/beego/beego/v2/server/web"
 )
 
-// ResponsabilidadFiscalPerfilController operations for ResponsabilidadFiscalPerfil
-type ResponsabilidadFiscalPerfilController struct {
+// TipoConformacionController operations for TipoConformacion
+type TipoConformacionController struct {
 	beego.Controller
 }
 
 // URLMapping ...
-func (c *ResponsabilidadFiscalPerfilController) URLMapping() {
+func (c *TipoConformacionController) URLMapping() {
 	c.Mapping("Post", c.Post)
 	c.Mapping("GetOne", c.GetOne)
 	c.Mapping("GetAll", c.GetAll)
@@ -27,15 +27,15 @@ func (c *ResponsabilidadFiscalPerfilController) URLMapping() {
 
 // Post ...
 // @Title Post
-// @Description create ResponsabilidadFiscalPerfil
-// @Param	body		body 	models.ResponsabilidadFiscalPerfil	true		"body for ResponsabilidadFiscalPerfil content"
-// @Success 201 {int} models.ResponsabilidadFiscalPerfil
+// @Description create TipoConformacion
+// @Param	body		body 	models.TipoConformacion	true		"body for TipoConformacion content"
+// @Success 201 {int} models.TipoConformacion
 // @Failure 400 the request contains incorrect syntax
 // @router / [post]
-func (c *ResponsabilidadFiscalPerfilController) Post() {
-	var v models.ResponsabilidadFiscalPerfil
+func (c *TipoConformacionController) Post() {
+	var v models.TipoConformacion
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
-		if _, err := models.AddResponsabilidadFiscalPerfil(&v); err == nil {
+		if _, err := models.AddTipoConformacion(&v); err == nil {
 			c.Ctx.Output.SetStatus(201)
 			c.Data["json"] = map[string]interface{}{"Success": true, "Status": "201", "Message": "Registration successful", "Data": v}
 		} else {
@@ -53,15 +53,15 @@ func (c *ResponsabilidadFiscalPerfilController) Post() {
 
 // GetOne ...
 // @Title Get One
-// @Description get ResponsabilidadFiscalPerfil by id
+// @Description get TipoConformacion by id
 // @Param	id		path 	string	true		"The key for staticblock"
-// @Success 200 {object} models.ResponsabilidadFiscalPerfil
+// @Success 200 {object} models.TipoConformacion
 // @Failure 404 not found resource
 // @router /:id [get]
-func (c *ResponsabilidadFiscalPerfilController) GetOne() {
+func (c *TipoConformacionController) GetOne() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
-	v, err := models.GetResponsabilidadFiscalPerfilById(id)
+	v, err := models.GetTipoConformacionById(id)
 	if err != nil {
 		beeLogger.Log.Error(err.Error())
 		c.Data["message"] = "Error service GetOne: The request contains an incorrect parameter or no record exists"
@@ -74,17 +74,17 @@ func (c *ResponsabilidadFiscalPerfilController) GetOne() {
 
 // GetAll ...
 // @Title Get All
-// @Description get ResponsabilidadFiscalPerfil
+// @Description get TipoConformacion
 // @Param	query	query	string	false	"Filter. e.g. col1:v1,col2:v2 ..."
 // @Param	fields	query	string	false	"Fields returned. e.g. col1,col2 ..."
 // @Param	sortby	query	string	false	"Sorted-by fields. e.g. col1,col2 ..."
 // @Param	order	query	string	false	"Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ..."
 // @Param	limit	query	string	false	"Limit the size of result set. Must be an integer"
 // @Param	offset	query	string	false	"Start position of result set. Must be an integer"
-// @Success 200 {object} models.ResponsabilidadFiscalPerfil
+// @Success 200 {object} models.TipoConformacion
 // @Failure 404 not found resource
 // @router / [get]
-func (c *ResponsabilidadFiscalPerfilController) GetAll() {
+func (c *TipoConformacionController) GetAll() {
 	var fields []string
 	var sortby []string
 	var order []string
@@ -117,22 +117,24 @@ func (c *ResponsabilidadFiscalPerfilController) GetAll() {
 		for _, cond := range strings.Split(v, ",") {
 			kv := strings.SplitN(cond, ":", 2)
 			if len(kv) != 2 {
-				c.Data["message"] = "Error service GetAll: invalid query parameter. Expected format: query=campo:valor,campo2:valor2"
-				c.Abort("400")
+				c.Ctx.Output.SetStatus(400)
+				c.Data["json"] = map[string]interface{}{"Success": false, "Status": "400", "Message": "Error service GetAll: invalid query parameter. Expected format: query=campo:valor,campo2:valor2", "Data": nil}
+				c.ServeJSON()
+				return
 			}
 			k, v := kv[0], kv[1]
 			query[k] = v
 		}
 	}
 
-	l, err := models.GetAllResponsabilidadFiscalPerfil(query, fields, sortby, order, offset, limit)
+	l, err := models.GetAllTipoConformacion(query, fields, sortby, order, offset, limit)
 	if err != nil {
 		beeLogger.Log.Error(err.Error())
 		c.Data["message"] = "Error service GetAll: The request contains an incorrect parameter or no record exists"
 		c.Abort("404")
 	} else {
 		if l == nil {
-			l = append(l, map[string]interface{}{})
+			l = []interface{}{}
 		}
 		c.Data["json"] = map[string]interface{}{"Success": true, "Status": "200", "Message": "Request successful", "Data": l}
 	}
@@ -141,27 +143,19 @@ func (c *ResponsabilidadFiscalPerfilController) GetAll() {
 
 // Put ...
 // @Title Put
-// @Description update the ResponsabilidadFiscalPerfil
+// @Description update the TipoConformacion
 // @Param	id		path 	string	true		"The id you want to update"
-// @Param	body		body 	models.ResponsabilidadFiscalPerfil	true		"body for ResponsabilidadFiscalPerfil content"
-// @Success 200 {object} models.ResponsabilidadFiscalPerfil
+// @Param	body		body 	models.TipoConformacion	true		"body for TipoConformacion content"
+// @Success 200 {object} models.TipoConformacion
 // @Failure 400 the request contains incorrect syntax
 // @router /:id [put]
-func (c *ResponsabilidadFiscalPerfilController) Put() {
+func (c *TipoConformacionController) Put() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
-	v := models.ResponsabilidadFiscalPerfil{Id: id}
-	var m models.ResponsabilidadFiscalPerfil
-	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &m); err == nil {
-		if m.Id != 0 && m.Id != v.Id {
-			c.Data["message"] = "Error service Put: The id cannot be modified"
-			c.Abort("400")
-		}
-		if m.Id == 0 {
-			m.Id = v.Id
-		}
-		if err := models.UpdateResponsabilidadFiscalPerfilById(&m); err == nil {
-			c.Data["json"] = map[string]interface{}{"Success": true, "Status": "200", "Message": "Update successful", "Data": m}
+	v := models.TipoConformacion{Id: id}
+	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
+		if err := models.UpdateTipoConformacionById(&v); err == nil {
+			c.Data["json"] = map[string]interface{}{"Success": true, "Status": "200", "Message": "Update successful", "Data": v}
 		} else {
 			beeLogger.Log.Error(err.Error())
 			c.Data["message"] = "Error service Put: The request contains an incorrect data type or an invalid parameter"
@@ -177,21 +171,22 @@ func (c *ResponsabilidadFiscalPerfilController) Put() {
 
 // Delete ...
 // @Title Delete
-// @Description delete the ResponsabilidadFiscalPerfil
+// @Description delete the TipoConformacion
 // @Param	id		path 	string	true		"The id you want to delete"
 // @Success 200 {string} delete success!
 // @Failure 404 not found resource
 // @router /:id [delete]
-func (c *ResponsabilidadFiscalPerfilController) Delete() {
+func (c *TipoConformacionController) Delete() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
-	if err := models.DeleteResponsabilidadFiscalPerfil(id); err == nil {
-		d := map[string]interface{}{"Id": id}
-		c.Data["json"] = map[string]interface{}{"Success": true, "Status": "200", "Message": "Delete successful", "Data": d}
+	v := models.TipoConformacion{Id: id}
+	v.Activo = false
+	if err := models.UpdateTipoConformacionById(&v); err == nil {
+		c.Data["json"] = map[string]interface{}{"Success": true, "Status": "200", "Message": "Update successful", "Data": v}
 	} else {
 		beeLogger.Log.Error(err.Error())
-		c.Data["message"] = "Error service Delete: Request contains incorrect parameter"
-		c.Abort("404")
+		c.Data["message"] = "Error service Put: The request contains an incorrect data type or an invalid parameter"
+		c.Abort("400")
 	}
 	c.ServeJSON()
 }

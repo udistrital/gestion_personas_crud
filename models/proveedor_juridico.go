@@ -11,18 +11,24 @@ import (
 )
 
 type ProveedorJuridico struct {
-	Id                       int       `orm:"column(id);pk;auto"`
-	NombreComercial          string    `orm:"column(nombre_comercial)"`
-	MatriculaMercantil       int       `orm:"column(matricula_mercantil)"`
-	FechaConstitucion        time.Time `orm:"column(fecha_constitucion);type(date)"`
-	FechaRenovacion          time.Time `orm:"column(fecha_renovacion);type(date)"`
-	ReportaBeneficiosFinales bool      `orm:"column(reporta_beneficios_finales)"`
-	CotizaBolsa              bool      `orm:"column(cotiza_bolsa)"`
-	RequiereRevisorFiscal    bool      `orm:"column(requiere_revisor_fiscal)"`
-	Activo                   bool      `orm:"column(activo)"`
-	FechaCreacion            time.Time `orm:"column(fecha_creacion);type(timestamp without time zone)"`
-	FechaModificacion        time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);null"`
-	AutorModificacionId      int       `orm:"column(autor_modificacion_id);null"`
+	Id                    int               `orm:"column(id);pk;auto"`
+	ProcedenciaEmpresaId  int               `orm:"column(procedencia_empresa_id)"`
+	CiudadOrigenId        int               `orm:"column(ciudad_origen_id);null"`
+	PaisOrigenId          int               `orm:"column(pais_origen_id);null"`
+	CodigoPostal          string            `orm:"column(codigo_postal);null"`
+	TipoConformacionId    *TipoConformacion `orm:"column(tipo_conformacion_id);rel(fk)"`
+	ExclusividadProducto  bool              `orm:"column(exclusividad_producto)"`
+	RegimenContributivo   int               `orm:"column(regimen_contributivo)"`
+	Pyme                  bool              `orm:"column(pyme)"`
+	RegistroMercantil     bool              `orm:"column(registro_mercantil)"`
+	SujetoRetencion       bool              `orm:"column(sujeto_retencion)"`
+	AgenteRetenedor       bool              `orm:"column(agente_retenedor)"`
+	ResponsableIca        bool              `orm:"column(responsable_ica)"`
+	ResponsableIva        bool              `orm:"column(responsable_iva)"`
+	Activo                bool              `orm:"column(activo)"`
+	FechaCreacion         time.Time         `orm:"column(fecha_creacion);type(timestamp without time zone)"`
+	FechaModificacion     time.Time         `orm:"column(fecha_modificacion);type(timestamp without time zone);null"`
+	UsuarioModificacionId int               `orm:"column(usuario_modificacion_id);null"`
 }
 
 func (t *ProveedorJuridico) TableName() string {
@@ -37,8 +43,6 @@ func init() {
 // last inserted Id on success.
 func AddProveedorJuridico(m *ProveedorJuridico) (id int64, err error) {
 	o := orm.NewOrm()
-	m.Activo = true
-	m.FechaCreacion = time.Now().UTC()
 	id, err = o.Insert(m)
 	return
 }
@@ -139,8 +143,6 @@ func UpdateProveedorJuridicoById(m *ProveedorJuridico) (err error) {
 	v := ProveedorJuridico{Id: m.Id}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
-		m.FechaCreacion = v.FechaCreacion
-		m.FechaModificacion = time.Now().UTC()
 		var num int64
 		if num, err = o.Update(m); err == nil {
 			fmt.Println("Number of records updated in database:", num)
@@ -157,9 +159,8 @@ func DeleteProveedorJuridico(id int) (err error) {
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
-		v.Activo = false
-		if num, err = o.Update(&v); err == nil {
-			fmt.Println("Number of records updated in database:", num)
+		if num, err = o.Delete(&ProveedorJuridico{Id: id}); err == nil {
+			fmt.Println("Number of records deleted in database:", num)
 		}
 	}
 	return

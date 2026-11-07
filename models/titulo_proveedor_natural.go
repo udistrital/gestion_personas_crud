@@ -5,53 +5,56 @@ import (
 	"fmt"
 	"reflect"
 	"strings"
+	"time"
 
 	"github.com/beego/beego/v2/client/orm"
 )
 
-type RangoFacturacion struct {
-	Id                int     `orm:"column(id);pk;auto"`
-	Nombre            string  `orm:"column(nombre)"`
-	Descripcion       string  `orm:"column(descripcion);null"`
-	CodigoAbreviacion string  `orm:"column(codigo_abreviacion);null"`
-	Activo            bool    `orm:"column(activo)"`
-	NumeroOrden       float64 `orm:"column(numero_orden);null"`
+type TituloProveedorNatural struct {
+	Id                              int        `orm:"column(id);pk;auto"`
+	TituloObtenido                  string     `orm:"column(titulo_obtenido)"`
+	NucleoBasicoConocimientoSniesId int        `orm:"column(nucleo_basico_conocimiento_snies_id)"`
+	ProveedorId                     *Proveedor `orm:"column(proveedor_id);rel(fk)"`
+	PerfilId                        int        `orm:"column(perfil_id)"`
+	Activo                          bool       `orm:"column(activo)"`
+	FechaCreacion                   time.Time  `orm:"column(fecha_creacion);type(timestamp without time zone)"`
+	FechaModificacion               time.Time  `orm:"column(fecha_modificacion);type(timestamp without time zone);null"`
+	UsuarioModificacionId           int        `orm:"column(usuario_modificacion_id);null"`
 }
 
-func (t *RangoFacturacion) TableName() string {
-	return "rango_facturacion"
+func (t *TituloProveedorNatural) TableName() string {
+	return "titulo_proveedor_natural"
 }
 
 func init() {
-	orm.RegisterModel(new(RangoFacturacion))
+	orm.RegisterModel(new(TituloProveedorNatural))
 }
 
-// AddRangoFacturacion insert a new RangoFacturacion into database and returns
+// AddTituloProveedorNatural insert a new TituloProveedorNatural into database and returns
 // last inserted Id on success.
-func AddRangoFacturacion(m *RangoFacturacion) (id int64, err error) {
+func AddTituloProveedorNatural(m *TituloProveedorNatural) (id int64, err error) {
 	o := orm.NewOrm()
-	m.Activo = true
 	id, err = o.Insert(m)
 	return
 }
 
-// GetRangoFacturacionById retrieves RangoFacturacion by Id. Returns error if
+// GetTituloProveedorNaturalById retrieves TituloProveedorNatural by Id. Returns error if
 // Id doesn't exist
-func GetRangoFacturacionById(id int) (v *RangoFacturacion, err error) {
+func GetTituloProveedorNaturalById(id int) (v *TituloProveedorNatural, err error) {
 	o := orm.NewOrm()
-	v = &RangoFacturacion{Id: id}
+	v = &TituloProveedorNatural{Id: id}
 	if err = o.Read(v); err == nil {
 		return v, nil
 	}
 	return nil, err
 }
 
-// GetAllRangoFacturacion retrieves all RangoFacturacion matches certain condition. Returns empty list if
+// GetAllTituloProveedorNatural retrieves all TituloProveedorNatural matches certain condition. Returns empty list if
 // no records exist
-func GetAllRangoFacturacion(query map[string]string, fields []string, sortby []string, order []string,
+func GetAllTituloProveedorNatural(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(RangoFacturacion)).RelatedSel()
+	qs := o.QueryTable(new(TituloProveedorNatural)).RelatedSel()
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute
@@ -101,7 +104,7 @@ func GetAllRangoFacturacion(query map[string]string, fields []string, sortby []s
 		}
 	}
 
-	var l []RangoFacturacion
+	var l []TituloProveedorNatural
 	qs = qs.OrderBy(sortFields...)
 	if _, err = qs.Limit(limit, offset).All(&l, fields...); err == nil {
 		if len(fields) == 0 {
@@ -124,11 +127,11 @@ func GetAllRangoFacturacion(query map[string]string, fields []string, sortby []s
 	return nil, err
 }
 
-// UpdateRangoFacturacion updates RangoFacturacion by Id and returns error if
+// UpdateTituloProveedorNatural updates TituloProveedorNatural by Id and returns error if
 // the record to be updated doesn't exist
-func UpdateRangoFacturacionById(m *RangoFacturacion) (err error) {
+func UpdateTituloProveedorNaturalById(m *TituloProveedorNatural) (err error) {
 	o := orm.NewOrm()
-	v := RangoFacturacion{Id: m.Id}
+	v := TituloProveedorNatural{Id: m.Id}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
@@ -139,17 +142,16 @@ func UpdateRangoFacturacionById(m *RangoFacturacion) (err error) {
 	return
 }
 
-// DeleteRangoFacturacion deletes RangoFacturacion by Id and returns error if
+// DeleteTituloProveedorNatural deletes TituloProveedorNatural by Id and returns error if
 // the record to be deleted doesn't exist
-func DeleteRangoFacturacion(id int) (err error) {
+func DeleteTituloProveedorNatural(id int) (err error) {
 	o := orm.NewOrm()
-	v := RangoFacturacion{Id: id}
+	v := TituloProveedorNatural{Id: id}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
-		v.Activo = false
-		if num, err = o.Update(&v); err == nil {
-			fmt.Println("Number of records updated in database:", num)
+		if num, err = o.Delete(&TituloProveedorNatural{Id: id}); err == nil {
+			fmt.Println("Number of records deleted in database:", num)
 		}
 	}
 	return

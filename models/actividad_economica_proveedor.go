@@ -11,14 +11,13 @@ import (
 )
 
 type ActividadEconomicaProveedor struct {
-	Id                   int        `orm:"column(id);pk;auto"`
-	ProveedorId          *Proveedor `orm:"column(proveedor_id);rel(fk)"`
-	ActividadEconomicaId int        `orm:"column(actividad_economica_id)"`
-	EsPrincipal          bool       `orm:"column(es_principal)"`
-	Activo               bool       `orm:"column(activo)"`
-	FechaCreacion        time.Time  `orm:"column(fecha_creacion);type(timestamp without time zone)"`
-	FechaModificacion    time.Time  `orm:"column(fecha_modificacion);type(timestamp without time zone);null"`
-	AutorModificacionId  int        `orm:"column(autor_modificacion_id);null"`
+	Id                    int        `orm:"column(id);pk;auto"`
+	ProveedorId           *Proveedor `orm:"column(proveedor_id);rel(fk)"`
+	ActividadEconomicaId  int        `orm:"column(actividad_economica_id)"`
+	Activo                bool       `orm:"column(activo)"`
+	FechaCreacion         time.Time  `orm:"column(fecha_creacion);type(timestamp without time zone)"`
+	FechaModificacion     time.Time  `orm:"column(fecha_modificacion);type(timestamp without time zone);null"`
+	UsuarioModificacionId int        `orm:"column(usuario_modificacion_id);null"`
 }
 
 func (t *ActividadEconomicaProveedor) TableName() string {
@@ -33,8 +32,6 @@ func init() {
 // last inserted Id on success.
 func AddActividadEconomicaProveedor(m *ActividadEconomicaProveedor) (id int64, err error) {
 	o := orm.NewOrm()
-	m.Activo = true
-	m.FechaCreacion = time.Now().UTC()
 	id, err = o.Insert(m)
 	return
 }
@@ -135,8 +132,6 @@ func UpdateActividadEconomicaProveedorById(m *ActividadEconomicaProveedor) (err 
 	v := ActividadEconomicaProveedor{Id: m.Id}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
-		m.FechaCreacion = v.FechaCreacion
-		m.FechaModificacion = time.Now().UTC()
 		var num int64
 		if num, err = o.Update(m); err == nil {
 			fmt.Println("Number of records updated in database:", num)
@@ -153,9 +148,8 @@ func DeleteActividadEconomicaProveedor(id int) (err error) {
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
-		v.Activo = false
-		if num, err = o.Update(&v); err == nil {
-			fmt.Println("Number of records updated in database:", num)
+		if num, err = o.Delete(&ActividadEconomicaProveedor{Id: id}); err == nil {
+			fmt.Println("Number of records deleted in database:", num)
 		}
 	}
 	return

@@ -11,14 +11,29 @@ import (
 )
 
 type ProveedorNatural struct {
-	Id                          int       `orm:"column(id);pk;auto"`
-	PerfilDeclarado             *Perfil   `orm:"column(perfil_declarado);rel(fk)"`
-	ExperienciaLaboralMeses     int       `orm:"column(experiencia_laboral_meses)"`
-	ExperienciaProfesionalMeses int       `orm:"column(experiencia_profesional_meses)"`
-	Activo                      bool      `orm:"column(activo)"`
-	FechaCreacion               time.Time `orm:"column(fecha_creacion);type(timestamp without time zone)"`
-	FechaModificacion           time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);null"`
-	AutorModificacionId         int       `orm:"column(autor_modificacion_id);null"`
+	Id                                int       `orm:"column(id);pk;auto"`
+	PaisNacimientoId                  int       `orm:"column(pais_nacimiento_id)"`
+	Cargo                             string    `orm:"column(cargo);null"`
+	MedicinaPrepagada                 bool      `orm:"column(medicina_prepagada);null"`
+	ValorUvtPrepagada                 float64   `orm:"column(valor_uvt_prepagada);null"`
+	InteresViviendaAfc                float64   `orm:"column(interes_vivienda_afc);null"`
+	DependienteHijoMejorEdad          bool      `orm:"column(dependiente_hijo_mejor_edad);null"`
+	DependienteHijoMenos23Estudiando  bool      `orm:"column(dependiente_hijo_menos23_estudiando);null"`
+	DependienteHijoMas23Discapacitado bool      `orm:"column(dependiente_hijo_mas23_discapacitado);null"`
+	DependienteConyuge                bool      `orm:"column(dependiente_conyuge);null"`
+	DependientePadreOHermano          bool      `orm:"column(dependiente_padre_o_hermano);null"`
+	Pensionado                        bool      `orm:"column(pensionado);null"`
+	ValorAfc                          float64   `orm:"column(valor_afc);null"`
+	ResponsableIva                    bool      `orm:"column(responsable_iva);null"`
+	ResideColombia                    bool      `orm:"column(reside_colombia);null"`
+	PensionVoluntaria                 bool      `orm:"column(pension_voluntaria);null"`
+	ValorPensionVoluntaria            float64   `orm:"column(valor_pension_voluntaria);null"`
+	ExperienciaLaboral                int       `orm:"column(experiencia_laboral);null"`
+	ExperienciaProfesional            int       `orm:"column(experiencia_profesional);null"`
+	Activo                            bool      `orm:"column(activo)"`
+	FechaCreacion                     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone)"`
+	FechaModificacion                 time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);null"`
+	UsuarioModificacionId             int       `orm:"column(usuario_modificacion_id);null"`
 }
 
 func (t *ProveedorNatural) TableName() string {
@@ -33,8 +48,6 @@ func init() {
 // last inserted Id on success.
 func AddProveedorNatural(m *ProveedorNatural) (id int64, err error) {
 	o := orm.NewOrm()
-	m.Activo = true
-	m.FechaCreacion = time.Now().UTC()
 	id, err = o.Insert(m)
 	return
 }
@@ -135,8 +148,6 @@ func UpdateProveedorNaturalById(m *ProveedorNatural) (err error) {
 	v := ProveedorNatural{Id: m.Id}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
-		m.FechaCreacion = v.FechaCreacion
-		m.FechaModificacion = time.Now().UTC()
 		var num int64
 		if num, err = o.Update(m); err == nil {
 			fmt.Println("Number of records updated in database:", num)
@@ -153,9 +164,8 @@ func DeleteProveedorNatural(id int) (err error) {
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
-		v.Activo = false
-		if num, err = o.Update(&v); err == nil {
-			fmt.Println("Number of records updated in database:", num)
+		if num, err = o.Delete(&ProveedorNatural{Id: id}); err == nil {
+			fmt.Println("Number of records deleted in database:", num)
 		}
 	}
 	return

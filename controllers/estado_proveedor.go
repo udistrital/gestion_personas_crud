@@ -6,18 +6,19 @@ import (
 	"strings"
 
 	"github.com/udistrital/gestion_personas_crud/models"
+	"github.com/udistrital/utils_oas/time_bogota"
 
 	beeLogger "github.com/beego/bee/v2/logger"
 	beego "github.com/beego/beego/v2/server/web"
 )
 
-// TipoDeclaracionProveedorController operations for TipoDeclaracionProveedor
-type TipoDeclaracionProveedorController struct {
+// EstadoProveedorController operations for EstadoProveedor
+type EstadoProveedorController struct {
 	beego.Controller
 }
 
 // URLMapping ...
-func (c *TipoDeclaracionProveedorController) URLMapping() {
+func (c *EstadoProveedorController) URLMapping() {
 	c.Mapping("Post", c.Post)
 	c.Mapping("GetOne", c.GetOne)
 	c.Mapping("GetAll", c.GetAll)
@@ -27,15 +28,18 @@ func (c *TipoDeclaracionProveedorController) URLMapping() {
 
 // Post ...
 // @Title Post
-// @Description create TipoDeclaracionProveedor
-// @Param	body		body 	models.TipoDeclaracionProveedor	true		"body for TipoDeclaracionProveedor content"
-// @Success 201 {int} models.TipoDeclaracionProveedor
+// @Description create EstadoProveedor
+// @Param	body		body 	models.EstadoProveedor	true		"body for EstadoProveedor content"
+// @Success 201 {int} models.EstadoProveedor
 // @Failure 400 the request contains incorrect syntax
 // @router / [post]
-func (c *TipoDeclaracionProveedorController) Post() {
-	var v models.TipoDeclaracionProveedor
+func (c *EstadoProveedorController) Post() {
+	var v models.EstadoProveedor
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
-		if _, err := models.AddTipoDeclaracionProveedor(&v); err == nil {
+		v.Activo = true
+		v.FechaCreacion = time_bogota.Tiempo_bogota()
+		v.FechaModificacion = time_bogota.Tiempo_bogota()
+		if _, err := models.AddEstadoProveedor(&v); err == nil {
 			c.Ctx.Output.SetStatus(201)
 			c.Data["json"] = map[string]interface{}{"Success": true, "Status": "201", "Message": "Registration successful", "Data": v}
 		} else {
@@ -53,15 +57,15 @@ func (c *TipoDeclaracionProveedorController) Post() {
 
 // GetOne ...
 // @Title Get One
-// @Description get TipoDeclaracionProveedor by id
+// @Description get EstadoProveedor by id
 // @Param	id		path 	string	true		"The key for staticblock"
-// @Success 200 {object} models.TipoDeclaracionProveedor
+// @Success 200 {object} models.EstadoProveedor
 // @Failure 404 not found resource
 // @router /:id [get]
-func (c *TipoDeclaracionProveedorController) GetOne() {
+func (c *EstadoProveedorController) GetOne() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
-	v, err := models.GetTipoDeclaracionProveedorById(id)
+	v, err := models.GetEstadoProveedorById(id)
 	if err != nil {
 		beeLogger.Log.Error(err.Error())
 		c.Data["message"] = "Error service GetOne: The request contains an incorrect parameter or no record exists"
@@ -74,17 +78,17 @@ func (c *TipoDeclaracionProveedorController) GetOne() {
 
 // GetAll ...
 // @Title Get All
-// @Description get TipoDeclaracionProveedor
+// @Description get EstadoProveedor
 // @Param	query	query	string	false	"Filter. e.g. col1:v1,col2:v2 ..."
 // @Param	fields	query	string	false	"Fields returned. e.g. col1,col2 ..."
 // @Param	sortby	query	string	false	"Sorted-by fields. e.g. col1,col2 ..."
 // @Param	order	query	string	false	"Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ..."
 // @Param	limit	query	string	false	"Limit the size of result set. Must be an integer"
 // @Param	offset	query	string	false	"Start position of result set. Must be an integer"
-// @Success 200 {object} models.TipoDeclaracionProveedor
+// @Success 200 {object} models.EstadoProveedor
 // @Failure 404 not found resource
 // @router / [get]
-func (c *TipoDeclaracionProveedorController) GetAll() {
+func (c *EstadoProveedorController) GetAll() {
 	var fields []string
 	var sortby []string
 	var order []string
@@ -117,22 +121,24 @@ func (c *TipoDeclaracionProveedorController) GetAll() {
 		for _, cond := range strings.Split(v, ",") {
 			kv := strings.SplitN(cond, ":", 2)
 			if len(kv) != 2 {
-				c.Data["message"] = "Error service GetAll: invalid query parameter. Expected format: query=campo:valor,campo2:valor2"
-				c.Abort("400")
+				c.Ctx.Output.SetStatus(400)
+				c.Data["json"] = map[string]interface{}{"Success": false, "Status": "400", "Message": "Error service GetAll: invalid query parameter. Expected format: query=campo:valor,campo2:valor2", "Data": nil}
+				c.ServeJSON()
+				return
 			}
 			k, v := kv[0], kv[1]
 			query[k] = v
 		}
 	}
 
-	l, err := models.GetAllTipoDeclaracionProveedor(query, fields, sortby, order, offset, limit)
+	l, err := models.GetAllEstadoProveedor(query, fields, sortby, order, offset, limit)
 	if err != nil {
 		beeLogger.Log.Error(err.Error())
 		c.Data["message"] = "Error service GetAll: The request contains an incorrect parameter or no record exists"
 		c.Abort("404")
 	} else {
 		if l == nil {
-			l = append(l, map[string]interface{}{})
+			l = []interface{}{}
 		}
 		c.Data["json"] = map[string]interface{}{"Success": true, "Status": "200", "Message": "Request successful", "Data": l}
 	}
@@ -141,27 +147,29 @@ func (c *TipoDeclaracionProveedorController) GetAll() {
 
 // Put ...
 // @Title Put
-// @Description update the TipoDeclaracionProveedor
+// @Description update the EstadoProveedor
 // @Param	id		path 	string	true		"The id you want to update"
-// @Param	body		body 	models.TipoDeclaracionProveedor	true		"body for TipoDeclaracionProveedor content"
-// @Success 200 {object} models.TipoDeclaracionProveedor
+// @Param	body		body 	models.EstadoProveedor	true		"body for EstadoProveedor content"
+// @Success 200 {object} models.EstadoProveedor
 // @Failure 400 the request contains incorrect syntax
 // @router /:id [put]
-func (c *TipoDeclaracionProveedorController) Put() {
+func (c *EstadoProveedorController) Put() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
-	v := models.TipoDeclaracionProveedor{Id: id}
-	var m models.TipoDeclaracionProveedor
-	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &m); err == nil {
-		if m.Id != 0 && m.Id != v.Id {
+	v := models.EstadoProveedor{Id: id}
+	fechaCreacionOriginal := v.FechaCreacion
+	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
+		if v.Id != id {
 			c.Data["message"] = "Error service Put: The id cannot be modified"
 			c.Abort("400")
 		}
-		if m.Id == 0 {
-			m.Id = v.Id
+		if v.Id == 0 {
+			v.Id = id
 		}
-		if err := models.UpdateTipoDeclaracionProveedorById(&m); err == nil {
-			c.Data["json"] = map[string]interface{}{"Success": true, "Status": "200", "Message": "Update successful", "Data": m}
+		v.FechaCreacion = fechaCreacionOriginal
+		v.FechaModificacion = time_bogota.Tiempo_bogota()
+		if err := models.UpdateEstadoProveedorById(&v); err == nil {
+			c.Data["json"] = map[string]interface{}{"Success": true, "Status": "200", "Message": "Update successful", "Data": v}
 		} else {
 			beeLogger.Log.Error(err.Error())
 			c.Data["message"] = "Error service Put: The request contains an incorrect data type or an invalid parameter"
@@ -177,21 +185,23 @@ func (c *TipoDeclaracionProveedorController) Put() {
 
 // Delete ...
 // @Title Delete
-// @Description delete the TipoDeclaracionProveedor
+// @Description delete the EstadoProveedor
 // @Param	id		path 	string	true		"The id you want to delete"
 // @Success 200 {string} delete success!
 // @Failure 404 not found resource
 // @router /:id [delete]
-func (c *TipoDeclaracionProveedorController) Delete() {
+func (c *EstadoProveedorController) Delete() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
-	if err := models.DeleteTipoDeclaracionProveedor(id); err == nil {
-		d := map[string]interface{}{"Id": id}
-		c.Data["json"] = map[string]interface{}{"Success": true, "Status": "200", "Message": "Delete successful", "Data": d}
+	v := models.EstadoProveedor{Id: id}
+	v.Activo = false
+	v.FechaModificacion = time_bogota.Tiempo_bogota()
+	if err := models.UpdateEstadoProveedorById(&v); err == nil {
+		c.Data["json"] = map[string]interface{}{"Success": true, "Status": "200", "Message": "Update successful", "Data": v}
 	} else {
 		beeLogger.Log.Error(err.Error())
-		c.Data["message"] = "Error service Delete: Request contains incorrect parameter"
-		c.Abort("404")
+		c.Data["message"] = "Error service Put: The request contains an incorrect data type or an invalid parameter"
+		c.Abort("400")
 	}
 	c.ServeJSON()
 }
