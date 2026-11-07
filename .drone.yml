@@ -27,7 +27,7 @@ steps:
     - push
 
 - name: go_run_test
-  image: golang:1.25
+  image: golang:1.27
   commands:
     - go vet ./...
     - go fmt ./... && git diff --exit-code || (echo "Go fmt detected formatting issues! Please run 'go fmt' to format your code." && exit 1)
@@ -40,6 +40,7 @@ steps:
     # - cat coverage.xml
     # - go install github.com/jstemmer/go-junit-report@latest
     # - go test -v ./... | go-junit-report > test_report.xml
+    - go test ./...
     # - cat test_report.xml
   when:
     branch:
@@ -50,7 +51,7 @@ steps:
       - push
 
 - name: build
-  image: golang:1.25
+  image: golang:1.27
   commands:
     - GOOS=linux GOARCH=amd64 go build -o main
   when:
