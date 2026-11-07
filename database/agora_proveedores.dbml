@@ -33,7 +33,7 @@ Table proveedores.proveedor {
   ~campos_auditoria
 
   indexes {
-    id [pk, name: 'pk_proveedor']
+    id [name: 'pk_proveedor']
     tipo_proveedor [name: 'idx_proveedor_tipo_proveedor']
     activo [name: 'idx_proveedor_activo']
     fecha_creacion [name: 'idx_proveedor_fecha_creacion']
@@ -53,7 +53,7 @@ Table proveedores.contacto {
   ~campos_auditoria
 
   indexes {
-    id [pk, name: 'pk_contacto']
+    id [name: 'pk_contacto']
     proveedor_id [name: 'idx_contacto_proveedor_id']
     tipo_canal_contacto_id [name: 'idx_contacto_tipo_canal_contacto_id']
     activo [name: 'idx_contacto_activo']
@@ -71,7 +71,7 @@ Table proveedores.estado_proveedor {
   ~campos_auditoria
 
   indexes {
-    id [pk, name: 'pk_estado_proveedor']
+    id [name: 'pk_estado_proveedor']
     estado_id [name: 'idx_estado_proveedor_estado_id']
     proveedor_id [name: 'idx_estado_proveedor_proveedor_id']
     activo [name: 'idx_estado_proveedor_activo']
@@ -93,7 +93,7 @@ Table proveedores.cuenta_bancaria {
   ~campos_auditoria
 
   indexes {
-    id [pk, name: 'pk_cuenta_bancaria']
+    id [name: 'pk_cuenta_bancaria']
     tipo_cuenta_id [name: 'idx_cuenta_bancaria_tipo_cuenta_id']
     entidad_bancaria_id [name: 'idx_cuenta_bancaria_entidad_bancaria_id']
     contacto_id [name: 'idx_cuenta_bancaria_contacto_id']
@@ -114,7 +114,7 @@ Table proveedores.documento {
   ~campos_auditoria
 
   indexes {
-    id [pk, name: 'pk_documento']
+    id [name: 'pk_documento']
     tipo_documento_id [name: 'idx_documento_tipo_documento_id']
     proveedor_id [name: 'idx_documento_proveedor_id']
     activo [name: 'idx_documento_activo']
@@ -147,7 +147,7 @@ Table proveedores.proveedor_natural {
   ~campos_auditoria
 
   indexes {
-    id [pk, name: 'pk_proveedor_natural']
+    id [name: 'pk_proveedor_natural']
     pais_nacimiento_id [name: 'idx_proveedor_natural_pais_nacimiento_id']
     activo [name: 'idx_proveedor_natural_activo']
     fecha_creacion [name: 'idx_proveedor_natural_fecha_creacion']
@@ -163,7 +163,7 @@ Table proveedores.perfil_proveedor {
   ~campos_auditoria
 
   indexes {
-    id [pk, name: 'pk_perfil_proveedor']
+    id [name: 'pk_perfil_proveedor']
     perfil_id [name: 'idx_perfil_proveedor_perfil_id']
     proveedor_id [name: 'idx_perfil_proveedor_proveedor_id']
     activo [name: 'idx_perfil_proveedor_activo']
@@ -182,7 +182,7 @@ Table proveedores.titulo_proveedor_natural {
   ~campos_auditoria
 
   indexes {
-    id [pk, name: 'pk_titulo_proveedor_natural']
+    id [name: 'pk_titulo_proveedor_natural']
     nucleo_basico_conocimiento_snies_id [name: 'idx_titulo_proveedor_natural_nucleo_basico_conocimiento_snies_id']
     proveedor_id [name: 'idx_titulo_proveedor_natural_proveedor_id']
     perfil_id [name: 'idx_titulo_proveedor_natural_perfil_id']
@@ -211,7 +211,7 @@ Table proveedores.proveedor_juridico {
   ~campos_auditoria
 
   indexes {
-    id [pk, name: 'pk_proveedor_juridico']
+    id [name: 'pk_proveedor_juridico']
     procedencia_empresa_id [name: 'idx_proveedor_juridico_procedencia_empresa_id']
     ciudad_origen_id [name: 'idx_proveedor_juridico_ciudad_origen_id']
     pais_origen_id [name: 'idx_proveedor_juridico_pais_origen_id']
@@ -231,7 +231,7 @@ Table proveedores.actividad_economica_proveedor {
   ~campos_auditoria
 
   indexes {
-    id [pk, name: 'pk_actividad_economica_proveedor']
+    id [name: 'pk_actividad_economica_proveedor']
     proveedor_id [name: 'idx_actividad_economica_proveedor_proveedor_id']
     actividad_economica_id [name: 'idx_actividad_economica_proveedor_actividad_economica_id']
     activo [name: 'idx_actividad_economica_proveedor_activo']
@@ -248,7 +248,7 @@ Table proveedores.representacion {
   ~campos_auditoria
 
   indexes {
-    id [pk, name: 'pk_representacion']
+    id [name: 'pk_representacion']
     proveedor_id [name: 'idx_representacion_proveedor_id']
     representante_id [name: 'idx_representacion_representante_id']
     activo [name: 'idx_representacion_activo']
@@ -266,7 +266,7 @@ Table proveedores.persona_juridica_tipo_entidad {
   ~campos_auditoria
 
   indexes {
-    id [pk, name: 'pk_persona_juridica_tipo_entidad']
+    id [name: 'pk_persona_juridica_tipo_entidad']
     tipo_entidad_id [name: 'idx_persona_juridica_tipo_entidad_tipo_entidad_id']
     persona_juridica_id [name: 'idx_persona_juridica_tipo_entidad_persona_juridica_id']
     activo [name: 'idx_persona_juridica_tipo_entidad_activo']
@@ -281,7 +281,7 @@ Table proveedores.tipo_conformacion {
   ~campos_parametro
 
   indexes {
-    id [pk, name: 'pk_tipo_conformacion']
+    id [name: 'pk_tipo_conformacion']
     activo [name: 'idx_tipo_conformacion_activo']
   }
 }

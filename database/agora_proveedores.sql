@@ -8,8 +8,7 @@ CREATE TABLE "proveedores"."proveedor" (
   "activo" boolean NOT NULL DEFAULT (true),
   "fecha_creacion" timestamp NOT NULL DEFAULT (now()),
   "fecha_modificacion" timestamp,
-  "usuario_modificacion_id" integer,
-  PRIMARY KEY ("id")
+  "usuario_modificacion_id" integer
 );
 
 CREATE TABLE "proveedores"."contacto" (
@@ -23,8 +22,7 @@ CREATE TABLE "proveedores"."contacto" (
   "activo" boolean NOT NULL DEFAULT (true),
   "fecha_creacion" timestamp NOT NULL DEFAULT (now()),
   "fecha_modificacion" timestamp,
-  "usuario_modificacion_id" integer,
-  PRIMARY KEY ("id")
+  "usuario_modificacion_id" integer
 );
 
 CREATE TABLE "proveedores"."estado_proveedor" (
@@ -35,8 +33,7 @@ CREATE TABLE "proveedores"."estado_proveedor" (
   "activo" boolean NOT NULL DEFAULT (true),
   "fecha_creacion" timestamp NOT NULL DEFAULT (now()),
   "fecha_modificacion" timestamp,
-  "usuario_modificacion_id" integer,
-  PRIMARY KEY ("id")
+  "usuario_modificacion_id" integer
 );
 
 CREATE TABLE "proveedores"."cuenta_bancaria" (
@@ -51,8 +48,7 @@ CREATE TABLE "proveedores"."cuenta_bancaria" (
   "activo" boolean NOT NULL DEFAULT (true),
   "fecha_creacion" timestamp NOT NULL DEFAULT (now()),
   "fecha_modificacion" timestamp,
-  "usuario_modificacion_id" integer,
-  PRIMARY KEY ("id")
+  "usuario_modificacion_id" integer
 );
 
 CREATE TABLE "proveedores"."documento" (
@@ -63,8 +59,7 @@ CREATE TABLE "proveedores"."documento" (
   "activo" boolean NOT NULL DEFAULT (true),
   "fecha_creacion" timestamp NOT NULL DEFAULT (now()),
   "fecha_modificacion" timestamp,
-  "usuario_modificacion_id" integer,
-  PRIMARY KEY ("id")
+  "usuario_modificacion_id" integer
 );
 
 CREATE TABLE "proveedores"."proveedor_natural" (
@@ -90,8 +85,7 @@ CREATE TABLE "proveedores"."proveedor_natural" (
   "activo" boolean NOT NULL DEFAULT (true),
   "fecha_creacion" timestamp NOT NULL DEFAULT (now()),
   "fecha_modificacion" timestamp,
-  "usuario_modificacion_id" integer,
-  PRIMARY KEY ("id")
+  "usuario_modificacion_id" integer
 );
 
 CREATE TABLE "proveedores"."perfil_proveedor" (
@@ -101,8 +95,7 @@ CREATE TABLE "proveedores"."perfil_proveedor" (
   "activo" boolean NOT NULL DEFAULT (true),
   "fecha_creacion" timestamp NOT NULL DEFAULT (now()),
   "fecha_modificacion" timestamp,
-  "usuario_modificacion_id" integer,
-  PRIMARY KEY ("id")
+  "usuario_modificacion_id" integer
 );
 
 CREATE TABLE "proveedores"."titulo_proveedor_natural" (
@@ -114,8 +107,7 @@ CREATE TABLE "proveedores"."titulo_proveedor_natural" (
   "activo" boolean NOT NULL DEFAULT (true),
   "fecha_creacion" timestamp NOT NULL DEFAULT (now()),
   "fecha_modificacion" timestamp,
-  "usuario_modificacion_id" integer,
-  PRIMARY KEY ("id")
+  "usuario_modificacion_id" integer
 );
 
 CREATE TABLE "proveedores"."proveedor_juridico" (
@@ -136,8 +128,7 @@ CREATE TABLE "proveedores"."proveedor_juridico" (
   "activo" boolean NOT NULL DEFAULT (true),
   "fecha_creacion" timestamp NOT NULL DEFAULT (now()),
   "fecha_modificacion" timestamp,
-  "usuario_modificacion_id" integer,
-  PRIMARY KEY ("id")
+  "usuario_modificacion_id" integer
 );
 
 CREATE TABLE "proveedores"."actividad_economica_proveedor" (
@@ -147,8 +138,7 @@ CREATE TABLE "proveedores"."actividad_economica_proveedor" (
   "activo" boolean NOT NULL DEFAULT (true),
   "fecha_creacion" timestamp NOT NULL DEFAULT (now()),
   "fecha_modificacion" timestamp,
-  "usuario_modificacion_id" integer,
-  PRIMARY KEY ("id")
+  "usuario_modificacion_id" integer
 );
 
 CREATE TABLE "proveedores"."representacion" (
@@ -158,8 +148,7 @@ CREATE TABLE "proveedores"."representacion" (
   "activo" boolean NOT NULL DEFAULT (true),
   "fecha_creacion" timestamp NOT NULL DEFAULT (now()),
   "fecha_modificacion" timestamp,
-  "usuario_modificacion_id" integer,
-  PRIMARY KEY ("id")
+  "usuario_modificacion_id" integer
 );
 
 CREATE TABLE "proveedores"."persona_juridica_tipo_entidad" (
@@ -170,8 +159,7 @@ CREATE TABLE "proveedores"."persona_juridica_tipo_entidad" (
   "activo" boolean NOT NULL DEFAULT (true),
   "fecha_creacion" timestamp NOT NULL DEFAULT (now()),
   "fecha_modificacion" timestamp,
-  "usuario_modificacion_id" integer,
-  PRIMARY KEY ("id")
+  "usuario_modificacion_id" integer
 );
 
 CREATE TABLE "proveedores"."tipo_conformacion" (
@@ -180,9 +168,10 @@ CREATE TABLE "proveedores"."tipo_conformacion" (
   "descripcion" varchar(250),
   "codigo_abreviacion" varchar(20),
   "activo" boolean NOT NULL DEFAULT (true),
-  "numero_orden" numeric(5,2),
-  PRIMARY KEY ("id")
+  "numero_orden" numeric(5,2)
 );
+
+CREATE INDEX "pk_proveedor" ON "proveedores"."proveedor" ("id");
 
 CREATE INDEX "idx_proveedor_tipo_proveedor" ON "proveedores"."proveedor" ("tipo_proveedor");
 
@@ -193,6 +182,8 @@ CREATE INDEX "idx_proveedor_fecha_creacion" ON "proveedores"."proveedor" ("fecha
 CREATE INDEX "idx_proveedor_fecha_modificacion" ON "proveedores"."proveedor" ("fecha_modificacion");
 
 CREATE INDEX "idx_proveedor_usuario_modificacion_id" ON "proveedores"."proveedor" ("usuario_modificacion_id");
+
+CREATE INDEX "pk_contacto" ON "proveedores"."contacto" ("id");
 
 CREATE INDEX "idx_contacto_proveedor_id" ON "proveedores"."contacto" ("proveedor_id");
 
@@ -206,6 +197,8 @@ CREATE INDEX "idx_contacto_fecha_modificacion" ON "proveedores"."contacto" ("fec
 
 CREATE INDEX "idx_contacto_usuario_modificacion_id" ON "proveedores"."contacto" ("usuario_modificacion_id");
 
+CREATE INDEX "pk_estado_proveedor" ON "proveedores"."estado_proveedor" ("id");
+
 CREATE INDEX "idx_estado_proveedor_estado_id" ON "proveedores"."estado_proveedor" ("estado_id");
 
 CREATE INDEX "idx_estado_proveedor_proveedor_id" ON "proveedores"."estado_proveedor" ("proveedor_id");
@@ -217,6 +210,8 @@ CREATE INDEX "idx_estado_proveedor_fecha_creacion" ON "proveedores"."estado_prov
 CREATE INDEX "idx_estado_proveedor_fecha_modificacion" ON "proveedores"."estado_proveedor" ("fecha_modificacion");
 
 CREATE INDEX "idx_estado_proveedor_usuario_modificacion_id" ON "proveedores"."estado_proveedor" ("usuario_modificacion_id");
+
+CREATE INDEX "pk_cuenta_bancaria" ON "proveedores"."cuenta_bancaria" ("id");
 
 CREATE INDEX "idx_cuenta_bancaria_tipo_cuenta_id" ON "proveedores"."cuenta_bancaria" ("tipo_cuenta_id");
 
@@ -236,6 +231,8 @@ CREATE INDEX "idx_cuenta_bancaria_fecha_modificacion" ON "proveedores"."cuenta_b
 
 CREATE INDEX "idx_cuenta_bancaria_usuario_modificacion_id" ON "proveedores"."cuenta_bancaria" ("usuario_modificacion_id");
 
+CREATE INDEX "pk_documento" ON "proveedores"."documento" ("id");
+
 CREATE INDEX "idx_documento_tipo_documento_id" ON "proveedores"."documento" ("tipo_documento_id");
 
 CREATE INDEX "idx_documento_proveedor_id" ON "proveedores"."documento" ("proveedor_id");
@@ -248,6 +245,8 @@ CREATE INDEX "idx_documento_fecha_modificacion" ON "proveedores"."documento" ("f
 
 CREATE INDEX "idx_documento_usuario_modificacion_id" ON "proveedores"."documento" ("usuario_modificacion_id");
 
+CREATE INDEX "pk_proveedor_natural" ON "proveedores"."proveedor_natural" ("id");
+
 CREATE INDEX "idx_proveedor_natural_pais_nacimiento_id" ON "proveedores"."proveedor_natural" ("pais_nacimiento_id");
 
 CREATE INDEX "idx_proveedor_natural_activo" ON "proveedores"."proveedor_natural" ("activo");
@@ -257,6 +256,8 @@ CREATE INDEX "idx_proveedor_natural_fecha_creacion" ON "proveedores"."proveedor_
 CREATE INDEX "idx_proveedor_natural_fecha_modificacion" ON "proveedores"."proveedor_natural" ("fecha_modificacion");
 
 CREATE INDEX "idx_proveedor_natural_usuario_modificacion_id" ON "proveedores"."proveedor_natural" ("usuario_modificacion_id");
+
+CREATE INDEX "pk_perfil_proveedor" ON "proveedores"."perfil_proveedor" ("id");
 
 CREATE INDEX "idx_perfil_proveedor_perfil_id" ON "proveedores"."perfil_proveedor" ("perfil_id");
 
@@ -269,6 +270,8 @@ CREATE INDEX "idx_perfil_proveedor_fecha_creacion" ON "proveedores"."perfil_prov
 CREATE INDEX "idx_perfil_proveedor_fecha_modificacion" ON "proveedores"."perfil_proveedor" ("fecha_modificacion");
 
 CREATE INDEX "idx_perfil_proveedor_usuario_modificacion_id" ON "proveedores"."perfil_proveedor" ("usuario_modificacion_id");
+
+CREATE INDEX "pk_titulo_proveedor_natural" ON "proveedores"."titulo_proveedor_natural" ("id");
 
 CREATE INDEX "idx_titulo_proveedor_natural_nucleo_basico_conocimiento_snies_id" ON "proveedores"."titulo_proveedor_natural" ("nucleo_basico_conocimiento_snies_id");
 
@@ -283,6 +286,8 @@ CREATE INDEX "idx_titulo_proveedor_natural_fecha_creacion" ON "proveedores"."tit
 CREATE INDEX "idx_titulo_proveedor_natural_fecha_modificacion" ON "proveedores"."titulo_proveedor_natural" ("fecha_modificacion");
 
 CREATE INDEX "idx_titulo_proveedor_natural_usuario_modificacion_id" ON "proveedores"."titulo_proveedor_natural" ("usuario_modificacion_id");
+
+CREATE INDEX "pk_proveedor_juridico" ON "proveedores"."proveedor_juridico" ("id");
 
 CREATE INDEX "idx_proveedor_juridico_procedencia_empresa_id" ON "proveedores"."proveedor_juridico" ("procedencia_empresa_id");
 
@@ -302,6 +307,8 @@ CREATE INDEX "idx_proveedor_juridico_fecha_modificacion" ON "proveedores"."prove
 
 CREATE INDEX "idx_proveedor_juridico_usuario_modificacion_id" ON "proveedores"."proveedor_juridico" ("usuario_modificacion_id");
 
+CREATE INDEX "pk_actividad_economica_proveedor" ON "proveedores"."actividad_economica_proveedor" ("id");
+
 CREATE INDEX "idx_actividad_economica_proveedor_proveedor_id" ON "proveedores"."actividad_economica_proveedor" ("proveedor_id");
 
 CREATE INDEX "idx_actividad_economica_proveedor_actividad_economica_id" ON "proveedores"."actividad_economica_proveedor" ("actividad_economica_id");
@@ -313,6 +320,8 @@ CREATE INDEX "idx_actividad_economica_proveedor_fecha_creacion" ON "proveedores"
 CREATE INDEX "idx_actividad_economica_proveedor_fecha_modificacion" ON "proveedores"."actividad_economica_proveedor" ("fecha_modificacion");
 
 CREATE INDEX "idx_actividad_economica_proveedor_usuario_modificacion_id" ON "proveedores"."actividad_economica_proveedor" ("usuario_modificacion_id");
+
+CREATE INDEX "pk_representacion" ON "proveedores"."representacion" ("id");
 
 CREATE INDEX "idx_representacion_proveedor_id" ON "proveedores"."representacion" ("proveedor_id");
 
@@ -326,6 +335,8 @@ CREATE INDEX "idx_representacion_fecha_modificacion" ON "proveedores"."represent
 
 CREATE INDEX "idx_representacion_usuario_modificacion_id" ON "proveedores"."representacion" ("usuario_modificacion_id");
 
+CREATE INDEX "pk_persona_juridica_tipo_entidad" ON "proveedores"."persona_juridica_tipo_entidad" ("id");
+
 CREATE INDEX "idx_persona_juridica_tipo_entidad_tipo_entidad_id" ON "proveedores"."persona_juridica_tipo_entidad" ("tipo_entidad_id");
 
 CREATE INDEX "idx_persona_juridica_tipo_entidad_persona_juridica_id" ON "proveedores"."persona_juridica_tipo_entidad" ("persona_juridica_id");
@@ -337,6 +348,8 @@ CREATE INDEX "idx_persona_juridica_tipo_entidad_fecha_creacion" ON "proveedores"
 CREATE INDEX "idx_persona_juridica_tipo_entidad_fecha_modificacion" ON "proveedores"."persona_juridica_tipo_entidad" ("fecha_modificacion");
 
 CREATE INDEX "idx_persona_juridica_tipo_entidad_usuario_modificacion_id" ON "proveedores"."persona_juridica_tipo_entidad" ("usuario_modificacion_id");
+
+CREATE INDEX "pk_tipo_conformacion" ON "proveedores"."tipo_conformacion" ("id");
 
 CREATE INDEX "idx_tipo_conformacion_activo" ON "proveedores"."tipo_conformacion" ("activo");
 
