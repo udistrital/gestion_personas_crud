@@ -11,24 +11,24 @@ import (
 )
 
 type ProveedorJuridico struct {
-	Id                    int               `orm:"column(id);pk;auto"`
-	ProcedenciaEmpresaId  int               `orm:"column(procedencia_empresa_id)"`
-	CiudadOrigenId        int               `orm:"column(ciudad_origen_id);null"`
-	PaisOrigenId          int               `orm:"column(pais_origen_id);null"`
-	CodigoPostal          string            `orm:"column(codigo_postal);null"`
-	TipoConformacionId    *TipoConformacion `orm:"column(tipo_conformacion_id);rel(fk)"`
-	ExclusividadProducto  bool              `orm:"column(exclusividad_producto)"`
-	RegimenContributivo   int               `orm:"column(regimen_contributivo)"`
-	Pyme                  bool              `orm:"column(pyme)"`
-	RegistroMercantil     bool              `orm:"column(registro_mercantil)"`
-	SujetoRetencion       bool              `orm:"column(sujeto_retencion)"`
-	AgenteRetenedor       bool              `orm:"column(agente_retenedor)"`
-	ResponsableIca        bool              `orm:"column(responsable_ica)"`
-	ResponsableIva        bool              `orm:"column(responsable_iva)"`
-	Activo                bool              `orm:"column(activo)"`
-	FechaCreacion         time.Time         `orm:"column(fecha_creacion);type(timestamp without time zone)"`
-	FechaModificacion     time.Time         `orm:"column(fecha_modificacion);type(timestamp without time zone);null"`
-	UsuarioModificacionId int               `orm:"column(usuario_modificacion_id);null"`
+	Id                    int       `orm:"column(id);pk;auto"`
+	ProcedenciaEmpresaId  int       `orm:"column(procedencia_empresa_id)"`
+	CiudadOrigenId        int       `orm:"column(ciudad_origen_id);null"`
+	PaisOrigenId          int       `orm:"column(pais_origen_id);null"`
+	CodigoPostal          string    `orm:"column(codigo_postal);null"`
+	TipoConformacionId    int       `orm:"column(tipo_conformacion_id)"`
+	ExclusividadProducto  bool      `orm:"column(exclusividad_producto)"`
+	RegimenContributivo   int       `orm:"column(regimen_contributivo)"`
+	Pyme                  bool      `orm:"column(pyme)"`
+	RegistroMercantil     bool      `orm:"column(registro_mercantil)"`
+	SujetoRetencion       bool      `orm:"column(sujeto_retencion)"`
+	AgenteRetenedor       bool      `orm:"column(agente_retenedor)"`
+	ResponsableIca        bool      `orm:"column(responsable_ica)"`
+	ResponsableIva        bool      `orm:"column(responsable_iva)"`
+	Activo                bool      `orm:"column(activo)"`
+	FechaCreacion         time.Time `orm:"column(fecha_creacion);type(timestamp without time zone)"`
+	FechaModificacion     time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);null"`
+	UsuarioModificacionId int       `orm:"column(usuario_modificacion_id);null"`
 }
 
 func (t *ProveedorJuridico) TableName() string {

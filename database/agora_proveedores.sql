@@ -162,15 +162,6 @@ CREATE TABLE "proveedores"."persona_juridica_tipo_entidad" (
   "usuario_modificacion_id" integer
 );
 
-CREATE TABLE "proveedores"."tipo_conformacion" (
-  "id" serial PRIMARY KEY,
-  "nombre" varchar(50) NOT NULL,
-  "descripcion" varchar(250),
-  "codigo_abreviacion" varchar(20),
-  "activo" boolean NOT NULL DEFAULT (true),
-  "numero_orden" numeric(5,2)
-);
-
 CREATE INDEX "pk_proveedor" ON "proveedores"."proveedor" ("id");
 
 CREATE INDEX "idx_proveedor_tipo_proveedor" ON "proveedores"."proveedor" ("tipo_proveedor");
@@ -349,10 +340,6 @@ CREATE INDEX "idx_persona_juridica_tipo_entidad_fecha_modificacion" ON "proveedo
 
 CREATE INDEX "idx_persona_juridica_tipo_entidad_usuario_modificacion_id" ON "proveedores"."persona_juridica_tipo_entidad" ("usuario_modificacion_id");
 
-CREATE INDEX "pk_tipo_conformacion" ON "proveedores"."tipo_conformacion" ("id");
-
-CREATE INDEX "idx_tipo_conformacion_activo" ON "proveedores"."tipo_conformacion" ("activo");
-
 COMMENT ON COLUMN "proveedores"."proveedor"."usuario_modificacion_id" IS 'Posible eferencia externa a Terceros CRUD';
 
 COMMENT ON COLUMN "proveedores"."contacto"."usuario_modificacion_id" IS 'Posible eferencia externa a Terceros CRUD';
@@ -377,11 +364,7 @@ COMMENT ON COLUMN "proveedores"."representacion"."usuario_modificacion_id" IS 'P
 
 COMMENT ON COLUMN "proveedores"."persona_juridica_tipo_entidad"."usuario_modificacion_id" IS 'Posible eferencia externa a Terceros CRUD';
 
-COMMENT ON TABLE "proveedores"."tipo_conformacion" IS 'Posible procedencia de Parametros CRUD.';
-
 ALTER TABLE "proveedores"."cuenta_bancaria" ADD CONSTRAINT "fk_cuenta_bancaria_contacto" FOREIGN KEY ("contacto_id") REFERENCES "proveedores"."contacto" ("id") DEFERRABLE INITIALLY IMMEDIATE;
-
-ALTER TABLE "proveedores"."proveedor_juridico" ADD CONSTRAINT "fk_proveedor_juridico_tipo_conformacion" FOREIGN KEY ("tipo_conformacion_id") REFERENCES "proveedores"."tipo_conformacion" ("id") DEFERRABLE INITIALLY IMMEDIATE;
 
 ALTER TABLE "proveedores"."actividad_economica_proveedor" ADD CONSTRAINT "fk_actividad_economica_proveedor_proveedor" FOREIGN KEY ("proveedor_id") REFERENCES "proveedores"."proveedor" ("id") DEFERRABLE INITIALLY IMMEDIATE;
 

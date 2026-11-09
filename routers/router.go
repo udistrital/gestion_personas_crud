@@ -28,12 +28,6 @@ func init() {
 			),
 		),
 
-		beego.NSNamespace("/tipo_conformacion",
-			beego.NSInclude(
-				&controllers.TipoConformacionController{},
-			),
-		),
-
 		beego.NSNamespace("/proveedor_juridico",
 			beego.NSInclude(
 				&controllers.ProveedorJuridicoController{},
