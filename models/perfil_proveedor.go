@@ -5,53 +5,54 @@ import (
 	"fmt"
 	"reflect"
 	"strings"
+	"time"
 
 	"github.com/beego/beego/v2/client/orm"
 )
 
-type Perfil struct {
-	Id                int     `orm:"column(id);pk;auto"`
-	Nombre            string  `orm:"column(nombre)"`
-	Descripcion       string  `orm:"column(descripcion);null"`
-	CodigoAbreviacion string  `orm:"column(codigo_abreviacion);null"`
-	Activo            bool    `orm:"column(activo)"`
-	NumeroOrden       float64 `orm:"column(numero_orden);null"`
+type PerfilProveedor struct {
+	Id                    int        `orm:"column(id);pk;auto"`
+	PerfilId              int        `orm:"column(perfil_id)"`
+	ProveedorId           *Proveedor `orm:"column(proveedor_id);rel(fk)"`
+	Activo                bool       `orm:"column(activo)"`
+	FechaCreacion         time.Time  `orm:"column(fecha_creacion);type(timestamp without time zone)"`
+	FechaModificacion     time.Time  `orm:"column(fecha_modificacion);type(timestamp without time zone);null"`
+	UsuarioModificacionId int        `orm:"column(usuario_modificacion_id);null"`
 }
 
-func (t *Perfil) TableName() string {
-	return "perfil"
+func (t *PerfilProveedor) TableName() string {
+	return "perfil_proveedor"
 }
 
 func init() {
-	orm.RegisterModel(new(Perfil))
+	orm.RegisterModel(new(PerfilProveedor))
 }
 
-// AddPerfil insert a new Perfil into database and returns
+// AddPerfilProveedor insert a new PerfilProveedor into database and returns
 // last inserted Id on success.
-func AddPerfil(m *Perfil) (id int64, err error) {
+func AddPerfilProveedor(m *PerfilProveedor) (id int64, err error) {
 	o := orm.NewOrm()
-	m.Activo = true
 	id, err = o.Insert(m)
 	return
 }
 
-// GetPerfilById retrieves Perfil by Id. Returns error if
+// GetPerfilProveedorById retrieves PerfilProveedor by Id. Returns error if
 // Id doesn't exist
-func GetPerfilById(id int) (v *Perfil, err error) {
+func GetPerfilProveedorById(id int) (v *PerfilProveedor, err error) {
 	o := orm.NewOrm()
-	v = &Perfil{Id: id}
+	v = &PerfilProveedor{Id: id}
 	if err = o.Read(v); err == nil {
 		return v, nil
 	}
 	return nil, err
 }
 
-// GetAllPerfil retrieves all Perfil matches certain condition. Returns empty list if
+// GetAllPerfilProveedor retrieves all PerfilProveedor matches certain condition. Returns empty list if
 // no records exist
-func GetAllPerfil(query map[string]string, fields []string, sortby []string, order []string,
+func GetAllPerfilProveedor(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(Perfil)).RelatedSel()
+	qs := o.QueryTable(new(PerfilProveedor)).RelatedSel()
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute
@@ -101,7 +102,7 @@ func GetAllPerfil(query map[string]string, fields []string, sortby []string, ord
 		}
 	}
 
-	var l []Perfil
+	var l []PerfilProveedor
 	qs = qs.OrderBy(sortFields...)
 	if _, err = qs.Limit(limit, offset).All(&l, fields...); err == nil {
 		if len(fields) == 0 {
@@ -124,11 +125,11 @@ func GetAllPerfil(query map[string]string, fields []string, sortby []string, ord
 	return nil, err
 }
 
-// UpdatePerfil updates Perfil by Id and returns error if
+// UpdatePerfilProveedor updates PerfilProveedor by Id and returns error if
 // the record to be updated doesn't exist
-func UpdatePerfilById(m *Perfil) (err error) {
+func UpdatePerfilProveedorById(m *PerfilProveedor) (err error) {
 	o := orm.NewOrm()
-	v := Perfil{Id: m.Id}
+	v := PerfilProveedor{Id: m.Id}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
@@ -139,17 +140,16 @@ func UpdatePerfilById(m *Perfil) (err error) {
 	return
 }
 
-// DeletePerfil deletes Perfil by Id and returns error if
+// DeletePerfilProveedor deletes PerfilProveedor by Id and returns error if
 // the record to be deleted doesn't exist
-func DeletePerfil(id int) (err error) {
+func DeletePerfilProveedor(id int) (err error) {
 	o := orm.NewOrm()
-	v := Perfil{Id: id}
+	v := PerfilProveedor{Id: id}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
-		v.Activo = false
-		if num, err = o.Update(&v); err == nil {
-			fmt.Println("Number of records updated in database:", num)
+		if num, err = o.Delete(&PerfilProveedor{Id: id}); err == nil {
+			fmt.Println("Number of records deleted in database:", num)
 		}
 	}
 	return

@@ -11,18 +11,18 @@ import (
 )
 
 type CuentaBancaria struct {
-	Id                  int        `orm:"column(id);pk;auto"`
-	ProveedorId         *Proveedor `orm:"column(proveedor_id);rel(fk)"`
-	EntidadBancariaId   int        `orm:"column(entidad_bancaria_id)"`
-	TipoCuentaId        int        `orm:"column(tipo_cuenta_id)"`
-	NumeroCuenta        string     `orm:"column(numero_cuenta)"`
-	NombreTitular       string     `orm:"column(nombre_titular)"`
-	CiudadAperturaId    int        `orm:"column(ciudad_apertura_id);null"`
-	EsPrincipal         bool       `orm:"column(es_principal);null"`
-	Activo              bool       `orm:"column(activo)"`
-	FechaCreacion       time.Time  `orm:"column(fecha_creacion);type(timestamp without time zone)"`
-	FechaModificacion   time.Time  `orm:"column(fecha_modificacion);type(timestamp without time zone);null"`
-	AutorModificacionId int        `orm:"column(autor_modificacion_id);null"`
+	Id                     int        `orm:"column(id);pk;auto"`
+	TipoCuentaId           int        `orm:"column(tipo_cuenta_id)"`
+	NumeroCuenta           string     `orm:"column(numero_cuenta)"`
+	EntidadBancariaId      int        `orm:"column(entidad_bancaria_id)"`
+	ContactoId             *Contacto  `orm:"column(contacto_id);rel(fk)"`
+	TipoCuentaBancariaId   bool       `orm:"column(tipo_cuenta_bancaria_id)"`
+	MontoCapitalAutorizado float64    `orm:"column(monto_capital_autorizado);null"`
+	ProveedorId            *Proveedor `orm:"column(proveedor_id);rel(fk)"`
+	Activo                 bool       `orm:"column(activo)"`
+	FechaCreacion          time.Time  `orm:"column(fecha_creacion);type(timestamp without time zone)"`
+	FechaModificacion      time.Time  `orm:"column(fecha_modificacion);type(timestamp without time zone);null"`
+	UsuarioModificacionId  int        `orm:"column(usuario_modificacion_id);null"`
 }
 
 func (t *CuentaBancaria) TableName() string {
@@ -37,8 +37,6 @@ func init() {
 // last inserted Id on success.
 func AddCuentaBancaria(m *CuentaBancaria) (id int64, err error) {
 	o := orm.NewOrm()
-	m.Activo = true
-	m.FechaCreacion = time.Now().UTC()
 	id, err = o.Insert(m)
 	return
 }
@@ -139,8 +137,6 @@ func UpdateCuentaBancariaById(m *CuentaBancaria) (err error) {
 	v := CuentaBancaria{Id: m.Id}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
-		m.FechaCreacion = v.FechaCreacion
-		m.FechaModificacion = time.Now().UTC()
 		var num int64
 		if num, err = o.Update(m); err == nil {
 			fmt.Println("Number of records updated in database:", num)
@@ -157,9 +153,8 @@ func DeleteCuentaBancaria(id int) (err error) {
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
-		v.Activo = false
-		if num, err = o.Update(&v); err == nil {
-			fmt.Println("Number of records updated in database:", num)
+		if num, err = o.Delete(&CuentaBancaria{Id: id}); err == nil {
+			fmt.Println("Number of records deleted in database:", num)
 		}
 	}
 	return

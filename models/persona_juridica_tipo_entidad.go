@@ -10,58 +10,50 @@ import (
 	"github.com/beego/beego/v2/client/orm"
 )
 
-type PerfilFinanciero struct {
-	Id                               int                 `orm:"column(id);pk;auto"`
-	ProveedorId                      *ProveedorJuridico  `orm:"column(proveedor_id);rel(fk)"`
-	GranContribuyente                bool                `orm:"column(gran_contribuyente)"`
-	Autorretenedor                   bool                `orm:"column(autorretenedor)"`
-	ExencionIca                      bool                `orm:"column(exencion_ica)"`
-	ObligadoFacturarElectronicamente bool                `orm:"column(obligado_facturar_electronicamente)"`
-	PrefijoFacturacionId             *PrefijoFacturacion `orm:"column(prefijo_facturacion_id);rel(fk)"`
-	RangoFacturacionId               *RangoFacturacion   `orm:"column(rango_facturacion_id);rel(fk)"`
-	ResolucionFacturacion            string              `orm:"column(resolucion_facturacion);null"`
-	OperaMonedaExtranjera            bool                `orm:"column(opera_moneda_extranjera)"`
-	Activo                           bool                `orm:"column(activo)"`
-	FechaCreacion                    time.Time           `orm:"column(fecha_creacion);type(timestamp without time zone)"`
-	FechaModificacion                time.Time           `orm:"column(fecha_modificacion);type(timestamp without time zone);null"`
-	AutorModificacionId              int                 `orm:"column(autor_modificacion_id);null"`
+type PersonaJuridicaTipoEntidad struct {
+	Id                    int                `orm:"column(id);pk;auto"`
+	NombrePerfilEntidad   string             `orm:"column(nombre_perfil_entidad);null"`
+	TipoEntidadId         int                `orm:"column(tipo_entidad_id)"`
+	PersonaJuridicaId     *ProveedorJuridico `orm:"column(persona_juridica_id);rel(fk)"`
+	Activo                bool               `orm:"column(activo)"`
+	FechaCreacion         time.Time          `orm:"column(fecha_creacion);type(timestamp without time zone)"`
+	FechaModificacion     time.Time          `orm:"column(fecha_modificacion);type(timestamp without time zone);null"`
+	UsuarioModificacionId int                `orm:"column(usuario_modificacion_id);null"`
 }
 
-func (t *PerfilFinanciero) TableName() string {
-	return "perfil_financiero"
+func (t *PersonaJuridicaTipoEntidad) TableName() string {
+	return "persona_juridica_tipo_entidad"
 }
 
 func init() {
-	orm.RegisterModel(new(PerfilFinanciero))
+	orm.RegisterModel(new(PersonaJuridicaTipoEntidad))
 }
 
-// AddPerfilFinanciero insert a new PerfilFinanciero into database and returns
+// AddPersonaJuridicaTipoEntidad insert a new PersonaJuridicaTipoEntidad into database and returns
 // last inserted Id on success.
-func AddPerfilFinanciero(m *PerfilFinanciero) (id int64, err error) {
+func AddPersonaJuridicaTipoEntidad(m *PersonaJuridicaTipoEntidad) (id int64, err error) {
 	o := orm.NewOrm()
-	m.Activo = true
-	m.FechaCreacion = time.Now().UTC()
 	id, err = o.Insert(m)
 	return
 }
 
-// GetPerfilFinancieroById retrieves PerfilFinanciero by Id. Returns error if
+// GetPersonaJuridicaTipoEntidadById retrieves PersonaJuridicaTipoEntidad by Id. Returns error if
 // Id doesn't exist
-func GetPerfilFinancieroById(id int) (v *PerfilFinanciero, err error) {
+func GetPersonaJuridicaTipoEntidadById(id int) (v *PersonaJuridicaTipoEntidad, err error) {
 	o := orm.NewOrm()
-	v = &PerfilFinanciero{Id: id}
+	v = &PersonaJuridicaTipoEntidad{Id: id}
 	if err = o.Read(v); err == nil {
 		return v, nil
 	}
 	return nil, err
 }
 
-// GetAllPerfilFinanciero retrieves all PerfilFinanciero matches certain condition. Returns empty list if
+// GetAllPersonaJuridicaTipoEntidad retrieves all PersonaJuridicaTipoEntidad matches certain condition. Returns empty list if
 // no records exist
-func GetAllPerfilFinanciero(query map[string]string, fields []string, sortby []string, order []string,
+func GetAllPersonaJuridicaTipoEntidad(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(PerfilFinanciero)).RelatedSel()
+	qs := o.QueryTable(new(PersonaJuridicaTipoEntidad)).RelatedSel()
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute
@@ -111,7 +103,7 @@ func GetAllPerfilFinanciero(query map[string]string, fields []string, sortby []s
 		}
 	}
 
-	var l []PerfilFinanciero
+	var l []PersonaJuridicaTipoEntidad
 	qs = qs.OrderBy(sortFields...)
 	if _, err = qs.Limit(limit, offset).All(&l, fields...); err == nil {
 		if len(fields) == 0 {
@@ -134,15 +126,13 @@ func GetAllPerfilFinanciero(query map[string]string, fields []string, sortby []s
 	return nil, err
 }
 
-// UpdatePerfilFinanciero updates PerfilFinanciero by Id and returns error if
+// UpdatePersonaJuridicaTipoEntidad updates PersonaJuridicaTipoEntidad by Id and returns error if
 // the record to be updated doesn't exist
-func UpdatePerfilFinancieroById(m *PerfilFinanciero) (err error) {
+func UpdatePersonaJuridicaTipoEntidadById(m *PersonaJuridicaTipoEntidad) (err error) {
 	o := orm.NewOrm()
-	v := PerfilFinanciero{Id: m.Id}
+	v := PersonaJuridicaTipoEntidad{Id: m.Id}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
-		m.FechaCreacion = v.FechaCreacion
-		m.FechaModificacion = time.Now().UTC()
 		var num int64
 		if num, err = o.Update(m); err == nil {
 			fmt.Println("Number of records updated in database:", num)
@@ -151,17 +141,16 @@ func UpdatePerfilFinancieroById(m *PerfilFinanciero) (err error) {
 	return
 }
 
-// DeletePerfilFinanciero deletes PerfilFinanciero by Id and returns error if
+// DeletePersonaJuridicaTipoEntidad deletes PersonaJuridicaTipoEntidad by Id and returns error if
 // the record to be deleted doesn't exist
-func DeletePerfilFinanciero(id int) (err error) {
+func DeletePersonaJuridicaTipoEntidad(id int) (err error) {
 	o := orm.NewOrm()
-	v := PerfilFinanciero{Id: id}
+	v := PersonaJuridicaTipoEntidad{Id: id}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
-		v.Activo = false
-		if num, err = o.Update(&v); err == nil {
-			fmt.Println("Number of records updated in database:", num)
+		if num, err = o.Delete(&PersonaJuridicaTipoEntidad{Id: id}); err == nil {
+			fmt.Println("Number of records deleted in database:", num)
 		}
 	}
 	return

@@ -16,30 +16,6 @@ import (
 func init() {
 	ns := beego.NewNamespace("/v1",
 
-		beego.NSNamespace("/proveedor_natural",
-			beego.NSInclude(
-				&controllers.ProveedorNaturalController{},
-			),
-		),
-
-		beego.NSNamespace("/proveedor",
-			beego.NSInclude(
-				&controllers.ProveedorController{},
-			),
-		),
-
-		beego.NSNamespace("/perfil",
-			beego.NSInclude(
-				&controllers.PerfilController{},
-			),
-		),
-
-		beego.NSNamespace("/proveedor_juridico",
-			beego.NSInclude(
-				&controllers.ProveedorJuridicoController{},
-			),
-		),
-
 		beego.NSNamespace("/contacto",
 			beego.NSInclude(
 				&controllers.ContactoController{},
@@ -52,39 +28,21 @@ func init() {
 			),
 		),
 
+		beego.NSNamespace("/proveedor_juridico",
+			beego.NSInclude(
+				&controllers.ProveedorJuridicoController{},
+			),
+		),
+
+		beego.NSNamespace("/proveedor",
+			beego.NSInclude(
+				&controllers.ProveedorController{},
+			),
+		),
+
 		beego.NSNamespace("/actividad_economica_proveedor",
 			beego.NSInclude(
 				&controllers.ActividadEconomicaProveedorController{},
-			),
-		),
-
-		beego.NSNamespace("/perfil_financiero",
-			beego.NSInclude(
-				&controllers.PerfilFinancieroController{},
-			),
-		),
-
-		beego.NSNamespace("/prefijo_facturacion",
-			beego.NSInclude(
-				&controllers.PrefijoFacturacionController{},
-			),
-		),
-
-		beego.NSNamespace("/rango_facturacion",
-			beego.NSInclude(
-				&controllers.RangoFacturacionController{},
-			),
-		),
-
-		beego.NSNamespace("/responsabilidad_fiscal_perfil",
-			beego.NSInclude(
-				&controllers.ResponsabilidadFiscalPerfilController{},
-			),
-		),
-
-		beego.NSNamespace("/informacion_financiera",
-			beego.NSInclude(
-				&controllers.InformacionFinancieraController{},
 			),
 		),
 
@@ -94,21 +52,39 @@ func init() {
 			),
 		),
 
+		beego.NSNamespace("/persona_juridica_tipo_entidad",
+			beego.NSInclude(
+				&controllers.PersonaJuridicaTipoEntidadController{},
+			),
+		),
+
+		beego.NSNamespace("/proveedor_natural",
+			beego.NSInclude(
+				&controllers.ProveedorNaturalController{},
+			),
+		),
+
+		beego.NSNamespace("/perfil_proveedor",
+			beego.NSInclude(
+				&controllers.PerfilProveedorController{},
+			),
+		),
+
 		beego.NSNamespace("/documento",
 			beego.NSInclude(
 				&controllers.DocumentoController{},
 			),
 		),
 
-		beego.NSNamespace("/tipo_declaracion_proveedor",
+		beego.NSNamespace("/titulo_proveedor_natural",
 			beego.NSInclude(
-				&controllers.TipoDeclaracionProveedorController{},
+				&controllers.TituloProveedorNaturalController{},
 			),
 		),
 
-		beego.NSNamespace("/declaracion",
+		beego.NSNamespace("/estado_proveedor",
 			beego.NSInclude(
-				&controllers.DeclaracionController{},
+				&controllers.EstadoProveedorController{},
 			),
 		),
 	)
