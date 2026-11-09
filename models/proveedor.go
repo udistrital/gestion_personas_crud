@@ -15,6 +15,7 @@ type Proveedor struct {
 	TipoProveedor         int       `orm:"column(tipo_proveedor)"`
 	DescripcionPortafolio string    `orm:"column(descripcion_portafolio);null"`
 	Consentimiento        bool      `orm:"column(consentimiento);null"`
+	TerceroId             int       `orm:"column(tercero_id)"`
 	Activo                bool      `orm:"column(activo)"`
 	FechaCreacion         time.Time `orm:"column(fecha_creacion);type(timestamp without time zone)"`
 	FechaModificacion     time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);null"`

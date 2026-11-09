@@ -5,6 +5,7 @@ CREATE TABLE "proveedores"."proveedor" (
   "tipo_proveedor" integer NOT NULL,
   "descripcion_portafolio" text,
   "consentimiento" boolean DEFAULT (false),
+  "tercero_id" integer,
   "activo" boolean NOT NULL DEFAULT (true),
   "fecha_creacion" timestamp NOT NULL DEFAULT (now()),
   "fecha_modificacion" timestamp,
@@ -165,6 +166,8 @@ CREATE TABLE "proveedores"."persona_juridica_tipo_entidad" (
 CREATE INDEX "pk_proveedor" ON "proveedores"."proveedor" ("id");
 
 CREATE INDEX "idx_proveedor_tipo_proveedor" ON "proveedores"."proveedor" ("tipo_proveedor");
+
+CREATE INDEX "idx_proveedor_tercero_id" ON "proveedores"."proveedor" ("tercero_id");
 
 CREATE INDEX "idx_proveedor_activo" ON "proveedores"."proveedor" ("activo");
 
