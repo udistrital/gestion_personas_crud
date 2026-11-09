@@ -10,7 +10,7 @@ TablePartial campos_auditoria {
   activo boolean [not null, default: `true`]
   fecha_creacion timestamp [not null, default: `now()`]
   fecha_modificacion timestamp
-  usuario_modificacion_id integer [note: 'Posible eferencia externa a Terceros CRUD']
+  usuario_modificacion_id integer [note: 'Posible referencia externa a Terceros CRUD']
 }
 
 TablePartial campos_parametro {
@@ -67,7 +67,7 @@ Table proveedores.contacto {
 Table proveedores.estado_proveedor {
   ~id
   estado_id integer
-  proveedor_id integer
+  proveedor_id integer [not null]
   observacion varchar(100)
   ~campos_auditoria
 

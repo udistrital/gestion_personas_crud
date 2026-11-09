@@ -28,7 +28,7 @@ CREATE TABLE "proveedores"."contacto" (
 CREATE TABLE "proveedores"."estado_proveedor" (
   "id" serial PRIMARY KEY,
   "estado_id" integer,
-  "proveedor_id" integer,
+  "proveedor_id" integer NOT NULL,
   "observacion" varchar(100),
   "activo" boolean NOT NULL DEFAULT (true),
   "fecha_creacion" timestamp NOT NULL DEFAULT (now()),
@@ -340,29 +340,29 @@ CREATE INDEX "idx_persona_juridica_tipo_entidad_fecha_modificacion" ON "proveedo
 
 CREATE INDEX "idx_persona_juridica_tipo_entidad_usuario_modificacion_id" ON "proveedores"."persona_juridica_tipo_entidad" ("usuario_modificacion_id");
 
-COMMENT ON COLUMN "proveedores"."proveedor"."usuario_modificacion_id" IS 'Posible eferencia externa a Terceros CRUD';
+COMMENT ON COLUMN "proveedores"."proveedor"."usuario_modificacion_id" IS 'Posible referencia externa a Terceros CRUD';
 
-COMMENT ON COLUMN "proveedores"."contacto"."usuario_modificacion_id" IS 'Posible eferencia externa a Terceros CRUD';
+COMMENT ON COLUMN "proveedores"."contacto"."usuario_modificacion_id" IS 'Posible referencia externa a Terceros CRUD';
 
-COMMENT ON COLUMN "proveedores"."estado_proveedor"."usuario_modificacion_id" IS 'Posible eferencia externa a Terceros CRUD';
+COMMENT ON COLUMN "proveedores"."estado_proveedor"."usuario_modificacion_id" IS 'Posible referencia externa a Terceros CRUD';
 
-COMMENT ON COLUMN "proveedores"."cuenta_bancaria"."usuario_modificacion_id" IS 'Posible eferencia externa a Terceros CRUD';
+COMMENT ON COLUMN "proveedores"."cuenta_bancaria"."usuario_modificacion_id" IS 'Posible referencia externa a Terceros CRUD';
 
-COMMENT ON COLUMN "proveedores"."documento"."usuario_modificacion_id" IS 'Posible eferencia externa a Terceros CRUD';
+COMMENT ON COLUMN "proveedores"."documento"."usuario_modificacion_id" IS 'Posible referencia externa a Terceros CRUD';
 
-COMMENT ON COLUMN "proveedores"."proveedor_natural"."usuario_modificacion_id" IS 'Posible eferencia externa a Terceros CRUD';
+COMMENT ON COLUMN "proveedores"."proveedor_natural"."usuario_modificacion_id" IS 'Posible referencia externa a Terceros CRUD';
 
-COMMENT ON COLUMN "proveedores"."perfil_proveedor"."usuario_modificacion_id" IS 'Posible eferencia externa a Terceros CRUD';
+COMMENT ON COLUMN "proveedores"."perfil_proveedor"."usuario_modificacion_id" IS 'Posible referencia externa a Terceros CRUD';
 
-COMMENT ON COLUMN "proveedores"."titulo_proveedor_natural"."usuario_modificacion_id" IS 'Posible eferencia externa a Terceros CRUD';
+COMMENT ON COLUMN "proveedores"."titulo_proveedor_natural"."usuario_modificacion_id" IS 'Posible referencia externa a Terceros CRUD';
 
-COMMENT ON COLUMN "proveedores"."proveedor_juridico"."usuario_modificacion_id" IS 'Posible eferencia externa a Terceros CRUD';
+COMMENT ON COLUMN "proveedores"."proveedor_juridico"."usuario_modificacion_id" IS 'Posible referencia externa a Terceros CRUD';
 
-COMMENT ON COLUMN "proveedores"."actividad_economica_proveedor"."usuario_modificacion_id" IS 'Posible eferencia externa a Terceros CRUD';
+COMMENT ON COLUMN "proveedores"."actividad_economica_proveedor"."usuario_modificacion_id" IS 'Posible referencia externa a Terceros CRUD';
 
-COMMENT ON COLUMN "proveedores"."representacion"."usuario_modificacion_id" IS 'Posible eferencia externa a Terceros CRUD';
+COMMENT ON COLUMN "proveedores"."representacion"."usuario_modificacion_id" IS 'Posible referencia externa a Terceros CRUD';
 
-COMMENT ON COLUMN "proveedores"."persona_juridica_tipo_entidad"."usuario_modificacion_id" IS 'Posible eferencia externa a Terceros CRUD';
+COMMENT ON COLUMN "proveedores"."persona_juridica_tipo_entidad"."usuario_modificacion_id" IS 'Posible referencia externa a Terceros CRUD';
 
 ALTER TABLE "proveedores"."cuenta_bancaria" ADD CONSTRAINT "fk_cuenta_bancaria_contacto" FOREIGN KEY ("contacto_id") REFERENCES "proveedores"."contacto" ("id") DEFERRABLE INITIALLY IMMEDIATE;
 
