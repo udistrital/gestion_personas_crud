@@ -157,7 +157,6 @@ func (c *DocumentoController) Put() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
 	v := models.Documento{Id: id}
-	fechaCreacionOriginal := v.FechaCreacion
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
 		if v.Id != id {
 			c.Data["message"] = "Error service Put: The id cannot be modified"
@@ -166,7 +165,6 @@ func (c *DocumentoController) Put() {
 		if v.Id == 0 {
 			v.Id = id
 		}
-		v.FechaCreacion = fechaCreacionOriginal
 		v.FechaModificacion = time_bogota.Tiempo_bogota()
 		if err := models.UpdateDocumentoById(&v); err == nil {
 			c.Data["json"] = map[string]interface{}{"Success": true, "Status": "200", "Message": "Update successful", "Data": v}
@@ -193,10 +191,15 @@ func (c *DocumentoController) Put() {
 func (c *DocumentoController) Delete() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
-	v := models.Documento{Id: id}
+	v, err := models.GetDocumentoById(id)
+	if err != nil {
+		beeLogger.Log.Error(err.Error())
+		c.Data["message"] = "Error service Delete: The request contains an incorrect parameter or no record exists"
+		c.Abort("404")
+	}
 	v.Activo = false
 	v.FechaModificacion = time_bogota.Tiempo_bogota()
-	if err := models.UpdateDocumentoById(&v); err == nil {
+	if err := models.UpdateDocumentoById(v); err == nil {
 		c.Data["json"] = map[string]interface{}{"Success": true, "Status": "200", "Message": "Update successful", "Data": v}
 	} else {
 		beeLogger.Log.Error(err.Error())

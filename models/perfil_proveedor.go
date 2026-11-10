@@ -133,7 +133,7 @@ func UpdatePerfilProveedorById(m *PerfilProveedor) (err error) {
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
-		if num, err = o.Update(m); err == nil {
+		if num, err = o.Update(m, "PerfilId", "ProveedorId", "Activo", "FechaModificacion", "UsuarioModificacionId"); err == nil {
 			fmt.Println("Number of records updated in database:", num)
 		}
 	}
