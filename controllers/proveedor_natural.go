@@ -36,6 +36,11 @@ func (c *ProveedorNaturalController) URLMapping() {
 func (c *ProveedorNaturalController) Post() {
 	var v models.ProveedorNatural
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
+		// El Id no es autoincremental: debe ser el Id del proveedor (relación 1:1)
+		if v.Id <= 0 {
+			c.Data["message"] = "Error service POST: Id is required and must be the Id of an existing proveedor"
+			c.Abort("400")
+		}
 		v.Activo = true
 		v.FechaCreacion = time_bogota.Tiempo_bogota()
 		v.FechaModificacion = time_bogota.Tiempo_bogota()
