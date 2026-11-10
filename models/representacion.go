@@ -40,8 +40,9 @@ func AddRepresentacion(m *Representacion) (id int64, err error) {
 // Id doesn't exist
 func GetRepresentacionById(id int) (v *Representacion, err error) {
 	o := orm.NewOrm()
-	v = &Representacion{Id: id}
-	if err = o.Read(v); err == nil {
+	v = &Representacion{}
+	// RelatedSel expande las FK, igual que en GetAllRepresentacion
+	if err = o.QueryTable(new(Representacion)).Filter("Id", id).RelatedSel().One(v); err == nil {
 		return v, nil
 	}
 	return nil, err

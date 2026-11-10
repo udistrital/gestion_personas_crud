@@ -40,8 +40,9 @@ func AddPerfilProveedor(m *PerfilProveedor) (id int64, err error) {
 // Id doesn't exist
 func GetPerfilProveedorById(id int) (v *PerfilProveedor, err error) {
 	o := orm.NewOrm()
-	v = &PerfilProveedor{Id: id}
-	if err = o.Read(v); err == nil {
+	v = &PerfilProveedor{}
+	// RelatedSel expande las FK, igual que en GetAllPerfilProveedor
+	if err = o.QueryTable(new(PerfilProveedor)).Filter("Id", id).RelatedSel().One(v); err == nil {
 		return v, nil
 	}
 	return nil, err

@@ -40,8 +40,9 @@ func AddActividadEconomicaProveedor(m *ActividadEconomicaProveedor) (id int64, e
 // Id doesn't exist
 func GetActividadEconomicaProveedorById(id int) (v *ActividadEconomicaProveedor, err error) {
 	o := orm.NewOrm()
-	v = &ActividadEconomicaProveedor{Id: id}
-	if err = o.Read(v); err == nil {
+	v = &ActividadEconomicaProveedor{}
+	// RelatedSel expande las FK, igual que en GetAllActividadEconomicaProveedor
+	if err = o.QueryTable(new(ActividadEconomicaProveedor)).Filter("Id", id).RelatedSel().One(v); err == nil {
 		return v, nil
 	}
 	return nil, err

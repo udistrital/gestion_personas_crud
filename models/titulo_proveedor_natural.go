@@ -42,8 +42,9 @@ func AddTituloProveedorNatural(m *TituloProveedorNatural) (id int64, err error) 
 // Id doesn't exist
 func GetTituloProveedorNaturalById(id int) (v *TituloProveedorNatural, err error) {
 	o := orm.NewOrm()
-	v = &TituloProveedorNatural{Id: id}
-	if err = o.Read(v); err == nil {
+	v = &TituloProveedorNatural{}
+	// RelatedSel expande las FK, igual que en GetAllTituloProveedorNatural
+	if err = o.QueryTable(new(TituloProveedorNatural)).Filter("Id", id).RelatedSel().One(v); err == nil {
 		return v, nil
 	}
 	return nil, err

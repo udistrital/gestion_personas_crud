@@ -44,8 +44,9 @@ func AddContacto(m *Contacto) (id int64, err error) {
 // Id doesn't exist
 func GetContactoById(id int) (v *Contacto, err error) {
 	o := orm.NewOrm()
-	v = &Contacto{Id: id}
-	if err = o.Read(v); err == nil {
+	v = &Contacto{}
+	// RelatedSel expande las FK, igual que en GetAllContacto
+	if err = o.QueryTable(new(Contacto)).Filter("Id", id).RelatedSel().One(v); err == nil {
 		return v, nil
 	}
 	return nil, err

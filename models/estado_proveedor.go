@@ -41,8 +41,9 @@ func AddEstadoProveedor(m *EstadoProveedor) (id int64, err error) {
 // Id doesn't exist
 func GetEstadoProveedorById(id int) (v *EstadoProveedor, err error) {
 	o := orm.NewOrm()
-	v = &EstadoProveedor{Id: id}
-	if err = o.Read(v); err == nil {
+	v = &EstadoProveedor{}
+	// RelatedSel expande las FK, igual que en GetAllEstadoProveedor
+	if err = o.QueryTable(new(EstadoProveedor)).Filter("Id", id).RelatedSel().One(v); err == nil {
 		return v, nil
 	}
 	return nil, err

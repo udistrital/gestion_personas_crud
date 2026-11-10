@@ -41,8 +41,9 @@ func AddDocumento(m *Documento) (id int64, err error) {
 // Id doesn't exist
 func GetDocumentoById(id int) (v *Documento, err error) {
 	o := orm.NewOrm()
-	v = &Documento{Id: id}
-	if err = o.Read(v); err == nil {
+	v = &Documento{}
+	// RelatedSel expande las FK, igual que en GetAllDocumento
+	if err = o.QueryTable(new(Documento)).Filter("Id", id).RelatedSel().One(v); err == nil {
 		return v, nil
 	}
 	return nil, err

@@ -41,8 +41,9 @@ func AddPersonaJuridicaTipoEntidad(m *PersonaJuridicaTipoEntidad) (id int64, err
 // Id doesn't exist
 func GetPersonaJuridicaTipoEntidadById(id int) (v *PersonaJuridicaTipoEntidad, err error) {
 	o := orm.NewOrm()
-	v = &PersonaJuridicaTipoEntidad{Id: id}
-	if err = o.Read(v); err == nil {
+	v = &PersonaJuridicaTipoEntidad{}
+	// RelatedSel expande las FK, igual que en GetAllPersonaJuridicaTipoEntidad
+	if err = o.QueryTable(new(PersonaJuridicaTipoEntidad)).Filter("Id", id).RelatedSel().One(v); err == nil {
 		return v, nil
 	}
 	return nil, err
