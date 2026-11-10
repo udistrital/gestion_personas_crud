@@ -43,7 +43,6 @@ CREATE TABLE "proveedores"."cuenta_bancaria" (
   "numero_cuenta" varchar(50) NOT NULL,
   "entidad_bancaria_id" integer NOT NULL,
   "contacto_id" integer,
-  "tipo_cuenta_bancaria_id" boolean NOT NULL,
   "monto_capital_autorizado" numeric(20,7),
   "proveedor_id" integer NOT NULL,
   "activo" boolean NOT NULL DEFAULT (true),
@@ -212,8 +211,6 @@ CREATE INDEX "idx_cuenta_bancaria_tipo_cuenta_id" ON "proveedores"."cuenta_banca
 CREATE INDEX "idx_cuenta_bancaria_entidad_bancaria_id" ON "proveedores"."cuenta_bancaria" ("entidad_bancaria_id");
 
 CREATE INDEX "idx_cuenta_bancaria_contacto_id" ON "proveedores"."cuenta_bancaria" ("contacto_id");
-
-CREATE INDEX "idx_cuenta_bancaria_tipo_cuenta_bancaria_id" ON "proveedores"."cuenta_bancaria" ("tipo_cuenta_bancaria_id");
 
 CREATE INDEX "idx_cuenta_bancaria_proveedor_id" ON "proveedores"."cuenta_bancaria" ("proveedor_id");
 
