@@ -36,6 +36,8 @@ func (c *TituloProveedorNaturalController) URLMapping() {
 func (c *TituloProveedorNaturalController) Post() {
 	var v models.TituloProveedorNatural
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
+		// El Id lo asigna la base de datos (serial): se ignora el enviado por el cliente
+		v.Id = 0
 		v.Activo = true
 		v.FechaCreacion = time_bogota.Tiempo_bogota()
 		v.FechaModificacion = time_bogota.Tiempo_bogota()
