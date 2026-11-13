@@ -144,7 +144,10 @@ func UpdateProveedorJuridicoById(m *ProveedorJuridico) (err error) {
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
-		if num, err = o.Update(m); err == nil {
+		if num, err = o.Update(m, "ProcedenciaEmpresaId", "CiudadOrigenId", "PaisOrigenId", "CodigoPostal",
+			"TipoConformacionId", "ExclusividadProducto", "RegimenContributivo", "Pyme",
+			"RegistroMercantil", "SujetoRetencion", "AgenteRetenedor", "ResponsableIca", "ResponsableIva",
+			"Activo", "FechaModificacion", "UsuarioModificacionId"); err == nil {
 			fmt.Println("Number of records updated in database:", num)
 		}
 	}

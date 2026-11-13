@@ -41,8 +41,9 @@ func AddEstadoProveedor(m *EstadoProveedor) (id int64, err error) {
 // Id doesn't exist
 func GetEstadoProveedorById(id int) (v *EstadoProveedor, err error) {
 	o := orm.NewOrm()
-	v = &EstadoProveedor{Id: id}
-	if err = o.Read(v); err == nil {
+	v = &EstadoProveedor{}
+	// RelatedSel expande las FK, igual que en GetAllEstadoProveedor
+	if err = o.QueryTable(new(EstadoProveedor)).Filter("Id", id).RelatedSel().One(v); err == nil {
 		return v, nil
 	}
 	return nil, err
@@ -134,7 +135,8 @@ func UpdateEstadoProveedorById(m *EstadoProveedor) (err error) {
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
-		if num, err = o.Update(m); err == nil {
+		if num, err = o.Update(m, "EstadoId", "ProveedorId", "Observacion", "Activo", "FechaModificacion",
+			"UsuarioModificacionId"); err == nil {
 			fmt.Println("Number of records updated in database:", num)
 		}
 	}

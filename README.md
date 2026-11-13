@@ -90,11 +90,29 @@ El script se ejecuta únicamente cuando se crea el volumen de PostgreSQL. Para r
 
 ### Ejecución Pruebas
 
-Pruebas unitarias
+Pruebas unitarias de controladores (`tests/controllers`), según el [lineamiento de pruebas unitarias de la OAS](https://github.com/udistrital/lineamientos_oas/tree/master/pruebas_unitarias_api_beego). Se ejecutan contra la base de datos PostgreSQL configurada en las variables `GESTION_PERSONAS_CRUD_PG*`; cada prueba crea sus propios registros y los elimina al terminar.
 
 ```shell
-# En Proceso
+# Cargar las variables de conexión
+set -a; source environment.env; set +a
+
+# Ejecutar las pruebas
+cd tests
+go test ./... -v
+
+# Limpiar la caché de pruebas
+go clean -testcache
 ```
+
+Si las variables no están definidas (por ejemplo en el pipeline de IC), las pruebas se omiten (`SKIP`).
+
+Las pruebas de cada controlador se generan a partir de los modelos, el router y el script `database/agora_proveedores.sql`. Al modificar el modelo de datos, regenérelas desde la raíz del proyecto:
+
+```shell
+go run ./scripts/generar_pruebas
+```
+
+El generador también advierte cuando un modelo no coincide con el script SQL (columnas inexistentes o llaves foráneas con distinta obligatoriedad).
 
 ## Estado CI
 

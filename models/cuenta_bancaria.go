@@ -15,7 +15,8 @@ type CuentaBancaria struct {
 	TipoCuentaId           int        `orm:"column(tipo_cuenta_id)"`
 	NumeroCuenta           string     `orm:"column(numero_cuenta)"`
 	EntidadBancariaId      int        `orm:"column(entidad_bancaria_id)"`
-	ContactoId             *Contacto  `orm:"column(contacto_id);rel(fk)"`
+	ContactoId             *Contacto  `orm:"column(contacto_id);rel(fk);null"`
+	TipoCuentaBancariaId   bool       `orm:"column(tipo_cuenta_bancaria_id)"`
 	MontoCapitalAutorizado float64    `orm:"column(monto_capital_autorizado);null"`
 	ProveedorId            *Proveedor `orm:"column(proveedor_id);rel(fk)"`
 	Activo                 bool       `orm:"column(activo)"`
@@ -44,8 +45,9 @@ func AddCuentaBancaria(m *CuentaBancaria) (id int64, err error) {
 // Id doesn't exist
 func GetCuentaBancariaById(id int) (v *CuentaBancaria, err error) {
 	o := orm.NewOrm()
-	v = &CuentaBancaria{Id: id}
-	if err = o.Read(v); err == nil {
+	v = &CuentaBancaria{}
+	// RelatedSel expande las FK, igual que en GetAllCuentaBancaria
+	if err = o.QueryTable(new(CuentaBancaria)).Filter("Id", id).RelatedSel().One(v); err == nil {
 		return v, nil
 	}
 	return nil, err
@@ -137,7 +139,9 @@ func UpdateCuentaBancariaById(m *CuentaBancaria) (err error) {
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
-		if num, err = o.Update(m); err == nil {
+		if num, err = o.Update(m, "TipoCuentaId", "NumeroCuenta", "EntidadBancariaId", "ContactoId",
+			"TipoCuentaBancariaId", "MontoCapitalAutorizado", "ProveedorId", "Activo", "FechaModificacion",
+			"UsuarioModificacionId"); err == nil {
 			fmt.Println("Number of records updated in database:", num)
 		}
 	}

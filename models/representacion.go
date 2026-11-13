@@ -40,8 +40,9 @@ func AddRepresentacion(m *Representacion) (id int64, err error) {
 // Id doesn't exist
 func GetRepresentacionById(id int) (v *Representacion, err error) {
 	o := orm.NewOrm()
-	v = &Representacion{Id: id}
-	if err = o.Read(v); err == nil {
+	v = &Representacion{}
+	// RelatedSel expande las FK, igual que en GetAllRepresentacion
+	if err = o.QueryTable(new(Representacion)).Filter("Id", id).RelatedSel().One(v); err == nil {
 		return v, nil
 	}
 	return nil, err
@@ -133,7 +134,8 @@ func UpdateRepresentacionById(m *Representacion) (err error) {
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
-		if num, err = o.Update(m); err == nil {
+		if num, err = o.Update(m, "ProveedorId", "RepresentanteId", "Activo", "FechaModificacion",
+			"UsuarioModificacionId"); err == nil {
 			fmt.Println("Number of records updated in database:", num)
 		}
 	}

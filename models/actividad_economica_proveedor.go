@@ -40,8 +40,9 @@ func AddActividadEconomicaProveedor(m *ActividadEconomicaProveedor) (id int64, e
 // Id doesn't exist
 func GetActividadEconomicaProveedorById(id int) (v *ActividadEconomicaProveedor, err error) {
 	o := orm.NewOrm()
-	v = &ActividadEconomicaProveedor{Id: id}
-	if err = o.Read(v); err == nil {
+	v = &ActividadEconomicaProveedor{}
+	// RelatedSel expande las FK, igual que en GetAllActividadEconomicaProveedor
+	if err = o.QueryTable(new(ActividadEconomicaProveedor)).Filter("Id", id).RelatedSel().One(v); err == nil {
 		return v, nil
 	}
 	return nil, err
@@ -133,7 +134,8 @@ func UpdateActividadEconomicaProveedorById(m *ActividadEconomicaProveedor) (err 
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
-		if num, err = o.Update(m); err == nil {
+		if num, err = o.Update(m, "ProveedorId", "ActividadEconomicaId", "Activo", "FechaModificacion",
+			"UsuarioModificacionId"); err == nil {
 			fmt.Println("Number of records updated in database:", num)
 		}
 	}

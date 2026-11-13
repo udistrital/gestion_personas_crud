@@ -149,7 +149,12 @@ func UpdateProveedorNaturalById(m *ProveedorNatural) (err error) {
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
-		if num, err = o.Update(m); err == nil {
+		if num, err = o.Update(m, "PaisNacimientoId", "Cargo", "MedicinaPrepagada", "ValorUvtPrepagada",
+			"InteresViviendaAfc", "DependienteHijoMejorEdad", "DependienteHijoMenos23Estudiando",
+			"DependienteHijoMas23Discapacitado", "DependienteConyuge", "DependientePadreOHermano",
+			"Pensionado", "ValorAfc", "ResponsableIva", "ResideColombia", "PensionVoluntaria",
+			"ValorPensionVoluntaria", "ExperienciaLaboral", "ExperienciaProfesional", "Activo",
+			"FechaModificacion", "UsuarioModificacionId"); err == nil {
 			fmt.Println("Number of records updated in database:", num)
 		}
 	}

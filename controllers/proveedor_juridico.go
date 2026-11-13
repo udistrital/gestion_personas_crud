@@ -36,6 +36,11 @@ func (c *ProveedorJuridicoController) URLMapping() {
 func (c *ProveedorJuridicoController) Post() {
 	var v models.ProveedorJuridico
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
+		// El Id no es autoincremental: debe ser el Id del proveedor (relación 1:1)
+		if v.Id <= 0 {
+			c.Data["message"] = "Error service POST: Id is required and must be the Id of an existing proveedor"
+			c.Abort("400")
+		}
 		v.Activo = true
 		v.FechaCreacion = time_bogota.Tiempo_bogota()
 		v.FechaModificacion = time_bogota.Tiempo_bogota()
@@ -157,7 +162,6 @@ func (c *ProveedorJuridicoController) Put() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
 	v := models.ProveedorJuridico{Id: id}
-	fechaCreacionOriginal := v.FechaCreacion
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
 		if v.Id != id {
 			c.Data["message"] = "Error service Put: The id cannot be modified"
@@ -166,7 +170,6 @@ func (c *ProveedorJuridicoController) Put() {
 		if v.Id == 0 {
 			v.Id = id
 		}
-		v.FechaCreacion = fechaCreacionOriginal
 		v.FechaModificacion = time_bogota.Tiempo_bogota()
 		if err := models.UpdateProveedorJuridicoById(&v); err == nil {
 			c.Data["json"] = map[string]interface{}{"Success": true, "Status": "200", "Message": "Update successful", "Data": v}
@@ -193,10 +196,15 @@ func (c *ProveedorJuridicoController) Put() {
 func (c *ProveedorJuridicoController) Delete() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
-	v := models.ProveedorJuridico{Id: id}
+	v, err := models.GetProveedorJuridicoById(id)
+	if err != nil {
+		beeLogger.Log.Error(err.Error())
+		c.Data["message"] = "Error service Delete: The request contains an incorrect parameter or no record exists"
+		c.Abort("404")
+	}
 	v.Activo = false
 	v.FechaModificacion = time_bogota.Tiempo_bogota()
-	if err := models.UpdateProveedorJuridicoById(&v); err == nil {
+	if err := models.UpdateProveedorJuridicoById(v); err == nil {
 		c.Data["json"] = map[string]interface{}{"Success": true, "Status": "200", "Message": "Update successful", "Data": v}
 	} else {
 		beeLogger.Log.Error(err.Error())
